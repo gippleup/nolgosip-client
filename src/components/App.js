@@ -2,8 +2,8 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import '../style/App.css';
 import Login from './Login';
-import Login from './SignUp';
-import Login from './Main';
+import SignUp from './SignUp';
+import Main from './Main';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class App extends React.Component {
           <Route
             exact
             path="/signUp"
-            render={() => <Signup logged={this.state.logged} />}
+            render={() => <SignUp logged={this.state.logged} />}
           />
           <Route
             exact
