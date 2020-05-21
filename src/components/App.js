@@ -5,11 +5,21 @@ import { connect } from 'react-redux';
 import '../style/App.css';
 import Login from './Login';
 import SignUp from './SignUp';
+import MenuBar from './MenuBar';
 // import Main from './Main';
 
 const App = (props) => (
   <div className="App">
     <Switch>
+      <Route
+        path="*"
+        render={() => {
+          if (props.logged) {
+            return <MenuBar />;
+          }
+          return <div>NOT FOUND</div>;
+        }}
+      />
       <Route path="/login" render={() => <Login logged={props.logged} />} />
       <Route exact path="/signup" render={() => <SignUp />} />
       {/* <Route
@@ -21,8 +31,8 @@ const App = (props) => (
         path="/"
         render={() => {
           if (props.logged) {
-            // return <div>main</div>;
-            return <Redirect to="/main" />;
+            return <div>main</div>;
+            // return <Redirect to="/main" />;
           }
           return <Redirect to="/login" />;
         }}

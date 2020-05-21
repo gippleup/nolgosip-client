@@ -1,14 +1,14 @@
-export const SET_LOGGED = "SET_LOGGED";
-export const SET_USERDATA = "SET_USERDATA";
+export const SET_LOGGED = 'SET_LOGGED';
+export const SET_USERDATA = 'SET_USERDATA';
 
-export const setLogged = logged => ({
+export const setLogged = (logged) => ({
   type: SET_LOGGED,
-  logged
+  logged,
 });
 
-export const setUserData = userData => ({
+export const setUserData = (userData) => ({
   type: SET_USERDATA,
-  userData
+  userData,
 });
 // export const setDarkMode = value => ({
 //   type: SET_DARK_MODE,
