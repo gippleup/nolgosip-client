@@ -8,31 +8,27 @@ import Main from './Main';
 class App extends React.Component {
   constructor(props) {
     super(props);
-
-    state = {
-      logged: false
-    };
   }
   
   render() {
     return (
       <div className="App">
         <Switch>
-          <Route path="/login" render={() => <Login logged={this.state.logged} />} />
+          <Route path="/login" render={() => <Login logged={this.props.logged} />} />
           <Route
             exact
             path="/signUp"
-            render={() => <SignUp logged={this.state.logged} />}
+            render={() => <SignUp logged={this.props.logged} />}
           />
           <Route
             exact
             path="/main"
-            render={() => <Main logged={this.state.logged}/>}
+            render={() => <Main logged={this.props.logged}/>}
           />
           <Route
             path="/"
             render={() => {
-              if (this.state.logged) {
+              if (this.props.logged) {
                 return <Redirect to="/main" />;
               } else {
                 return <Redirect to="/login" />;
@@ -45,9 +41,9 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = state => { //state === 전체 스토어
   return {
-    logged: state.userReducer.logged
+    logged: state.logged
   };
 };
 
