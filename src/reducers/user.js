@@ -3,11 +3,11 @@ import { SET_LOGGED, SET_USERDATA } from '../actions/index';
 const initialState = {
   logged: false,
   loggedUser: {
-    auth: 'user',
-    leftVacation: 11,
-    email: 'test@naver.com',
-    mobile: '010-1234-1234',
-    name: 'tester',
+    auth: '',
+    leftVacation: 0,
+    email: '',
+    mobile: '',
+    name: '',
   },
 };
 
@@ -22,11 +22,11 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         loggedUser: {
-          auth: action.userData.auth,
-          leftVacation: action.userData.leftVacation,
-          email: action.userData.email,
-          mobile: action.userData.mobile,
-          name: action.userData.name,
+          auth: action.userData.data.auth,
+          leftVacation: action.userData.data.leftVacation,
+          email: action.userData.data.email,
+          mobile: action.userData.data.mobile,
+          name: action.userData.data.name,
         },
       };
     default:
