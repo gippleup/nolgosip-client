@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 const MenuBar = (props) => {
+  console.log(props);
   let button = null;
   const { loggedUser } = props;
   if (loggedUser.auth === 'admin') {
@@ -28,6 +29,8 @@ MenuBar.propTypes = {
 //   auth: 'user',
 // };
 
-const mapStateToProps = (state) => ({ loggedUser: state.user.loggedUser });
+const mapStateToProps = (state) => ({
+  loggedUser: state.user.loggedUser,
+});
 
 export default connect(mapStateToProps)(MenuBar);

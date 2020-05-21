@@ -11,7 +11,7 @@ import MenuBar from './MenuBar';
 const App = (props) => (
   <div className="App">
     <Switch>
-      <Route
+      {/* <Route
         path="*"
         render={() => {
           if (props.logged) {
@@ -19,7 +19,7 @@ const App = (props) => (
           }
           return <div>NOT FOUND</div>;
         }}
-      />
+      /> */}
       <Route path="/login" render={() => <Login logged={props.logged} />} />
       <Route exact path="/signup" render={() => <SignUp />} />
       {/* <Route
@@ -31,7 +31,7 @@ const App = (props) => (
         path="/"
         render={() => {
           if (props.logged) {
-            return <div>main</div>;
+            return <div><MenuBar /></div>;
             // return <Redirect to="/main" />;
           }
           return <Redirect to="/login" />;
@@ -50,6 +50,8 @@ App.defaultProps = {
 };
 
 // state === 전체 스토어
-const mapStateToProps = (state) => ({ logged: state.user.logged });
+const mapStateToProps = (state) => ({
+  logged: state.user.logged,
+});
 
 export default connect(mapStateToProps)(App);
