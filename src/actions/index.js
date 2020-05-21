@@ -1,14 +1,15 @@
-// export const SET_USERNAME = "SET_USERNAME";
-// export const SET_DARK_MODE = "SET_DARK_MODE";
-// export const SET_CURRENT_VIDEO = "SET_CURRENT_VIDEO";
+export const SET_LOGGED = "SET_LOGGED";
+export const SET_USERDATA = "SET_USERDATA";
 
+export const setLogged = logged => ({
+  type: SET_LOGGED,
+  logged
+});
 
-
-// export const setUsername = name => ({
-//   type: SET_USERNAME,
-//   name
-// });
-
+export const setUserData = userData => ({
+  type: SET_USERDATA,
+  userData
+});
 // export const setDarkMode = value => ({
 //   type: SET_DARK_MODE,
 //   value

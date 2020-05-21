@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from "react-redux";
 import '../style/App.css';
 import Login from './Login';
-// import SignUp from './SignUp';
+import SignUp from './SignUp';
 // import Main from './Main';
 
 class App extends React.Component {
@@ -16,19 +16,13 @@ class App extends React.Component {
       <div className="App">
         <Switch>
           <Route path="/login" render={() => <Login logged={this.props.logged} />} />
+          <Route exact path="/signup" render={() => <SignUp />} />
           {/* <Route
-            exact
-            path="/signUp"
-            render={() => <SignUp logged={this.props.logged} />}
-          />
-          <Route
             exact
             path="/main"
             render={() => <Main logged={this.props.logged}/>}
           /> */}
-          <Route
-            path="/"
-            render={() => {
+          <Route path="/" render={() => {
               if (this.props.logged) {
                 return <div>main</div>
                 // return <Redirect to="/main" />;
@@ -45,7 +39,7 @@ class App extends React.Component {
 
 const mapStateToProps = state => { //state === 전체 스토어
   return {
-    logged: state.logged
+    logged: state.user.logged
   };
 };
 

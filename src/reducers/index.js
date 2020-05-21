@@ -1,8 +1,7 @@
 import { combineReducers } from "redux";
-// import settingReducer from "./setting";
-// import videoReducer from "./video";
+import userReducer from "./user";
+
 
 export default combineReducers({
-//   settingReducer,
-//   videoReducer
+  user: userReducer,
 });
