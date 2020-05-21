@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import { connect } from "react-redux";
 import '../style/App.css';
 import Login from './Login';
 import SignUp from './SignUp';
