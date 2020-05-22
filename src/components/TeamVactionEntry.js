@@ -1,21 +1,29 @@
 import React from 'react'
 
-const TeamVactionEntry = ({ userName, email, vacationFrom, vacationTo, vacationStatus }) => {
+export const TeamVactionEntry = ({userName,vacationFrom,vacationTo,vacationStatus}) => (
     <div className='TemaVactionEntry'>
         <div className='userName'>
+        {userName}
         </div>
         <div>
-            <div className='VacationFrom'></div>
+            <div className='VacationFrom'>
+                {vacationFrom}
+            </div>
 
-            <div className='VacationTo'></div>
+            <div className='VacationTo'>
+                {vacationTo}
+            </div>
         </div>
         <div className='VactaionStatus'>
-
-        </div>
-        <div className=''>
-
+        {vacationStatus}
         </div>
     </div>
-}
+)
+
 
 export default TeamVactionEntry
+
+// userName = {vacation.userName}
+// vacationFrom = {vacation.vacationFrom}
+// vacationTo = {vacation.vacationTo}
+// vacationStatus = {vacation.vacationStatus}
