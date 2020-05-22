@@ -54,9 +54,6 @@ const MenuBar = (props) => {
 MenuBar.propTypes = {
   loggedUser: PropTypes.shape({ auth: PropTypes.string }).isRequired,
   history: PropTypes.shape(historyPropTypes),
-};
-
-MenuBar.propTypes = {
   logoutDispatch: PropTypes.func.isRequired,
 };
 
