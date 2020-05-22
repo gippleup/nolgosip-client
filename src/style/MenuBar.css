@@ -1,0 +1,26 @@
+.menuBar {
+    border: 1px solid black;
+    width: 300px;
+    height: 1000px;
+}
+
+.mainButton {
+    font-size: 40px;
+    float: left;
+}
+.myPageButton {
+    font-size: 40px;
+    float: left;
+}
+.vacationManagerButton {
+    font-size: 40px;
+    float: left;
+}
+.employeeManagerButton {
+    font-size: 40px;
+    float: left;
+}
+.signOutButton {
+    font-size: 40px;
+    float: left;
+}
