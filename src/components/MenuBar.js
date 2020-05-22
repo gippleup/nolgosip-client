@@ -3,24 +3,23 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { history as historyPropTypes } from 'history-prop-types';
 import { withRouter } from 'react-router-dom';
+import { setLogged, setUserData } from '../actions';
 // import axios from 'axios';
 import '../style/MenuBar.css';
 
 
 const MenuBar = (props) => {
   let button = null;
-  const { loggedUser, history } = props;
+  const { loggedUser, history, logoutDispatch } = props;
 
   const signOut = () => {
     fetch('http://15.164.226.124:5000/signout', {
       method: 'POST',
-      mode: 'cors',
       credentials: 'include',
     })
-      .then((res) => res.json())
       .then((res) => {
-        console.log(res);
-        if (res.msg === 'ok') {
+        if (res.status === 200) {
+          logoutDispatch();
           history.push('/login');
         }
       })
@@ -57,12 +56,9 @@ MenuBar.propTypes = {
   history: PropTypes.shape(historyPropTypes),
 };
 
-// App.defaultProps = {
-//   auth: 'user',
-// };
-
-// MenuBar.propTypes = {
-// };
+MenuBar.propTypes = {
+  logoutDispatch: PropTypes.func.isRequired,
+};
 
 MenuBar.defaultProps = {
   history: [],
@@ -72,4 +68,17 @@ const mapStateToProps = (state) => ({
   loggedUser: state.user.loggedUser,
 });
 
-export default connect(mapStateToProps)(withRouter(MenuBar));
+const mapDispatchToProps = (dispatch) => ({
+  logoutDispatch: () => {
+    dispatch(setLogged(false));
+    dispatch(setUserData({
+      auth: '',
+      leftVacation: 0,
+      email: '',
+      mobile: '',
+      name: '',
+    }));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MenuBar));
