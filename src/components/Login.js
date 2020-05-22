@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { history as historyPropTypes } from 'history-prop-types';
 import { setLogged, setUserData } from '../actions';
+import '../style/Login.css';
 
 class Login extends React.Component {
   constructor(props) {
