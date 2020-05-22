@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -33,19 +33,27 @@ class Login extends React.Component {
       email,
       password,
     } = this.state;
-    axios.post('http://15.164.226.124:5000/signin', {
-      email,
-      password,
+
+    fetch('http://15.164.226.124:5000/signin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+      credentials: 'include',
     })
       .then((res) => {
-        if (res.data === 'NO DATA') {
+        if (res.status === 404) {
           alert('등록된 계정이 없습니다');
-        } else {
-          loggedDispatch();
-          userDataDispatch(res);
         }
-        // this.props.dispatch(setLogged(true));
-        // this.props.dispatch(setUserData(res));
+        return res.json();
+      })
+      .then((res) => {
+        loggedDispatch();
+        userDataDispatch(res);
       })
       .then(() => history.push('/'))
       .catch((error) => {
@@ -61,16 +69,16 @@ class Login extends React.Component {
   render() {
     return (
       <div className="Login">
-        <div>
-          <img src="#" alt="" />
+        <div className="loginLogo">
+          <span className="loginLogoImage">LOGO</span>
         </div>
-        <div className="email">
-          이메일 :
-          <input className="emailInput" size="30" type="email" onChange={this.handleInputValue('email')} required />
-        </div>
-        <div className="password">
-          비밀번호 :
-          <input className="passwordInput" size="30" type="password" onChange={this.handleInputValue('password')} required />
+        <div className="loginInputContainer">
+          <div className="loginEmail">
+            <input className="loginEmailInput" placeholder="Email" size="50" type="email" onChange={this.handleInputValue('email')} required />
+          </div>
+          <div className="loginPassword">
+            <input className="loginPasswordInput" placeholder="Password" size="50" type="password" onChange={this.handleInputValue('password')} required />
+          </div>
         </div>
         <div className="loginButton">
           <button className="signInSubmitButton" type="submit" onClick={this.submit}>로그인</button>

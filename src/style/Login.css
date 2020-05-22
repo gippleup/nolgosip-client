@@ -1,4 +1,68 @@
 .Login {
     border : 1px solid black;
-    width : 50%;
+    width : 500px;
+    height: 500px;
+    margin: 100px auto;
+    background-color: #bcbaba;
+}
+
+.loginLogo {
+    border : 1px solid black;
+    height: 200px;
+    width : 300px;
+    margin : 30px auto;
+    text-align: center;
+    background-color: #8fc693;
+}
+
+.loginLogoImage{
+    align-self: center;
+}
+
+.loginInputContainer {
+    margin: 20px auto;
+    height: 150px;
+    width: 300px;
+}
+
+.loginEmailInput {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+  }
+
+.loginPasswordInput {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+  }
+
+.loginEmail{
+    float: left;
+}
+
+.loginPassword{
+    float: left;
+}
+
+.signInSubmitButton {
+    font-size: 30px;
+    margin-right: 10px;
+}
+
+.signUpButton {
+    font-size: 30px;
+    margin-left: 10px;
 }

@@ -22,11 +22,11 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         loggedUser: {
-          auth: action.userData.data.auth,
-          leftVacation: action.userData.data.leftVacation,
-          email: action.userData.data.email,
-          mobile: action.userData.data.mobile,
-          name: action.userData.data.name,
+          auth: action.userData.auth,
+          leftVacation: action.userData.leftVacation,
+          email: action.userData.email,
+          mobile: action.userData.mobile,
+          name: action.userData.name,
         },
       };
     default:

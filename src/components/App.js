@@ -31,7 +31,7 @@ const App = (props) => (
         path="/"
         render={() => {
           if (props.logged) {
-            return <div><MenuBar /></div>;
+            return <MenuBar />;
             // return <Redirect to="/main" />;
           }
           return <Redirect to="/login" />;

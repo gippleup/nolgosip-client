@@ -3,6 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { history as historyPropTypes } from 'history-prop-types';
 import { withRouter } from 'react-router-dom';
+import '../style/SignUp.css';
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -51,28 +52,23 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <div className="Login">
-        <div>
-          <img src="#" alt="" />
-        </div>
-        <div className="email">
-          이메일 :
-          <input className="emailInput" size="30" type="email" onChange={this.handleInputValue('email')} required />
-        </div>
-        <div className="password">
-          비밀번호 :
-          <input className="passwordInput" size="30" type="password" onChange={this.handleInputValue('password')} required />
-        </div>
-        <div className="name">
-          이름 :
-          <input className="nameInput" size="30" type="text" onChange={this.handleInputValue('name')} required />
-        </div>
-        <div className="mobile">
-          전화번호 :
-          <input className="mobileInput" size="30" type="mobile" onChange={this.handleInputValue('mobile')} required />
-        </div>
-        <div className="signUpButton">
-          <button className="signUpSubmitButton" type="button" onClick={this.submitSignUp}>완료</button>
+      <div className="SignUp">
+        <div className="signUpInputContainer">
+          <div className="email">
+            <input className="signUpEmailInput" placeholder="Email" size="30" type="email" onChange={this.handleInputValue('email')} required />
+          </div>
+          <div className="password">
+            <input className="signUpPasswordInput" placeholder="Password" size="30" type="password" onChange={this.handleInputValue('password')} required />
+          </div>
+          <div className="name">
+            <input className="signUpNameInput" placeholder="Name" size="30" type="text" onChange={this.handleInputValue('name')} required />
+          </div>
+          <div className="mobile">
+            <input className="signUpMobileInput" placeholder="Mobile" size="30" type="mobile" onChange={this.handleInputValue('mobile')} required />
+          </div>
+          <div className="signUpButton">
+            <button className="signUpSubmitButton" type="button" onClick={this.submitSignUp}>완료</button>
+          </div>
         </div>
       </div>
     );
