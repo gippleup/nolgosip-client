@@ -8,8 +8,16 @@ export const fakeData = [{
         mobile: '010-1234-1111',
         leftVacation: 20,
         usedVacation: 0,
-        vacations: []
+        vacations: [
+            {
+                "userName": "송팀장",
+                "from": "2020-03-02",
+                "to": "2020-03-05"
+            },
+        ]
     },
+    "groupName": "백도어1팀",
+ 
     employeeList: [],
     employeeVacationList: [],
     hasSubmit: false,
@@ -23,7 +31,13 @@ export const fakeData = [{
         mobile: '010-1234-2222',
         leftVacation: 20,
         usedVacation: 0,
-        vacations: []
+        vacations: [
+            {
+                "userName": "일반박사원",
+                "from": "2020-03-0233",
+                "to": "2020-03-05"
+            },
+        ]
     },
     employeeList: [],
     employeeVacationList: [],
@@ -59,3 +73,5 @@ export const fakeData = [{
     employeeVacationList: [],
     hasSubmit: false,
 }];
+
+export default {fakeData}

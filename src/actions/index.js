@@ -24,16 +24,46 @@ export const ADD_VACATION = 'ADD_VACATION';
 // 휴가 취소 
 export const DELETE_VACATION = 'DELETE_VACATION';
 
-export const ADD_VACATION = () => (
+// 팀원 휴가 상태 변경 
+export const MODIFY_OTHER_VACATION = 'MODIFY_OTHER_VACATION'
+
+// 내 휴가 상태 변경 
+export const MODIFY_MY_VACATION = 'MODIFY_MY_VACATION'
+
+// 휴가 추가 
+
+export const addVaction = (addVaction) => (
   {
     type: ADD_VACATION,
-    value
+    addVaction
   }
 )
 
-export const DELETE_VACATION = () => (
+// 휴가 삭제 
+
+export const deleteVacation = (deleteVacation) => (
   {
     type: DELETE_VACATION,
-    value
+    deleteVacation
   }
 )
+
+// 내 휴가 상태 변경 
+export const modifyMyVacation = (curUserEntries) => (
+  {
+    type : MODIFY_MY_VACATION,
+    curUserEntries
+  }
+)
+
+
+// 팀원 휴가 상태 변경 
+export const modifyOtherVaction = (otherEntries) => (
+  {
+    type : MODIFY_OTHER_VACATION,
+    otherEntries 
+  }
+)
+
+
+
