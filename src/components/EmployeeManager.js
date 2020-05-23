@@ -2,20 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { history as historyPropTypes } from 'history-prop-types';
+// import { history as historyPropTypes } from 'history-prop-types';
 import { setEmployeeList } from '../actions';
 import EmployeeEntry from './EmployeeEntry';
-import fakeData from '../fakeData';
+// import fakeData from '../fakeData';
 
 
 class EmployeeManager extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-    //   search: '',
-      employeeList: fakeData[0].employeeList,
-    };
+    // const employeeList = this.props;
+    // this.state = {
+    // //   search: '',
+    //   employeeList,
+    // };
     this.handleInputValue = this.handleInputValue.bind(this);
     this.searchEmployee = this.searchEmployee.bind(this);
   }
@@ -30,13 +30,14 @@ class EmployeeManager extends React.Component {
   }
 
   render() {
-    const { employeeList } = this.state;
+    const { employeeList } = this.props;
     return (
       <div className="EmployeeManager">
         <div className="searchTarget">
           <input className="searchTargetInput" type="text" placeholder="검색할 이름을 입력하세요" size="30" />
         </div>
-        {employeeList.map((employeeData) => <EmployeeEntry employee={employeeData} key={employeeData.email} />)}
+        {employeeList.employeeList.map((employeeData) => (
+          <EmployeeEntry employee={employeeData} key={employeeData.email} />))}
       </div>
     );
   }
@@ -45,6 +46,12 @@ class EmployeeManager extends React.Component {
 EmployeeManager.propTypes = {
 //   history: PropTypes.shape(historyPropTypes),
   searchDispatch: PropTypes.func.isRequired,
+  employeeList: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    email: PropTypes.string,
+    mobile: PropTypes.string,
+    totalVacation: PropTypes.number,
+  })).isRequired,
 };
 
 EmployeeManager.defaultProps = {
@@ -53,7 +60,7 @@ EmployeeManager.defaultProps = {
 
 const mapStateToProps = (state) => ({
 //   searchTarget: state.user.logged,
-//   loggedUser: state.user.loggedUser,
+  employeeList: state.employee,
 });
 
 const mapDispatchToProps = (dispatch) => ({

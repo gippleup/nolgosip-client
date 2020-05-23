@@ -13,8 +13,8 @@ const EmployeeEntry = (props) => {
         {employee.email}
         {employee.mobile}
       </div>
-      <div>{11 - employee.leftVacation}</div>
-      <div>{employee.leftVacation}</div>
+      <div>{11 - employee.totalVacation}</div>
+      <div>{employee.totalVacation}</div>
       <div>
         <button type="button">관리자지정</button>
       </div>
@@ -26,7 +26,7 @@ EmployeeEntry.propTypes = {
     name: PropTypes.string,
     email: PropTypes.string,
     mobile: PropTypes.string,
-    leftVacation: PropTypes.number,
+    totalVacation: PropTypes.number,
   }).isRequired,
 //   history: PropTypes.shape(historyPropTypes)
 //   searchDispatch: PropTypes.func.isRequired,

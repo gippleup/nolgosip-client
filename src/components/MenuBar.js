@@ -46,9 +46,9 @@ const MenuBar = (props) => {
       // },
       credentials: 'include',
     })
+      .then((res) => res.json())
       .then((res) => {
-        console.log(res);
-        employeeListDispatch(res.data);
+        employeeListDispatch(res);
       })
       .then(() => {
         history.push('/employeeManager');
@@ -106,7 +106,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(setLogged(false));
     dispatch(setUserData({
       auth: '',
-      leftVacation: 0,
+      totalVacation: 0,
       email: '',
       mobile: '',
       name: '',
