@@ -11,11 +11,10 @@ import EmployeeEntry from './EmployeeEntry';
 class EmployeeManager extends React.Component {
   constructor(props) {
     super(props);
-    // const employeeList = this.props;
-    // this.state = {
-    // //   search: '',
-    //   employeeList,
-    // };
+
+    this.state = {
+      search: '',
+    };
     this.handleInputValue = this.handleInputValue.bind(this);
     this.searchEmployee = this.searchEmployee.bind(this);
   }
@@ -25,8 +24,15 @@ class EmployeeManager extends React.Component {
   };
 
   searchEmployee = () => {
-    const { searchDispatch } = this.props;
-    searchDispatch();
+    const { searchDispatch, employeeList } = this.props;
+    const { search } = this.state;
+    const searchTarget = [];
+    for (let i = 0; i < employeeList.length; i += 1) {
+      if (employeeList[i].name === search) {
+        searchTarget.push(employeeList[i]);
+      }
+    }
+    searchDispatch(searchTarget);
   }
 
   render() {
@@ -34,9 +40,10 @@ class EmployeeManager extends React.Component {
     return (
       <div className="EmployeeManager">
         <div className="searchTarget">
-          <input className="searchTargetInput" type="text" placeholder="검색할 이름을 입력하세요" size="30" />
+          <input className="searchTargetInput" type="text" placeholder="검색할 이름을 입력하세요" onChange={this.handleInputValue('search')} size="30" />
+          <button type="button" onClick={this.searchEmployee}>검색</button>
         </div>
-        {employeeList.employeeList.map((employeeData) => (
+        {employeeList.map((employeeData) => (
           <EmployeeEntry employee={employeeData} key={employeeData.email} />))}
       </div>
     );
@@ -54,13 +61,12 @@ EmployeeManager.propTypes = {
   })).isRequired,
 };
 
-EmployeeManager.defaultProps = {
-  history: [],
-};
+// EmployeeManager.defaultProps = {
+//   history: [],
+// };
 
 const mapStateToProps = (state) => ({
-//   searchTarget: state.user.logged,
-  employeeList: state.employee,
+  employeeList: state.employee.employeeList,
 });
 
 const mapDispatchToProps = (dispatch) => ({
