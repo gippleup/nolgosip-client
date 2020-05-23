@@ -32,7 +32,16 @@ const App = (props) => (
         )}
       />
       <Route exact path="/signup" render={() => <SignUp />} />
-      <Route exact path="/employeeManager" render={() => <EmployeeManager />} />
+      <Route
+        exact
+        path="/employeeManager"
+        render={() => (
+          <div>
+            <MenuBar />
+            <EmployeeManager />
+          </div>
+        )}
+      />
       {/* <Route
         exact
         path="/main"
