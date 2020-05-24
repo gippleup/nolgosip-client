@@ -7,6 +7,11 @@
   pointer-events: none;
 }
 
+.backgroundImage {
+  z-index: -1;
+  filter: blur(3px) brightness(70%);
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

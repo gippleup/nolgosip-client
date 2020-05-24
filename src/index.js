@@ -1,11 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./components/App";
-import { createStore, applyMiddleware, compose } from "redux";
-import thunk from "redux-thunk";
-import { Provider } from "react-redux";
-import reducers from "./reducers";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import reducers from './reducers';
+import App from './components/App';
 
 
 //   window.devToolsExtension ? window.devToolsExtension() : f => f
@@ -23,5 +23,5 @@ ReactDOM.render(
       <App />
     </BrowserRouter>
   </Provider>,
-  document.getElementById("root")
+  document.getElementById('root'),
 );

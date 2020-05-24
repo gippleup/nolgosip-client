@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../style/App.css';
+import backImg from '../img/vacation.jpg';
 import Login from './Login';
 import SignUp from './SignUp';
 import MenuBar from './MenuBar';
+import EmployeeManager from './EmployeeManager';
 // import Main from './Main';
 
 const App = (props) => (
@@ -20,8 +22,26 @@ const App = (props) => (
           return <div>NOT FOUND</div>;
         }}
       /> */}
-      <Route path="/login" render={() => <Login logged={props.logged} />} />
+      <Route
+        path="/login"
+        render={() => (
+          <div className="loginContainter">
+            <img className="backgroundImage" src={backImg} alt="background" />
+            <Login logged={props.logged} />
+          </div>
+        )}
+      />
       <Route exact path="/signup" render={() => <SignUp />} />
+      <Route
+        exact
+        path="/employeeManager"
+        render={() => (
+          <div>
+            <MenuBar />
+            <EmployeeManager />
+          </div>
+        )}
+      />
       {/* <Route
         exact
         path="/main"

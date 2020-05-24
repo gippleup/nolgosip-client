@@ -38,7 +38,7 @@ class SignUp extends React.Component {
     })
       .then((res) => {
         const { history } = this.props;
-        if (res.data === 'ok') {
+        if (res.status === 200) {
           alert('회원가입이 완료되었습니다');
           history.push('/login');
         } else if (res.data === 'duplicate') {
