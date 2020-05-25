@@ -2,10 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-// import { history as historyPropTypes } from 'history-prop-types';
 import { setEmployeeList } from '../actions';
 import EmployeeEntry from './EmployeeEntry';
-// import fakeData from '../fakeData';
 
 
 class EmployeeManager extends React.Component {
@@ -51,7 +49,6 @@ class EmployeeManager extends React.Component {
 }
 
 EmployeeManager.propTypes = {
-//   history: PropTypes.shape(historyPropTypes),
   searchDispatch: PropTypes.func.isRequired,
   employeeList: PropTypes.arrayOf(PropTypes.shape({
     userName: PropTypes.string,
@@ -61,10 +58,6 @@ EmployeeManager.propTypes = {
     auth: PropTypes.string,
   })).isRequired,
 };
-
-// EmployeeManager.defaultProps = {
-//   history: [],
-// };
 
 const mapStateToProps = (state) => ({
   employeeList: state.employee.employeeList,

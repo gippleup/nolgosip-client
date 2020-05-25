@@ -7,9 +7,6 @@ import { BrowserRouter } from 'react-router-dom';
 import reducers from './reducers';
 import App from './components/App';
 
-
-//   window.devToolsExtension ? window.devToolsExtension() : f => f
-
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(

@@ -4,16 +4,6 @@ const initialState = {
   vacationList: {
     groupName: '',
     vacations: [],
-    // vacations: {
-    //   from: '',
-    //   to: '',
-    //   status: '',
-    //   email: '',
-    //   approver: '',
-    //   reason: '',
-    //   createdAt: '',
-    //   userName: '',
-    // },
   },
 };
 

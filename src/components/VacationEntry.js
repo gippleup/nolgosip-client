@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { setVacationApprove } from '../actions';
-// import { history as historyPropTypes } from 'history-prop-types';
-
 
 const VacationEntry = (props) => {
   const { vacation, approveDispatch, vacationList } = props;
@@ -83,7 +81,6 @@ const VacationEntry = (props) => {
       <div>{vacation.reason}</div>
       <div>
         {button}
-        {/* <button type="button">{buttonStatus}</button> */}
       </div>
     </div>
   );
@@ -114,13 +111,11 @@ VacationEntry.propTypes = {
       id: PropTypes.number,
     })).isRequired,
   }).isRequired,
-//   history: PropTypes.shape(historyPropTypes)
   approveDispatch: PropTypes.func.isRequired,
 };
 
 
 const mapStateToProps = (state) => ({
-//   searchTarget: state.user.logged,
   vacationList: state.vacation.vacationList,
 });
 

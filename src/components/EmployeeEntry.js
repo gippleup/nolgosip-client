@@ -93,8 +93,6 @@ EmployeeEntry.defaultProps = {
 };
 
 const mapStateToProps = (state) => ({
-//   searchTarget: state.user.logged,
-//   loggedUser: state.user.loggedUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({

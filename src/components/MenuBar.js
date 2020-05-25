@@ -3,12 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { history as historyPropTypes } from 'history-prop-types';
 import { withRouter } from 'react-router-dom';
-// import axios from 'axios';
 import {
   setLogged, setUserData, setEmployeeList, setVacationList,
 } from '../actions';
 import '../style/MenuBar.css';
-// import { fakeData } from '../fakeData';
 
 
 const MenuBar = (props) => {
