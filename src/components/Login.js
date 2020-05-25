@@ -34,7 +34,7 @@ class Login extends React.Component {
       password,
     } = this.state;
 
-    fetch('http://15.164.226.124:5000/signin', {
+    fetch('http://54.180.90.57:5000/signin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

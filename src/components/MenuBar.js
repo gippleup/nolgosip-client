@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import { history as historyPropTypes } from 'history-prop-types';
 import { withRouter } from 'react-router-dom';
 // import axios from 'axios';
-import { setLogged, setUserData, setEmployeeList } from '../actions';
+import {
+  setLogged, setUserData, setEmployeeList, setVacationList,
+} from '../actions';
 import '../style/MenuBar.css';
 // import { fakeData } from '../fakeData';
 
@@ -14,7 +16,7 @@ const MenuBar = (props) => {
   const { loggedUser, history, logoutDispatch } = props;
 
   const signOut = () => {
-    fetch('http://15.164.226.124:5000/signout', {
+    fetch('http://54.180.90.57:5000/signout', {
       method: 'POST',
       credentials: 'include',
     })
@@ -39,11 +41,8 @@ const MenuBar = (props) => {
 
   const toEmployeeManager = () => {
     const { employeeListDispatch } = props;
-    fetch('http://15.164.226.124:5000/users', {
+    fetch('http://54.180.90.57:5000/users', {
       method: 'GET',
-      // headers: {
-      //   'Content-Type': 'application/json',
-      // },
       credentials: 'include',
     })
       .then((res) => res.json())
@@ -59,7 +58,31 @@ const MenuBar = (props) => {
   };
 
   const toVacationManager = () => {
-    history.push('/vacationManager');
+    const { vacationListDispatch } = props;
+    fetch('http://54.180.90.57:5000/vacation', {
+      method: 'POST',
+      body: JSON.stringify({
+        type: 'get',
+        target: 'team',
+        email: loggedUser.email,
+        from: '2020-01-01',
+        to: '2020-12-31',
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        vacationListDispatch(res);
+      })
+      .then(() => {
+        history.push('/vacationManager');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   if (loggedUser.auth === 'admin') {
@@ -86,10 +109,11 @@ const MenuBar = (props) => {
 };
 
 MenuBar.propTypes = {
-  loggedUser: PropTypes.shape({ auth: PropTypes.string }).isRequired,
+  loggedUser: PropTypes.shape({ auth: PropTypes.string, email: PropTypes.string }).isRequired,
   history: PropTypes.shape(historyPropTypes),
   logoutDispatch: PropTypes.func.isRequired,
   employeeListDispatch: PropTypes.func.isRequired,
+  vacationListDispatch: PropTypes.func.isRequired,
 };
 
 MenuBar.defaultProps = {
@@ -102,6 +126,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   employeeListDispatch: (employeeList) => dispatch(setEmployeeList(employeeList)),
+  vacationListDispatch: (vacationList) => dispatch(setVacationList(vacationList)),
   logoutDispatch: () => {
     dispatch(setLogged(false));
     dispatch(setUserData({

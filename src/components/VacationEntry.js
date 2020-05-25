@@ -1,71 +1,131 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { setVacationApprove } from '../actions';
 // import { history as historyPropTypes } from 'history-prop-types';
 
 
 const VacationEntry = (props) => {
-  const { Vacation } = props;
+  const { vacation, approveDispatch, vacationList } = props;
+  let statusButton = '';
+  const date = new Date();
 
-//   const updateAuthToManager = () => {
-//     const data = {
-//       type: 'setAuth',
-//       auth: 'manager',
-//       email: Vacation.email,
-//     };
-//     fetch('http://15.164.226.124:5000/users', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify(data),
-//     })
-//       .then((res) => res.json())
-//       .then((res) => {
-//         console.log(res);
-//         if (res.email === Vacation.email) {
-//           alert('권한이 변경되었습니다');
-//         }
-//       })
-//       .catch((error) => {
-//         console.log(error);
-//       });
-//   };
+  function vacationAction(e) {
+    const buttonAction = e.target.value;
+    let type = '';
+    let approve = '';
+    if (buttonAction === '승인') {
+      type = 'approve';
+      approve = 'approved';
+    } else if (buttonAction === '취소') {
+      type = 'cancel';
+      approve = 'cancelled';
+    } else if (buttonAction === '거절') {
+      type = 'decline';
+      approve = 'declined';
+    } else if (buttonAction === '만료' || buttonAction === '완료') {
+      return;
+    }
+    fetch('http://54.180.90.57:5000/vacation', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        type,
+        vacationId: vacation.id,
+      }),
+      credentials: 'include',
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        for (let i = 0; i < vacationList.vacations.length; i += 1) {
+          if (vacationList.vacations[i].id === vacation.id) {
+            vacationList.vacations[i].status = approve;
+          }
+        }
+        approveDispatch(vacationList);
+        if (res.id === vacation.id) {
+          alert('요청하신 내용이 처리되었습니다');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  if (vacation.status === 'approved' && Date.parse(vacation.from) >= date) {
+    statusButton = '취소';
+  } else if (vacation.status === 'approved' && Date.parse(vacation.from) < date) {
+    statusButton = '완료';
+  } else if (vacation.status === 'expired') {
+    statusButton = '만료';
+  }
+  let button = null;
+  if (vacation.status === 'approved' || vacation.status === 'expired') {
+    button = <button type="button" value={statusButton} onClick={vacationAction}>{statusButton}</button>;
+  } else {
+    button = (
+      <div>
+        <button type="button" value="승인" onClick={vacationAction}>승인</button>
+        <button type="button" value="거절" onClick={vacationAction}>거절</button>
+      </div>
+    );
+  }
 
   return (
     <div className="VacationEntry">
-      <div>{Vacation.name}</div>
+      <div>{vacation.userName}</div>
+      <div>{vacation.createdAt}</div>
+      <div>{vacation.from}</div>
+      <div>{vacation.to}</div>
+      <div>{((Date.parse(vacation.to) - Date.parse(vacation.from)) / 1000 / 60 / 60 / 24)}</div>
+      <div>{vacation.reason}</div>
       <div>
-        {/* {vacation.email}
-        {vacation.mobile} */}
+        {button}
+        {/* <button type="button">{buttonStatus}</button> */}
       </div>
-      <div>{11 - Vacation.totalVacation}</div>
-      <div>{Vacation.totalVacation}</div>
-      {/* <div>
-        <button type="button" onClick={updateAuthToManager}>관리자지정</button>
-      </div> */}
     </div>
   );
 };
 VacationEntry.propTypes = {
-  Vacation: PropTypes.shape({
-    name: PropTypes.string,
+  vacation: PropTypes.shape({
+    from: PropTypes.string,
+    to: PropTypes.string,
+    status: PropTypes.string,
     email: PropTypes.string,
-    mobile: PropTypes.string,
-    totalVacation: PropTypes.number,
+    approver: PropTypes.string,
+    reason: PropTypes.string,
+    createdAt: PropTypes.string,
+    userName: PropTypes.string,
+    id: PropTypes.number,
+  }).isRequired,
+  vacationList: PropTypes.shape({
+    groupName: PropTypes.string,
+    vacations: PropTypes.arrayOf(PropTypes.shape({
+      from: PropTypes.string,
+      to: PropTypes.string,
+      status: PropTypes.string,
+      email: PropTypes.string,
+      approver: PropTypes.string,
+      reason: PropTypes.string,
+      createdAt: PropTypes.string,
+      userName: PropTypes.string,
+      id: PropTypes.number,
+    })).isRequired,
   }).isRequired,
 //   history: PropTypes.shape(historyPropTypes)
-//   authDispatch: PropTypes.func.isRequired,
+  approveDispatch: PropTypes.func.isRequired,
 };
 
 
 const mapStateToProps = (state) => ({
 //   searchTarget: state.user.logged,
-//   loggedUser: state.user.loggedUser,
+  vacationList: state.vacation.vacationList,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-//   searchDispatch: (target) => dispatch(setVacationList(target)),
+  approveDispatch: (approve) => dispatch(setVacationApprove(approve)),
 });
 
 

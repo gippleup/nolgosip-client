@@ -30,7 +30,7 @@ class SignUp extends React.Component {
       name,
       mobile,
     } = this.state;
-    axios.post('http://15.164.226.124:5000/signup', {
+    axios.post('http://54.180.90.57:5000/signup', {
       email,
       password,
       name,

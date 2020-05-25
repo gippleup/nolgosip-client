@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { history as historyPropTypes } from 'history-prop-types';
 import { setUserAuth } from '../actions';
@@ -21,7 +21,7 @@ const EmployeeEntry = (props) => {
       auth,
       email: employee.email,
     };
-    fetch('http://15.164.226.124:5000/users', {
+    fetch('http://54.180.90.57:5000/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ const EmployeeEntry = (props) => {
   }
   return (
     <div className="EmployeeEntry">
-      <div>{employee.name}</div>
+      <div>{employee.userName}</div>
       <div>
         {employee.email}
         {employee.mobile}
@@ -69,7 +69,7 @@ const EmployeeEntry = (props) => {
 };
 EmployeeEntry.propTypes = {
   employee: PropTypes.shape({
-    name: PropTypes.string,
+    userName: PropTypes.string,
     email: PropTypes.string,
     mobile: PropTypes.string,
     totalVacation: PropTypes.number,
@@ -77,7 +77,7 @@ EmployeeEntry.propTypes = {
   }).isRequired,
   employeeList: PropTypes.arrayOf(PropTypes.shape(
     {
-      name: PropTypes.string,
+      userName: PropTypes.string,
       email: PropTypes.string,
       mobile: PropTypes.string,
       totalVacation: PropTypes.number,

@@ -28,7 +28,7 @@ class EmployeeManager extends React.Component {
     const { search } = this.state;
     const searchTarget = [];
     for (let i = 0; i < employeeList.length; i += 1) {
-      if (employeeList[i].name === search) {
+      if (employeeList[i].userName === search) {
         searchTarget.push(employeeList[i]);
       }
     }
@@ -54,7 +54,7 @@ EmployeeManager.propTypes = {
 //   history: PropTypes.shape(historyPropTypes),
   searchDispatch: PropTypes.func.isRequired,
   employeeList: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string,
+    userName: PropTypes.string,
     email: PropTypes.string,
     mobile: PropTypes.string,
     totalVacation: PropTypes.number,

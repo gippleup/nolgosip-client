@@ -1,7 +1,20 @@
-import { SET_VACATIONLIST } from '../actions/index';
+import { SET_VACATIONLIST, SET_VACATIONAPPROVE } from '../actions/index';
 
 const initialState = {
-  vacationList: [],
+  vacationList: {
+    groupName: '',
+    vacations: [],
+    // vacations: {
+    //   from: '',
+    //   to: '',
+    //   status: '',
+    //   email: '',
+    //   approver: '',
+    //   reason: '',
+    //   createdAt: '',
+    //   userName: '',
+    // },
+  },
 };
 
 const vacationReducer = (state = initialState, action) => {
@@ -10,6 +23,11 @@ const vacationReducer = (state = initialState, action) => {
       return {
         ...state,
         vacationList: action.vacationList,
+      };
+    case SET_VACATIONAPPROVE:
+      return {
+        ...state,
+        vacationList: { ...action.approve },
       };
     default:
       return state;
