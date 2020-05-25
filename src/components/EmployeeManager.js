@@ -44,7 +44,7 @@ class EmployeeManager extends React.Component {
           <button type="button" onClick={this.searchEmployee}>검색</button>
         </div>
         {employeeList.map((employeeData) => (
-          <EmployeeEntry employee={employeeData} key={employeeData.email} />))}
+          <EmployeeEntry employeeList={employeeList} employee={employeeData} key={employeeData.email} />))}
       </div>
     );
   }
@@ -58,6 +58,7 @@ EmployeeManager.propTypes = {
     email: PropTypes.string,
     mobile: PropTypes.string,
     totalVacation: PropTypes.number,
+    auth: PropTypes.string,
   })).isRequired,
 };
 

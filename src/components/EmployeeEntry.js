@@ -1,16 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
-// import { history as historyPropTypes } from 'history-prop-types';
+import { history as historyPropTypes } from 'history-prop-types';
+import { setUserAuth } from '../actions';
 
 
 const EmployeeEntry = (props) => {
-  const { employee } = props;
+  const { employee, employeeList, history } = props;
 
-  const updateAuthToManager = () => {
+  const updateAuth = () => {
+    let auth = '';
+    if (employee.auth === 'user') {
+      auth = 'manager';
+    } else if (employee.auth === 'manager') {
+      auth = 'user';
+    }
     const data = {
       type: 'setAuth',
-      auth: 'manager',
+      auth,
       email: employee.email,
     };
     fetch('http://15.164.226.124:5000/users', {
@@ -18,20 +26,32 @@ const EmployeeEntry = (props) => {
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include',
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         if (res.email === employee.email) {
           alert('권한이 변경되었습니다');
         }
+        for (let i = 0; i < employeeList.length; i += 1) {
+          if (employeeList[i].email === employee.email) {
+            employeeList[i].auth = auth;
+          }
+        }
+        props.authDispatch(employeeList);
+        history.push('./employeeManager');
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
+  let button = null;
+  if (employee.auth === 'user') {
+    button = <button type="button" onClick={updateAuth}>관리자지정</button>;
+  } else if (employee.auth === 'manager') {
+    button = <button type="button" onClick={updateAuth}>권한취소</button>;
+  }
   return (
     <div className="EmployeeEntry">
       <div>{employee.name}</div>
@@ -42,7 +62,7 @@ const EmployeeEntry = (props) => {
       <div>{11 - employee.totalVacation}</div>
       <div>{employee.totalVacation}</div>
       <div>
-        <button type="button" onClick={updateAuthToManager}>관리자지정</button>
+        {button}
       </div>
     </div>
   );
@@ -53,11 +73,24 @@ EmployeeEntry.propTypes = {
     email: PropTypes.string,
     mobile: PropTypes.string,
     totalVacation: PropTypes.number,
+    auth: PropTypes.string,
   }).isRequired,
-//   history: PropTypes.shape(historyPropTypes)
-//   authDispatch: PropTypes.func.isRequired,
+  employeeList: PropTypes.arrayOf(PropTypes.shape(
+    {
+      name: PropTypes.string,
+      email: PropTypes.string,
+      mobile: PropTypes.string,
+      totalVacation: PropTypes.number,
+      auth: PropTypes.string,
+    },
+  )).isRequired,
+  history: PropTypes.shape(historyPropTypes),
+  authDispatch: PropTypes.func.isRequired,
 };
 
+EmployeeEntry.defaultProps = {
+  history: [],
+};
 
 const mapStateToProps = (state) => ({
 //   searchTarget: state.user.logged,
@@ -65,8 +98,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-//   searchDispatch: (target) => dispatch(setEmployeeList(target)),
+  authDispatch: (auth) => dispatch(setUserAuth(auth)),
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(EmployeeEntry);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(EmployeeEntry));

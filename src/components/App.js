@@ -8,6 +8,7 @@ import Login from './Login';
 import SignUp from './SignUp';
 import MenuBar from './MenuBar';
 import EmployeeManager from './EmployeeManager';
+import VacationManager from './VacationManager';
 // import Main from './Main';
 
 const App = (props) => (
@@ -39,6 +40,16 @@ const App = (props) => (
           <div>
             <MenuBar />
             <EmployeeManager />
+          </div>
+        )}
+      />
+      <Route
+        exact
+        path="/vacationManager"
+        render={() => (
+          <div>
+            <MenuBar />
+            <VacationManager />
           </div>
         )}
       />
