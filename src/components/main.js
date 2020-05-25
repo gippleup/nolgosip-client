@@ -1,109 +1,101 @@
 import React from 'react';
-import TeamVacationList from './TeamVactionList'
-import ShowModal from './ShowModal'
-import { fakeData } from '../fakeData'
+import { connect } from 'react-redux';
+import TeamVacationList from './TeamVactionList';
+import UserVacation from './UserVacation';
+import ShowModal from './ShowModal';
+import { modifyMyVacation, modifyOtherVaction } from '../actions';
 
-const axios = require("axios")
+// import { signin, getUserVacation } from './Util';
+
+const axios = require('axios');
+
+axios.defaults.withCredentials = true;
 
 class Main extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            ShowModal : false,
-            logged : false,
-            loggedUser :{
-                auth: 'user',
-                userName: '일반김코딩',
-                group: '',
-                email: 'codingkim@example.com',
-                mobile: '010-1234-1111',
-                leftVacation: 20,
-                usedVacation: 0,
-                vacations: []
-            },
-            employeeList: [],
-            employeeVacationList: [],
-            hasSubmit: false,
-        }
-        this.getTeamVacation = this.getTeamVacation.bind(this)
-        this.getUserVacation = this.getUserVacation.bind(this)
-        this.getFakeData = this.getFakeData.bind(this)
-        this.handleOpenModal = this.handleOpenModal.bind(this)
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      ShowModal: false,
+      logged: false,
+      hasSubmit: false,
+    };
+    this.getTeamVacation = this.getTeamVacation.bind(this);
+    this.getUserVacation = this.getUserVacation.bind(this);
+    // this.handleOpenModal = this.handleOpenModal.bind(this);
+  }
 
-    getFakeData = () => (
-        this.setState = ({
-              vacations : fakeData[0].vacations
-            })
-    )
-    
-    // 메인 화면이 렌더 되면서 보여 준다. 
-    componentDidMount(){
+  // 메인 화면이 렌더 되면서 보여 준다.
+  componentDidMount() {
+    // 메인 화면이 렌더되면서 데이터를 가져온다.
+    this.signin().then(() => { this.getUserVacation(); }).then(() => { this.getTeamVacation(); });
+  }
 
-    }
+  // 임시적으로 가입
+  signin() {
+    return axios.post('http://15.164.226.124:5000/signin', {
+      email: 'a',
+      password: 'a',
+    });
+    // .then((res) => console.log(res.data));
+  }
 
-    //http://13.125.27.141:5000/ 
+  // 팀 휴가 상태를 가져 오는 함수
+  getTeamVacation() {
+    const { TeamStoreVacation } = this.props;
+    return axios.post('http://15.164.226.124:5000/vacation', {
+      type: 'get',
+      target: 'team',
+      email: 'managerSong@gmail.com',
+      from: '2020-01-01',
+      to: '2020-12-31',
+    }).then((res) => TeamStoreVacation(res.data.vacations));
+  }
 
-    // url은 수정
+  // 내 휴가 상태를 가져 오는 함수
+  getUserVacation() {
+    const { UserStoreVacation } = this.props;
+    const url = 'http://15.164.226.124:5000/vacation';
+    return axios.post(url, {
+      type: 'get',
+      target: 'user',
+      email: 'managerSong@gmail.com',
+      from: '2020-01-01',
+      to: '2020-12-31',
+    }).then((res) => UserStoreVacation(res.data.vacations));
+  }
 
-      // 휴가 신청 버튼을 눌렀을 때 모달 창이 나오는 함수 
-      handleOpenModal () {
-        this.setState = ({
-            showModal : true
-        })
-    }
+  render() {
+    console.log(this.props);
 
-    // 팀 휴가 상태를 가져 오는 함수  
-    getTeamVacation = () => (
-        axios.get('http://13.125.27.141:5000/',{
-            vacations : this.state.loggedUser.vacations,
-            from : this.state.loggedUser.from,
-            to : this.state.loggedUser.to,
-            groupID : this.state.loggedUser.groupID,
-            groupName : this.state.loggedUser.groupName,
-            target : 'group'
-        })
-        .then(res => this.setState = {
-            vacations : res.data.vacations
-        })
-        .then(err => console.log(err) )
-    )
-
-    // 내 휴가 상태를 가져 오는 함수 
-    getUserVacation = () => (
-        axios.get('http://13.125.27.141:5000/',{
-            vacations : this.state.loggedUser.vacations,
-            from : this.state.loggedUser.from,
-            to : this.state.loggedUser.to,
-            groupID : this.state.loggedUser.groupID,
-            userName : this.state.loggedUser.userName,
-            target : 'user'
-        })
-        .then( res => 
-            this.setState = {
-                vacations : res.data.vacations
-            })
-        .then( err => console.log(err) )
-    )
-
-    render() {
-        const { vacations } = this.state.loggedUser
-
-        return (
-            <div>
-                <div className = 'userVacation'>
-                    {/* <TeamVacationList userVacationList = {vacations} getUserVacation = {this.getUserVacation} /> */}
-                </div>
-                <div className = 'ohterVaction'>
-                    {/* <TeamVacationList userVacationList = {vacations} getTeamVacation = {this.getTeamVacation}/> */}
-                </div>
-                <div>
-                <ShowModal />
-                </div>
-            </div>
-        )
-    }
+    return (
+      <div>
+        <div className="userVacation">
+          <UserVacation getUserVacation={this.getUserVacation} />
+        </div>
+        <div className="ohterVaction">
+          <TeamVacationList getTeamVacation={this.getTeamVacation} />
+        </div>
+        <div>
+          <ShowModal />
+        </div>
+      </div>
+    );
+  }
 }
 
+// 사용자 유저의 스토어 상태를 바꿔준다.
+// 팀 유저의 스토어 상태를 바꿔준다.
 
-export default Main 
+function mapDispatchtoProps(dispatch) {
+  return {
+    UserStoreVacation: (curUserEntries) => dispatch(modifyMyVacation(curUserEntries)),
+    TeamStoreVacation: (otherEntries) => dispatch(modifyOtherVaction(otherEntries)),
+  };
+}
+
+// 전체 스토어
+const mapStateToProps = (state) => ({
+  vacations: state.vacactionReducer,
+});
+
+export default connect(mapStateToProps, mapDispatchtoProps)(Main);

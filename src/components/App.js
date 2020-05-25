@@ -2,8 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../style/App.css';
-import Main from './Main.js'
-import ShowModal from './ShowModal';
+import Main from './Main.js';
 // import Login from './Login';
 // import SignUp from './SignUp';
 // import Main from './Main';
@@ -12,8 +11,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      logged : false
-    }
+      logged:false,
+    };
   }
 
   render() {
@@ -29,10 +28,11 @@ class App extends React.Component {
           <Route
             exact
             path="/main"
-            render={() => <div>
-            <Main logged={this.props.logged} /> 
-            </div>
-            }
+            render={() => (
+              <div>
+                <Main logged={this.props.logged} />
+              </div>
+            )}
           />
           <Route
             path="/"
