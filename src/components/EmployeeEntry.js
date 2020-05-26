@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { history as historyPropTypes } from 'history-prop-types';
 import { setUserAuth } from '../actions';
+import '../style/EmployeeEntry.css';
 
 
 const EmployeeEntry = (props) => {
@@ -48,36 +49,37 @@ const EmployeeEntry = (props) => {
   };
   let button = null;
   if (employee.auth === 'user') {
-    button = <button type="button" onClick={updateAuth}>관리자지정</button>;
+    button = <button type="button" className="employeeEntryElements" onClick={updateAuth}>관리자지정</button>;
   } else if (employee.auth === 'manager') {
-    button = <button type="button" onClick={updateAuth}>권한취소</button>;
+    button = <button type="button" className="employeeEntryElements" onClick={updateAuth}>권한취소</button>;
   }
 
   let employeeVacations = null;
-  if (employee.vacations){
+  if (employee.vacations) {
     employeeVacations = (
-      <div>
-        <div>{employee.vacations.sum.complete}</div>
-        <div>{employee.totalVacation - employee.vacations.sum.complete}</div>
-      </div>
-    )
+      <>
+        <div className="employeeEntryElements">{employee.vacations.sum.complete}</div>
+        <div className="employeeEntryElements">{employee.totalVacation - employee.vacations.sum.complete}</div>
+      </>
+    );
   } else {
     employeeVacations = (
-      <div>
-        <div>0</div>
-        <div>{employee.totalVacation}</div>
-      </div>
-    )
+      <>
+        <div className="employeeEntryElements">0</div>
+        <div className="employeeEntryElements">{employee.totalVacation}</div>
+      </>
+    );
   }
   return (
     <div className="EmployeeEntry">
-      <div>{employee.userName}</div>
+      <div className="employeeEntryElements">{employee.userName}</div>
       <div>
         {employee.email}
+        /
         {employee.mobile}
       </div>
       {employeeVacations}
-      <div>
+      <div className="employeeEntryElements">
         {button}
       </div>
     </div>
@@ -96,8 +98,8 @@ EmployeeEntry.propTypes = {
         approved: PropTypes.number,
         waiting: PropTypes.number,
         expired: PropTypes.number,
-      })
-    })
+      }),
+    }),
   }).isRequired,
   employeeList: PropTypes.arrayOf(PropTypes.shape(
     {

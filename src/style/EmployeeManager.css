@@ -1,0 +1,23 @@
+.EmployeeManager{
+    display: grid;
+    position: absolute;
+    left: 300px;
+    width: 1400px;
+}
+
+.searchTarget {
+    width: 1400px;
+    margin: 10px;
+}
+
+.employeeListTitleContainer {
+    display: grid;
+    margin: 0 auto;
+    font-size: 16px;
+    grid-template-columns: 200px 600px 200px 200px 200px;
+}
+
+.employeeListTitle {
+    /* display: inline; */
+    margin: 10px;
+}

@@ -1,0 +1,10 @@
+.EmployeeEntry {
+  display: grid;
+  margin: 0 auto;
+  grid-template-columns: 200px 600px 200px 200px 200px;
+}
+
+.EmployeeEntry div {
+  display: inline;
+  margin: 10px auto;
+}
