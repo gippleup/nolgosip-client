@@ -1,9 +1,29 @@
+.loginContainter {
+    height: 1000px;
+    border: 0px;
+    z-index: 1;
+}
+
 .SignUp {
-    border : 1px solid black;
-    width : 500px;
+    border : 1px black;
+    padding-top: 20px;
+    border-radius: 80px;
+    width : 450px;
     height: 500px;
     margin: 100px auto;
+    opacity: 0.95;
     background-color: #bcbaba;
+    opacity: 0.95;
+    z-index: 5;
+    position: absolute;
+    top: 100px;
+    left:50%; 
+    transform:translateX(-50%);
+}
+
+.signUpTitle {
+    margin: 30px;
+    font-size: 30px;
 }
 
 .signUpInputContainer {

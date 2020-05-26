@@ -54,6 +54,7 @@ class SignUp extends React.Component {
     return (
       <div className="SignUp">
         <div className="signUpInputContainer">
+          <div className="signUpTitle">회원가입</div>
           <div className="email">
             <input className="signUpEmailInput" placeholder="Email" size="30" type="email" onChange={this.handleInputValue('email')} required />
           </div>

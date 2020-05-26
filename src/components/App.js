@@ -32,7 +32,16 @@ const App = (props) => (
           </div>
         )}
       />
-      <Route exact path="/signup" render={() => <SignUp />} />
+      <Route
+        exact
+        path="/signup"
+        render={() => (
+          <div className="singupContainer">
+            <img className="backgroundImage" src={backImg} alt="background" />
+            <SignUp />
+          </div>
+        )}
+      />
       <Route
         exact
         path="/employeeManager"
