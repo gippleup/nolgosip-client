@@ -10,6 +10,19 @@ export const MODIFY_OTHER_VACATION = 'MODIFY_OTHER_VACATION';
 // 내 휴가 상태 변경
 export const MODIFY_MY_VACATION = 'MODIFY_MY_VACATION';
 
+// 내 데이터 가져오기
+
+export const GET_MY_DATA = 'GET_MY_DATA';
+
+export const getMyData = (myData) => {
+  console.log(myData);
+  return {
+    type: GET_MY_DATA,
+    myData,
+  };
+};
+
+
 // 휴가 추가
 
 export const addlModalVaction = (addVacation) => (

@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../style/App.css';
 import Main from './Main.js';
+import Mypage from './Mypage';
 // import Login from './Login';
 // import SignUp from './SignUp';
 // import Main from './Main';
@@ -31,6 +32,15 @@ class App extends React.Component {
             render={() => (
               <div>
                 <Main logged={this.props.logged} />
+              </div>
+            )}
+          />
+           <Route
+            exact
+            path="/mypage"
+            render={() => (
+              <div>
+                <Mypage logged={this.props.logged} />
               </div>
             )}
           />

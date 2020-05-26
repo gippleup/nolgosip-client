@@ -32,7 +32,7 @@ class Main extends React.Component {
 
   // 임시적으로 가입
   signin() {
-    return axios.post('http://15.164.226.124:5000/signin', {
+    return axios.post('http://54.180.90.57:5000/signin', {
       email: 'a',
       password: 'a',
     });
@@ -42,7 +42,7 @@ class Main extends React.Component {
   // 팀 휴가 상태를 가져 오는 함수
   getTeamVacation() {
     const { TeamStoreVacation } = this.props;
-    return axios.post('http://15.164.226.124:5000/vacation', {
+    return axios.post('http://54.180.90.57:5000/vacation', {
       type: 'get',
       target: 'team',
       email: 'managerSong@gmail.com',
@@ -54,14 +54,14 @@ class Main extends React.Component {
   // 내 휴가 상태를 가져 오는 함수
   getUserVacation() {
     const { UserStoreVacation } = this.props;
-    const url = 'http://15.164.226.124:5000/vacation';
+    const url = 'http://54.180.90.57:5000/vacation';
     return axios.post(url, {
       type: 'get',
       target: 'user',
       email: 'managerSong@gmail.com',
       from: '2020-01-01',
       to: '2020-12-31',
-    }).then((res) => UserStoreVacation(res.data.vacations));
+    }).then((res) => UserStoreVacation(res.data));
   }
 
   render() {
