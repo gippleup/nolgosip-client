@@ -45,7 +45,7 @@ class Main extends React.Component {
     return axios.post('http://54.180.90.57:5000/vacation', {
       type: 'get',
       target: 'team',
-      email: 'managerSong@gmail.com',
+      email: 'a',
       from: '2020-01-01',
       to: '2020-12-31',
     }).then((res) => TeamStoreVacation(res.data.vacations));
@@ -58,7 +58,7 @@ class Main extends React.Component {
     return axios.post(url, {
       type: 'get',
       target: 'user',
-      email: 'managerSong@gmail.com',
+      email: 'a',
       from: '2020-01-01',
       to: '2020-12-31',
     }).then((res) => UserStoreVacation(res.data));

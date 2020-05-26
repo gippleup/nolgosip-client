@@ -3,7 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  getMyData, getUserList, modifyMyVacation, modifyOtherVaction,
+  getMyData, getUserList, modifyMyVacation, deleteVacation, modifyOtherVaction, cancelVacation,
 } from '../actions';
 
 
@@ -17,7 +17,7 @@ class MyPage extends React.Component {
     this.getUserVacation = this.getUserVacation.bind(this);
     this.getUser = this.getUser.bind(this);
     this.getCurUserVacation = this.getCurUserVacation.bind(this);
-    this.cancleVacation = this.cancleVacation.bind(this);
+    // this.cancleVacation = this.cancleVacation.bind(this);
     this.state = {
       getData: false,
     };
@@ -29,9 +29,10 @@ class MyPage extends React.Component {
     this.getUserVacation();
   }
 
-  cancleVacation() {
-    
-  }
+  // cancleVacation(vacationId) {
+  //   this.props.cancel(vacationId)
+  //   console.log('hi')
+  // }
 
   // 유저 데이터 모두 가져오기
   getUser() {
@@ -40,7 +41,7 @@ class MyPage extends React.Component {
     return axios.post(url, {
       type: 'get',
       target: 'user',
-      email: 'managerSong@gmail.com',
+      email: 'a',
       from: '2020-01-01',
       to: '2020-12-31',
     }).then((res) => UserStoreVacation(res.data));
@@ -60,7 +61,7 @@ class MyPage extends React.Component {
     return axios.post('http://54.180.90.57:5000/vacation', {
       type: 'get',
       target: 'user',
-      email: 'managerSong@gmail.com',
+      email: 'a',
       from: '2020-01-01',
       to: '2020-12-31',
     }).then((res) => {
@@ -84,6 +85,9 @@ class MyPage extends React.Component {
     const tbody = Object.keys(myData[0])
       .filter((key) => isAnyOf(key, targetKeys))
       .map((key) => <td>{myData[0][key]}</td>);
+    let { status } = myData[0];
+    let btnText = status;
+
     return (
       <table className="tableIngVacation">
         <tr>
@@ -92,7 +96,7 @@ class MyPage extends React.Component {
         <tr>
           {tbody}
           <td>
-            <button type="button" value="휴가 취소" id="statusBtn">휴가 취소</button>
+            <button type="button" value="휴가 취소" id="statusBtn" onClick={this.props.cancel.bind(null, myData[0].id)}>{btnText}</button>
           </td>
         </tr>
       </table>
@@ -126,8 +130,8 @@ class MyPage extends React.Component {
   render() {
     const { getData } = this.state;
     const { vacations: { curUserEntries, myData } } = this.props;
-    console.log(curUserEntries);
-    console.log(myData);
+    // console.log(curUserEntries);
+    // console.log(myData);
 
     return (
       <div className="myPage">
@@ -183,6 +187,7 @@ const mapDispatchtoProps = (dispatch) => ({
   UserStoreVacation: (curUserEntries) => dispatch(modifyMyVacation(curUserEntries)),
   myData: (data) => dispatch(getMyData(data)),
   userList: (user) => dispatch(getUserList(user)),
+  cancel: (vacationId) => dispatch(cancelVacation(vacationId)),
 });
 
 export default connect(mapStateToProps, mapDispatchtoProps)(MyPage);

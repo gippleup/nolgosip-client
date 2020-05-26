@@ -1,5 +1,5 @@
 import {
-  MODIFY_MY_VACATION, MODIFY_OTHER_VACATION, GET_MY_DATA, USER_LIST,
+  MODIFY_MY_VACATION, MODIFY_OTHER_VACATION, GET_MY_DATA, USER_LIST, ADD_VACATION, DELETE_VACATION,
 } from '../actions/index';
 
 // 스토어 역할
@@ -48,6 +48,20 @@ export const vacactionReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+// export const vacationCancle = (state = initialState, action) => {
+//   switch (action.type) {
+//     case DELETE_VACATION:
+//       return {
+//       };
+//     case ADD_VACATION:
+//       return {
+
+//       }
+//     default:
+//       return state;
+//   }
+// };
 
 
 export default vacactionReducer;

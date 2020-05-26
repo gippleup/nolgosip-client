@@ -17,6 +17,7 @@ export const GET_MY_DATA = 'GET_MY_DATA';
 export const USER_LIST = 'USER_LIST';
 
 export const getMyData = (myData) => {
+  console.log(myData);
   return {
     type: GET_MY_DATA,
     myData,
@@ -42,10 +43,10 @@ export const addlModalVaction = (addVacation) => (
 
 // 휴가 삭제
 
-export const deleteModalVacation = (deleteVacation) => (
+export const deleteVacation = (vacation) => (
   {
     type: DELETE_VACATION,
-    deleteVacation,
+    vacation,
   }
 );
 
@@ -67,3 +68,50 @@ export const modifyOtherVaction = (otherEntries) => (
     otherEntries,
   }
 );
+
+
+export const cancelVacation = (vacationId) => async (dispatch, getState) => {
+  const cancel = await fetch('http://54.180.90.57:5000/vacation', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      type: 'cancel',
+      vacationId,
+    }),
+    credentials: 'include',
+  }).then((res) => {
+    if (res.status === 200) return res.json();
+    return false;
+  });
+
+  console.log(cancel);
+  if (!cancel) throw new Error('CANCEL FAILED');
+
+  const getUpdatedData = await fetch('http://54.180.90.57:5000/vacation', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      type: 'get',
+      target: 'user',
+      email: 'a',
+      from: '2020-01-01',
+      to: '2020-12-31',
+    }),
+    credentials: 'include',
+  }).then((res) => {
+    if (res.status === 200) return res.json();
+    return false;
+  }).catch((err) => {
+    throw err;
+  });
+
+  console.log(vacationId);
+  console.log(getUpdatedData);
+  if (!getUpdatedData) throw new Error('UPDATE FAILED');
+
+  dispatch(getMyData(getUpdatedData.vacations));
+};
