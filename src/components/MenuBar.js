@@ -97,7 +97,8 @@ const MenuBar = (props) => {
   }
   return (
     <div className="menuBar">
-      <div className="menuBarLogo">LOGO</div>
+      <div className="menuBarLogo">NOLGOSHIP</div>
+      <div className="marginBetweenLogo"></div>
       <button className="mainButton" type="button" onClick={toMain}>메인화면</button>
       <button className="myPageButton" type="button" onClick={toMypage}>마이페이지</button>
       {button}

@@ -20,11 +20,11 @@ const VacationManager = (props) => {
     <div className="VacationManager">
       <div className="notApprovedVacations">
         {notApprovedVacationList.map((vacationData) => (
-          <VacationEntry vacation={vacationData} key={vacationData.email} />))}
+          <VacationEntry vacation={vacationData} key={vacationData.id} />))}
       </div>
       <div className="approvedVacations">
         {approvedVacationList.map((vacationData) => (
-          <VacationEntry vacation={vacationData} key={vacationData.email} />))}
+          <VacationEntry vacation={vacationData} key={vacationData.id} />))}
       </div>
     </div>
   );

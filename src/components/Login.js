@@ -71,7 +71,7 @@ class Login extends React.Component {
     return (
       <div className="Login">
         <div className="loginLogo">
-          <span className="loginLogoImage">LOGO</span>
+          Login
         </div>
         <div className="loginInputContainer">
           <div className="loginEmail">
