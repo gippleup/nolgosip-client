@@ -52,6 +52,23 @@ const EmployeeEntry = (props) => {
   } else if (employee.auth === 'manager') {
     button = <button type="button" onClick={updateAuth}>권한취소</button>;
   }
+
+  let employeeVacations = null;
+  if (employee.vacations){
+    employeeVacations = (
+      <div>
+        <div>{employee.vacations.sum.complete}</div>
+        <div>{employee.totalVacation - employee.vacations.sum.complete}</div>
+      </div>
+    )
+  } else {
+    employeeVacations = (
+      <div>
+        <div>0</div>
+        <div>{employee.totalVacation}</div>
+      </div>
+    )
+  }
   return (
     <div className="EmployeeEntry">
       <div>{employee.userName}</div>
@@ -59,8 +76,7 @@ const EmployeeEntry = (props) => {
         {employee.email}
         {employee.mobile}
       </div>
-      <div>{11 - employee.totalVacation}</div>
-      <div>{employee.totalVacation}</div>
+      {employeeVacations}
       <div>
         {button}
       </div>
@@ -74,6 +90,14 @@ EmployeeEntry.propTypes = {
     mobile: PropTypes.string,
     totalVacation: PropTypes.number,
     auth: PropTypes.string,
+    vacations: PropTypes.shape({
+      sum: PropTypes.shape({
+        complete: PropTypes.number,
+        approved: PropTypes.number,
+        waiting: PropTypes.number,
+        expired: PropTypes.number,
+      })
+    })
   }).isRequired,
   employeeList: PropTypes.arrayOf(PropTypes.shape(
     {

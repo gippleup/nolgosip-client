@@ -9,23 +9,30 @@ const VacationManager = (props) => {
   const { vacationList } = props;
   const approvedVacationList = [];
   const notApprovedVacationList = [];
+
   for (let i = 0; i < vacationList.vacations.length; i += 1) {
-    if (vacationList.vacations[i].status === 'approved') {
-      approvedVacationList.push(vacationList.vacations[i]);
-    } else {
+    if (vacationList.vacations[i].status === 'waiting') {
       notApprovedVacationList.push(vacationList.vacations[i]);
+    } else {
+      approvedVacationList.push(vacationList.vacations[i]);
     }
   }
+
   return (
     <div className="VacationManager">
-      <div className="notApprovedVacations">
-        {notApprovedVacationList.map((vacationData) => (
-          <VacationEntry vacation={vacationData} key={vacationData.id} />))}
+      <div className="notApprovedVacationContainer">
+        <div className="notApprovedVacationListTitle">결재 대기중인 휴가</div>
+        <div className="notApprovedVacations">
+          {notApprovedVacationList.map((vacationData) => (
+            <VacationEntry vacation={vacationData} key={vacationData.id} />))}
+        </div>
       </div>
-      <div className="approvedVacations">
-        {approvedVacationList.map((vacationData) => (
-          <VacationEntry vacation={vacationData} key={vacationData.id} />))}
-      </div>
+      <div className="approvedVacationContainer"></div>
+        <div className="approvedVacationListTitle">결재 완료된 휴가</div>
+        <div className="approvedVacations">
+          {approvedVacationList.map((vacationData) => (
+            <VacationEntry vacation={vacationData} key={vacationData.id} />))}
+        </div>
     </div>
   );
 };

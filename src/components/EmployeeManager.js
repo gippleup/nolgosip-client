@@ -56,6 +56,14 @@ EmployeeManager.propTypes = {
     mobile: PropTypes.string,
     totalVacation: PropTypes.number,
     auth: PropTypes.string,
+    vacations: PropTypes.shape({
+      sum: PropTypes.shape({
+        complete: PropTypes.number,
+        approved: PropTypes.number,
+        waiting: PropTypes.number,
+        expired: PropTypes.number,
+      })
+    })
   })).isRequired,
 };
 

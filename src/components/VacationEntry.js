@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { setVacationApprove } from '../actions';
+import "../style/VacationEntry.css"
 
 const VacationEntry = (props) => {
   const { vacation, approveDispatch, vacationList } = props;
@@ -16,8 +17,8 @@ const VacationEntry = (props) => {
       type = 'approve';
       approve = 'approved';
     } else if (buttonAction === '취소') {
-      type = 'cancel';
-      approve = 'cancelled';
+      type = 'revert';
+      approve = 'waiting';
     } else if (buttonAction === '거절') {
       type = 'decline';
       approve = 'declined';
@@ -52,15 +53,18 @@ const VacationEntry = (props) => {
       });
   }
 
-  if (vacation.status === 'approved' && Date.parse(vacation.from) >= date) {
+  if ((vacation.status === 'approved' || vacation.status === 'declined') && Date.parse(vacation.from) >= date) {
     statusButton = '취소';
   } else if (vacation.status === 'approved' && Date.parse(vacation.from) < date) {
     statusButton = '완료';
+  } else if (vacation.status === 'declined' && Date.parse(vacation.from) < date) {
+    statusButton = '거절함';
   } else if (vacation.status === 'expired') {
     statusButton = '만료';
   }
+  
   let button = null;
-  if (vacation.status === 'approved' || vacation.status === 'expired') {
+  if (vacation.status === 'approved' || vacation.status === 'expired' || vacation.status === 'declined') {
     button = <button type="button" value={statusButton} onClick={vacationAction}>{statusButton}</button>;
   } else {
     button = (
@@ -73,13 +77,13 @@ const VacationEntry = (props) => {
 
   return (
     <div className="VacationEntry">
-      <div>{vacation.userName}</div>
-      <div>{vacation.createdAt}</div>
-      <div>{vacation.from}</div>
-      <div>{vacation.to}</div>
-      <div>{((Date.parse(vacation.to) - Date.parse(vacation.from)) / 1000 / 60 / 60 / 24)}</div>
-      <div>{vacation.reason}</div>
-      <div>
+      <div className="entryElements">{vacation.userName}</div>
+      <div className="entryElements">{vacation.createdAt}</div>
+      <div className="entryElements">{Date.parse(vacation.from)}</div>
+      <div className="entryElements">{vacation.to}</div>
+      <div className="entryElements">{((Date.parse(vacation.to) - Date.parse(vacation.from)) / 1000 / 60 / 60 / 24)}</div>
+      <div className="entryElements">{vacation.reason}</div>
+      <div className="entryElements">
         {button}
       </div>
     </div>
