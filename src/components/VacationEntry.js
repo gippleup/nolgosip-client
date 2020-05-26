@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { setVacationApprove } from '../actions';
-import "../style/VacationEntry.css"
+import '../style/VacationEntry.css';
 
 const VacationEntry = (props) => {
   const { vacation, approveDispatch, vacationList } = props;
@@ -62,7 +62,7 @@ const VacationEntry = (props) => {
   } else if (vacation.status === 'expired') {
     statusButton = '만료';
   }
-  
+
   let button = null;
   if (vacation.status === 'approved' || vacation.status === 'expired' || vacation.status === 'declined') {
     button = <button type="button" value={statusButton} onClick={vacationAction}>{statusButton}</button>;

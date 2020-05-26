@@ -12,7 +12,7 @@ const vacationReducer = (state = initialState, action) => {
     case SET_VACATIONLIST:
       return {
         ...state,
-        vacationList: action.vacationList,
+        vacationList: { ...action.vacationList },
       };
     case SET_VACATIONAPPROVE:
       return {

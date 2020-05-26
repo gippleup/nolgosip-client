@@ -62,8 +62,8 @@ EmployeeManager.propTypes = {
         approved: PropTypes.number,
         waiting: PropTypes.number,
         expired: PropTypes.number,
-      })
-    })
+      }),
+    }),
   })).isRequired,
 };
 
