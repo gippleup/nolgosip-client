@@ -9,12 +9,17 @@ class ShowModal extends React.Component {
     super(props);
     this.state = {
       showModal: false,
+      hasSubmit: false,
     };
-
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
+
+  handleSubmit() {
+    this.setState({ handleSubmit: true });
+  }
 
   // 모달 창 열기
   handleOpenModal() {
@@ -170,7 +175,7 @@ class ShowModal extends React.Component {
               연도
             </div>
           </div>
-          <button id="modal-button" onClick={this.handleCloseModal}>휴가 신청</button>
+          <button id="modal-button" onClick= {this.handleCloseModal}>휴가 신청</button>
         </ReactModal>
       </div>
     );

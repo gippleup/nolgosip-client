@@ -14,13 +14,21 @@ export const MODIFY_MY_VACATION = 'MODIFY_MY_VACATION';
 
 export const GET_MY_DATA = 'GET_MY_DATA';
 
+export const USER_LIST = 'USER_LIST';
+
 export const getMyData = (myData) => {
-  console.log(myData);
   return {
     type: GET_MY_DATA,
     myData,
   };
 };
+
+export const getUserList = (userList) => (
+  {
+    type: USER_LIST,
+    userList,
+  }
+);
 
 
 // 휴가 추가
