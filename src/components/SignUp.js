@@ -30,7 +30,7 @@ class SignUp extends React.Component {
       name,
       mobile,
     } = this.state;
-    axios.post('http://15.164.226.124:5000/signup', {
+    axios.post('http://54.180.90.57:5000/signup', {
       email,
       password,
       name,
@@ -38,7 +38,7 @@ class SignUp extends React.Component {
     })
       .then((res) => {
         const { history } = this.props;
-        if (res.data === 'ok') {
+        if (res.status === 200) {
           alert('회원가입이 완료되었습니다');
           history.push('/login');
         } else if (res.data === 'duplicate') {
@@ -54,6 +54,7 @@ class SignUp extends React.Component {
     return (
       <div className="SignUp">
         <div className="signUpInputContainer">
+          <div className="signUpTitle">회원가입</div>
           <div className="email">
             <input className="signUpEmailInput" placeholder="Email" size="30" type="email" onChange={this.handleInputValue('email')} required />
           </div>

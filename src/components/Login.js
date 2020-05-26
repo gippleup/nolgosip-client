@@ -34,7 +34,7 @@ class Login extends React.Component {
       password,
     } = this.state;
 
-    fetch('http://15.164.226.124:5000/signin', {
+    fetch('http://54.180.90.57:5000/signin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -52,6 +52,7 @@ class Login extends React.Component {
         return res.json();
       })
       .then((res) => {
+        console.log(res);
         loggedDispatch();
         userDataDispatch(res);
       })
@@ -70,7 +71,7 @@ class Login extends React.Component {
     return (
       <div className="Login">
         <div className="loginLogo">
-          <span className="loginLogoImage">LOGO</span>
+          Login
         </div>
         <div className="loginInputContainer">
           <div className="loginEmail">
