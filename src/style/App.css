@@ -2,9 +2,16 @@
   text-align: center;
 }
 
+body { margin:0; }
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.backgroundImage {
+  z-index: -1;
+  filter: blur(3px) brightness(70%);
 }
 
 @media (prefers-reduced-motion: no-preference) {

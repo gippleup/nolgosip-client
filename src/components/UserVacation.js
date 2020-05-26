@@ -31,7 +31,7 @@ export const UserVaction = ({ vacations: { curUserEntries } }) => (
 
 // 전체 상태
 const mapStateToProps = (state) => ({
-  vacations: state.vacactionReducer,
+  vacations: state.vacationState,
 });
 
 export default connect(mapStateToProps)(UserVaction);

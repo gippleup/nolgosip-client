@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import TeamVacationList from './TeamVactionList';
 import UserVacation from './UserVacation';
 import ShowModal from './ShowModal';
-import { modifyMyVacation, modifyOtherVaction } from '../actions';
+import { modifyMyVacation, modifyOtherVaction, setVacationList } from '../actions';
 
 // import { signin, getUserVacation } from './Util';
 
@@ -27,16 +27,7 @@ class Main extends React.Component {
   // 메인 화면이 렌더 되면서 보여 준다.
   componentDidMount() {
     // 메인 화면이 렌더되면서 데이터를 가져온다.
-    this.signin().then(() => { this.getUserVacation(); }).then(() => { this.getTeamVacation(); });
-  }
-
-  // 임시적으로 가입
-  signin() {
-    return axios.post('http://54.180.90.57:5000/signin', {
-      email: 'a',
-      password: 'a',
-    });
-    // .then((res) => console.log(res.data));
+    this.getUserVacation().then(() => { this.getTeamVacation(); });
   }
 
   // 팀 휴가 상태를 가져 오는 함수
@@ -48,7 +39,10 @@ class Main extends React.Component {
       email: 'a',
       from: '2020-01-01',
       to: '2020-12-31',
-    }).then((res) => TeamStoreVacation(res.data.vacations));
+    }).then((res) => {
+      TeamStoreVacation(res.data.vacations);
+      // TeamStoreVacation(res.data.vacations);
+    });
   }
 
   // 내 휴가 상태를 가져 오는 함수
@@ -95,7 +89,7 @@ function mapDispatchtoProps(dispatch) {
 
 // 전체 스토어
 const mapStateToProps = (state) => ({
-  vacations: state.vacactionReducer,
+  vacations: state.vacation,
 });
 
 export default connect(mapStateToProps, mapDispatchtoProps)(Main);

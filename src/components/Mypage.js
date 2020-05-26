@@ -180,7 +180,7 @@ class MyPage extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-  vacations: state.vacactionReducer,
+  vacations: state.vacaction,
 });
 
 const mapDispatchtoProps = (dispatch) => ({

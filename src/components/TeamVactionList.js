@@ -3,27 +3,38 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { TeamVactionEntry } from './TeamVactionEntry';
-// import { fakeData } from '../fakeData';
 
-export const TeamVacationList = ({ vacations: { otherEntries } }) => (
-  // console.log(otherEntries)
-  <div className="TeamVacitonList">
-    <div className="otherEntries">
-      {otherEntries.map((data, index) => (
-        <TeamVactionEntry
-          key={index}
-          userName={data.userName}
-          vacationFrom={data.from}
-          vacationTo={data.to}
-          vacationStatus={data.status}
-        />
-      ))}
-    </div>
-  </div>
-);
+export const TeamVacationList = ({ vacations: { otherEntries } }) => {
+  console.log(otherEntries);
+  const selectiveRender = () => {
+    if (!otherEntries.length) {
+      return (<></>);
+    }
+    return (
+      <div className="TeamVacitonList">
+        <div className="otherEntries">
+          {otherEntries.map((data, index) => (
+            <TeamVactionEntry
+              key={index}
+              userName={data.userName}
+              vacationFrom={data.from}
+              vacationTo={data.to}
+              vacationStatus={data.status}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  };
 
+  return selectiveRender();
+};
+
+// const mapStateToProps = (state) => ({
+//   vacations: state,
+// });
 const mapStateToProps = (state) => ({
-  vacations: state.vacactionReducer,
+  vacations: state.vacationState,
 });
 
 export default connect(mapStateToProps)(TeamVacationList);

@@ -14,54 +14,38 @@ const initialState = {
 
 // 팀원의 휴가 상태와 내 휴가 상태를 바꿔 주는 리듀서
 
-export const vacactionReducer = (state = initialState, action) => {
-  switch (action.type) {
-    // 내 휴가 상태를 새로운 상태로 바꾸어 준다.
-    case MODIFY_MY_VACATION:
-      return {
-        ...state,
-        curUserEntries: {
-          from: action.curUserEntries.vacations[0].from,
-          to: action.curUserEntries.vacations[0].to,
-          status: action.curUserEntries.vacations[0].status,
-          userName: action.curUserEntries.userName,
-        },
-      };
-      // 팀원의 휴가를 새로운 상태로 바꾸어 준다.
-    case MODIFY_OTHER_VACATION:
-      return {
-        ...state,
-        otherEntries: action.otherEntries,
-      };
-    case GET_MY_DATA:
-      // console.log(action);
-      return {
-        ...state,
-        myData: action.myData,
-      };
-    case USER_LIST:
-      return {
-        ...state,
-        userList: action.userList,
-      };
-    default:
-      return state;
+export const vacationState = (state = initialState, action) => {
+  console.log(action);
+  if (action.type === MODIFY_MY_VACATION) {
+    return {
+      ...state,
+      curUserEntries: {
+        from: action.curUserEntries.vacations[0].from,
+        to: action.curUserEntries.vacations[0].to,
+        status: action.curUserEntries.vacations[0].status,
+        userName: action.curUserEntries.userName,
+      },
+    };
   }
+  if (action.type === MODIFY_OTHER_VACATION) {
+    return {
+      ...state,
+      otherEntries: action.otherEntries,
+    };
+  }
+  if (action.type === GET_MY_DATA) {
+    return {
+      ...state,
+      myData: action.myData,
+    };
+  }
+  if (action.type === USER_LIST) {
+    return {
+      ...state,
+      userList: action.userList,
+    };
+  }
+  return state;
 };
 
-// export const vacationCancle = (state = initialState, action) => {
-//   switch (action.type) {
-//     case DELETE_VACATION:
-//       return {
-//       };
-//     case ADD_VACATION:
-//       return {
-
-//       }
-//     default:
-//       return state;
-//   }
-// };
-
-
-export default vacactionReducer;
+export default vacationState;
