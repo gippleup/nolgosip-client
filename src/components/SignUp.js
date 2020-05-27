@@ -52,9 +52,9 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <div className="SignUp">
+      <form className="SignUp">
         <div className="signUpInputContainer">
-          <div className="signUpTitle">회원가입</div>
+          <div className="signUpTitle">Sign Up</div>
           <div className="email">
             <input className="signUpEmailInput" placeholder="Email" size="30" type="email" onChange={this.handleInputValue('email')} required />
           </div>
@@ -67,11 +67,11 @@ class SignUp extends React.Component {
           <div className="mobile">
             <input className="signUpMobileInput" placeholder="Mobile" size="30" type="mobile" onChange={this.handleInputValue('mobile')} required />
           </div>
-          <div className="signUpButton">
-            <button className="signUpSubmitButton" type="button" onClick={this.submitSignUp}>완료</button>
+          <div className="signUpSubmitButtonContainer">
+            <button className="signUpSubmitButton" type="submit" onClick={this.submitSignUp}>완료</button>
           </div>
         </div>
-      </div>
+      </form>
     );
   }
 }
