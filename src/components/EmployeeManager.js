@@ -49,16 +49,18 @@ class EmployeeManager extends React.Component {
           <div className="employeeListTitle">남은 휴가</div>
           <div className="employeeListTitle">권한</div>
         </div>
-        {employeeList.map((employeeData) => {
-          const { search } = this.state;
-          if (search) {
-            if (search === employeeData.userName) {
+        <div className="employeeEntryListContainer">
+          {employeeList.map((employeeData) => {
+            const { search } = this.state;
+            if (search) {
+              if (search === employeeData.userName) {
+                return <EmployeeEntry employeeList={employeeList} employee={employeeData} key={employeeData.email} />;
+              }
+            } else {
               return <EmployeeEntry employeeList={employeeList} employee={employeeData} key={employeeData.email} />;
             }
-          } else {
-            return <EmployeeEntry employeeList={employeeList} employee={employeeData} key={employeeData.email} />;
-          }
-        })}
+          })}
+        </div>
       </div>
     );
   }

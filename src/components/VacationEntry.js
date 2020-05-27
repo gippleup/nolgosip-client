@@ -72,7 +72,7 @@ const VacationEntry = (props) => {
     }
   } else {
     button = (
-      <div>
+      <div className="buttonContainer">
         <button type="button" className="approveButton" value="승인" onClick={vacationAction}>승인</button>
         <button type="button" className="declineButton" value="거절" onClick={vacationAction}>거절</button>
       </div>
@@ -82,9 +82,9 @@ const VacationEntry = (props) => {
   return (
     <div className="VacationEntry">
       <div className="entryElements">{vacation.userName}</div>
-      <div className="entryElements">{vacation.createdAt}</div>
-      <div className="entryElements">{vacation.from}</div>
-      <div className="entryElements">{vacation.to}</div>
+      <div className="entryElements">{new Date(vacation.createdAt).toISOString().substring(0, 10)}</div>
+      <div className="entryElements">{new Date(vacation.from).toISOString().substring(0, 10)}</div>
+      <div className="entryElements">{new Date(vacation.to).toISOString().substring(0, 10)}</div>
       <div className="entryElements">
         {Math.floor(((Date.parse(vacation.to) - Date.parse(vacation.from)) / 1000 / 60 / 60 / 24))}
         일
@@ -96,6 +96,8 @@ const VacationEntry = (props) => {
     </div>
   );
 };
+
+
 VacationEntry.propTypes = {
   vacation: PropTypes.shape({
     from: PropTypes.string,

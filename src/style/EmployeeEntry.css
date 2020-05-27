@@ -1,10 +1,42 @@
 .EmployeeEntry {
   display: grid;
-  margin: 0 auto;
+  margin: 5px auto;
+  background-color: #f8ffe6;
   grid-template-columns: 200px 600px 200px 200px 200px;
 }
 
 .EmployeeEntry div {
-  display: inline;
+  /* display: inline; */
+  line-height: 37px;
   margin: 10px auto;
+}
+
+.approveAuthButton {
+  border-radius: 10px;
+  width: 80px;
+  background-color: #86ec6d;
+  border: none;
+  color: #fff;
+  padding: 5px 0;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px;
+  cursor: pointer;
+}
+
+.cancelAuthButton {
+  border-radius: 10px;
+  width: 80px;
+  background-color: #f56a58;
+  border: none;
+  color: #fff;
+  padding: 5px 0;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px;
+  cursor: pointer;
 }

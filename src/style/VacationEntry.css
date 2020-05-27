@@ -1,12 +1,20 @@
 .VacationEntry {
     display: grid;
-    margin: 0 auto;
-    grid-template-columns: 100px 300px 200px 200px 200px 200px 200px;
+    margin: 5px auto;
+    grid-template-columns: 150px 300px 250px 250px 100px 200px 200px;
+    grid-template-rows: 70px;
+    background-color: #eaeef8;
+    border: 1px;
+    border-radius: 20px;
 }
 
 .VacationEntry div {
-    /* display: inline; */
+    line-height: 50px;
     margin: 10px auto;
+}
+
+.buttonContainer {
+    margin-top: 0px !important;
 }
 
 .approveButton {
@@ -42,7 +50,7 @@
 .cancelButton {
     border-radius: 10px;
     width: 80px;
-    background-color: #58f558;
+    background-color: #1e8d1e;
     border: none;
     color: #fff;
     padding: 5px 0;
