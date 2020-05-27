@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../style/App.css';
-// import backImg from '../img/vacation.jpg';
 import Login from './Login';
 import SignUp from './SignUp';
 import MenuBar from './MenuBar';

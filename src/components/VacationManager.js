@@ -15,29 +15,11 @@ class VacationManager extends React.Component {
       search: '',
     };
     this.handleInputValue = this.handleInputValue.bind(this);
-    // this.searchVacation = this.searchVacation.bind(this);
   }
 
   handleInputValue = (key) => (e) => {
     this.setState({ [key]: e.target.value });
   };
-
-  // handleInputValue = (key) => (e) => {
-  //   this.setState({ [key]: e.target.value });
-  // };
-
-  // searchVacation = () => {
-  //   const { searchDispatch, vacationList } = this.props;
-  //   const { search } = this.state;
-  //   const searchTarget = [];
-  //   for (let i = 0; i < vacationList.vacations.length; i += 1) {
-  //     if (vacationList.vacations[i].userName === search) {
-  //       searchTarget.push(vacationList.vacations[i]);
-  //     }
-  //   }
-  //   vacationList.vacations = searchTarget;
-  //   searchDispatch(vacationList);
-  // };
 
 
   render() {

@@ -15,24 +15,11 @@ class EmployeeManager extends React.Component {
       search: '',
     };
     this.handleInputValue = this.handleInputValue.bind(this);
-    // this.searchEmployee = this.searchEmployee.bind(this);
   }
 
   handleInputValue = (key) => (e) => {
     this.setState({ [key]: e.target.value });
   };
-
-  // searchEmployee = () => {
-  //   const { searchDispatch, employeeList } = this.props;
-  //   const { search } = this.state;
-  //   const searchTarget = [];
-  //   for (let i = 0; i < employeeList.length; i += 1) {
-  //     if (employeeList[i].userName === search) {
-  //       searchTarget.push(employeeList[i]);
-  //     }
-  //   }
-  //   searchDispatch(searchTarget);
-  // }
 
   render() {
     const { employeeList } = this.props;
@@ -40,7 +27,6 @@ class EmployeeManager extends React.Component {
       <div className="EmployeeManager">
         <div className="searchTarget">
           <input className="searchTargetInput" type="text" placeholder="검색할 이름을 입력하세요" onChange={this.handleInputValue('search')} size="30" />
-          {/* <button type="button" onClick={this.searchEmployee}>검색</button> */}
         </div>
         <div className="employeeListTitleContainer">
           <div className="employeeListTitle">이름</div>
@@ -67,7 +53,6 @@ class EmployeeManager extends React.Component {
 }
 
 EmployeeManager.propTypes = {
-  // searchDispatch: PropTypes.func.isRequired,
   employeeList: PropTypes.arrayOf(PropTypes.shape({
     userName: PropTypes.string,
     email: PropTypes.string,

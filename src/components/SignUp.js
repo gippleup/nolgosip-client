@@ -93,4 +93,3 @@ SignUp.defaultProps = {
 };
 
 export default withRouter(SignUp);
-// export default connect(mapStateToProps)(Login);

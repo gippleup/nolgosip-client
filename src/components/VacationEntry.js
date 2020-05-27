@@ -89,6 +89,7 @@ const VacationEntry = (props) => {
     );
   }
 
+
   return (
     <div className="VacationEntry">
       <div className="entryElements">{vacation.userName}</div>
