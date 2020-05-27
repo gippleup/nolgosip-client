@@ -3,10 +3,8 @@
 // 현재 진행 중인 userVacation 사용자 휴가 하나 만...
 import React from 'react';
 
-// console.log(fakeData[0].loggedUser.vacations[0].userName);
-
-
 export const UserVaction = (props) => {
+  console.log(props);
   const { userEntries } = props;
 
   return userEntries.map((entry) => {

@@ -9,6 +9,7 @@ const initialState = {
   curUserEntries: [],
   myData: [],
   vacationState: [],
+  addVacation: [],
 };
 
 
@@ -34,10 +35,15 @@ export const vacationState = (state = initialState, action) => {
     };
   }
   if (action.type === SUM) {
-    console.log(action);
     return {
       ...state,
       vacationState: action.sum,
+    };
+  }
+  if (action.type === ADD_VACATION) {
+    return {
+      ...state,
+      addVacation: action.addVacation,
     };
   }
   return state;

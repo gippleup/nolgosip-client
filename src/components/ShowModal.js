@@ -1,8 +1,13 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import ReactModal from 'react-modal';
 import '../style/ShowModal.css';
 import { connect } from 'react-redux';
+import { history as historyPropTypes } from 'history-prop-types';
+import { withRouter } from 'react-router-dom';
 import * as actions from '../actions';
+
+const axios = require('axios');
 
 ReactModal.setAppElement('#root');
 
@@ -12,26 +17,59 @@ class ShowModal extends React.Component {
     this.state = {
       showModal: false,
       hasSubmit: false,
-      from: '',
-      to: '',
-      reason: '',
+      fromYear: '2020',
+      fromMonth: '1',
+      fromDay: '1',
+      toYear: '2020',
+      toMonth: '1',
+      toDay: '1',
+      reason: '병가',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleInputValue = this.handleInputValue.bind(this);
+    this.postVacation = this.postVacation.bind(this);
   }
 
+  postVacation = () => {
+    const {
+      fromYear, fromMonth, fromDay, toYear, toMonth, toDay, reason,
+    } = this.state;
+    const { getTeamVacation } = this.props;
+    let from = '';
+    let to = '';
+    from = `${fromYear}-${fromMonth}-${fromDay}`;
+    to = `${toYear}-${toMonth}-${toDay}`;
+    axios.post('http://54.180.90.57:5000/vacation', {
+      type: 'request',
+      from,
+      to,
+      reason,
+    }, { withCredentials: true })
+      .then(() => {
+        getTeamVacation();
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }
+
+  handleInputValue = (key) => (e) => {
+    console.log(e.target.value);
+    this.setState({ [key]: e.target.value });
+  };
+
+
+  handleClick(e) {
+    e.preventDefault();
+    this.handleCloseModal();
+    this.postVacation();
+  }
 
   handleSubmit() {
-    const from = document.querySelector('modalFrom');
-    const to = document.querySelector('modalTo');
-    const reason = document.querySelector('modalReason');
-    this.setState({ handleSubmit: true });
-    this.setState({
-      from: from,
-      to: to,
-      reason: reason,
-    });
+    this.setState({ hasSubmit: true });
   }
 
   // 모달 창 열기
@@ -46,7 +84,7 @@ class ShowModal extends React.Component {
 
   render() {
     const { showModal } = this.state;
-
+    const { addVacation } = this.props;
     return (
       <div>
         <button type="button" onClick={this.handleOpenModal}>휴가신청</button>
@@ -57,7 +95,8 @@ class ShowModal extends React.Component {
           <div>휴가 신청</div>
           <div className="modalVacationStart">
             시작일
-            <select className="modalFrom">
+            <select className="modalFrom" onChange={this.handleInputValue('fromYear')}>
+              <option />
               <option value="2020">2020</option>
               <option value="2021">2021</option>
               <option value="2022">2022</option>
@@ -65,23 +104,23 @@ class ShowModal extends React.Component {
             </select>
             년
 
-            <select className="modalFrom">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-              <option value="11">11</option>
-              <option value="12">12</option>
+            <select className="modalFrom" onChange={this.handleInputValue('fromMonth')}>
+              <option value="1" className="modalYear">1</option>
+              <option value="2" className="modalYear">2</option>
+              <option value="3" className="modalYear">3</option>
+              <option value="4" className="modalYear">4</option>
+              <option value="5" className="modalYear">5</option>
+              <option value="6" className="modalYear">6</option>
+              <option value="7" className="modalYear">7</option>
+              <option value="8" className="modalYear">8</option>
+              <option value="9" className="modalYear">9</option>
+              <option value="10" className="modalYear">10</option>
+              <option value="11" className="modalYear">11</option>
+              <option value="12" className="modalYear">12</option>
             </select>
             월
 
-            <select className="modalFrom">
+            <select className="modalFrom" onChange={this.handleInputValue('fromDay')}>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -118,14 +157,14 @@ class ShowModal extends React.Component {
             <div className="modalVacationEnd">
               <div>
                 종료일
-                <select className="modalTo">
+                <select className="modalTo" onChange={this.handleInputValue('toYear')}>
                   <option value="2020">2020</option>
                   <option value="2020">2021</option>
                   <option value="2020">2022</option>
                 </select>
                 년
 
-                <select className="modalTo">
+                <select className="modalTo" onChange={this.handleInputValue('toMonth')}>
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -141,7 +180,7 @@ class ShowModal extends React.Component {
                 </select>
                 월
 
-                <select className="modalTo">
+                <select className="modalTo" onChange={this.handleInputValue('toDay')}>
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -181,24 +220,28 @@ class ShowModal extends React.Component {
             <div className="modalReason">
               {' '}
               사유
-              <select className="modalReason">
+              <select className="modalReason" onChange={this.handleInputValue('reason')}>
                 <option> 병가 </option>
                 <option> 개인 사정  </option>
                 <option> 휴양 </option>
               </select>
-              연도
             </div>
           </div>
-          <button type="button" id="modal-button" onClick={this.handleCloseModal}>휴가 신청</button>
+          <button type="button" id="modal-button" onClick={this.handleClick}>휴가 신청</button>
+          <button type="button" id="cancel" onClick={this.handleCloseModal}>닫기</button>
         </ReactModal>
       </div>
     );
   }
 }
 
+const mapStateToProps = (state) => ({
+  curUserVacation: state,
+});
 
 const mapDispatchtoProps = (dispatch) => ({
   addVacation: (curUserEntries) => dispatch((actions.modifyMyVacation(curUserEntries))),
+  getTeamVacation: () => dispatch(actions.getTeamVacation()),
 });
 
-export default connect(null, mapDispatchtoProps)(ShowModal);
+export default connect(mapStateToProps, mapDispatchtoProps)(withRouter(ShowModal));
