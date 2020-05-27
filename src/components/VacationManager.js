@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import VacationEntry from './VacationEntry';
 import { setVacationList } from '../actions';
+import '../style/VacationManager.css';
 
 
 class VacationManager extends React.Component {
@@ -59,6 +60,15 @@ class VacationManager extends React.Component {
         </div>
         <div className="notApprovedVacationContainer">
           <div className="notApprovedVacationListTitle">결재 대기중인 휴가</div>
+          <div className="vacationTitleContainer">
+            <div className="vacationTitle">이름</div>
+            <div className="vacationTitle">신청일</div>
+            <div className="vacationTitle">사작일</div>
+            <div className="vacationTitle">종료일</div>
+            <div className="vacationTitle">사용일수</div>
+            <div className="vacationTitle">사유</div>
+            <div className="vacationTitle">결재</div>
+          </div>
           <div className="notApprovedVacations">
             {notApprovedVacationList.map((vacationData) => {
               if (search) {
@@ -73,6 +83,15 @@ class VacationManager extends React.Component {
         </div>
         <div className="approvedVacationContainer">
           <div className="approvedVacationListTitle">결재 완료된 휴가</div>
+          <div className="vacationTitleContainer">
+            <div className="vacationTitle">이름</div>
+            <div className="vacationTitle">신청일</div>
+            <div className="vacationTitle">사작일</div>
+            <div className="vacationTitle">종료일</div>
+            <div className="vacationTitle">사용일수</div>
+            <div className="vacationTitle">사유</div>
+            <div className="vacationTitle">결재</div>
+          </div>
           <div className="approvedVacations">
             {approvedVacationList.map((vacationData) => {
               if (search) {

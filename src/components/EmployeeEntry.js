@@ -58,15 +58,24 @@ const EmployeeEntry = (props) => {
   if (employee.vacations) {
     employeeVacations = (
       <>
-        <div className="employeeEntryElements">{employee.vacations.sum.complete}</div>
-        <div className="employeeEntryElements">{employee.totalVacation - employee.vacations.sum.complete}</div>
+        <div className="employeeEntryElements">
+          {employee.vacations.sum.complete}
+          일
+        </div>
+        <div className="employeeEntryElements">
+          {employee.totalVacation - employee.vacations.sum.complete}
+          일
+        </div>
       </>
     );
   } else {
     employeeVacations = (
       <>
-        <div className="employeeEntryElements">0</div>
-        <div className="employeeEntryElements">{employee.totalVacation}</div>
+        <div className="employeeEntryElements">0일</div>
+        <div className="employeeEntryElements">
+          {employee.totalVacation}
+          일
+        </div>
       </>
     );
   }

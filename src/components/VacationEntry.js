@@ -55,7 +55,7 @@ const VacationEntry = (props) => {
 
   if ((vacation.status === 'approved' || vacation.status === 'declined') && Date.parse(vacation.from) >= date) {
     statusButton = '취소';
-  } else if (vacation.status === 'approved' && Date.parse(vacation.from) < date) {
+  } else if (vacation.status === 'complete') {
     statusButton = '완료';
   } else if (vacation.status === 'declined' && Date.parse(vacation.from) < date) {
     statusButton = '거절함';
@@ -65,12 +65,16 @@ const VacationEntry = (props) => {
 
   let button = null;
   if (vacation.status === 'approved' || vacation.status === 'expired' || vacation.status === 'declined') {
-    button = <button type="button" value={statusButton} onClick={vacationAction}>{statusButton}</button>;
+    if (Date.parse(vacation.from) >= date) {
+      button = <button type="button" className="cancelButton" value={statusButton} onClick={vacationAction}>{statusButton}</button>;
+    } else {
+      button = <button type="button" className="completeButton" value={statusButton} onClick={vacationAction}>{statusButton}</button>;
+    }
   } else {
     button = (
       <div>
-        <button type="button" value="승인" onClick={vacationAction}>승인</button>
-        <button type="button" value="거절" onClick={vacationAction}>거절</button>
+        <button type="button" className="approveButton" value="승인" onClick={vacationAction}>승인</button>
+        <button type="button" className="declineButton" value="거절" onClick={vacationAction}>거절</button>
       </div>
     );
   }
@@ -79,9 +83,12 @@ const VacationEntry = (props) => {
     <div className="VacationEntry">
       <div className="entryElements">{vacation.userName}</div>
       <div className="entryElements">{vacation.createdAt}</div>
-      <div className="entryElements">{Date.parse(vacation.from)}</div>
+      <div className="entryElements">{vacation.from}</div>
       <div className="entryElements">{vacation.to}</div>
-      <div className="entryElements">{((Date.parse(vacation.to) - Date.parse(vacation.from)) / 1000 / 60 / 60 / 24)}</div>
+      <div className="entryElements">
+        {Math.floor(((Date.parse(vacation.to) - Date.parse(vacation.from)) / 1000 / 60 / 60 / 24))}
+        일
+      </div>
       <div className="entryElements">{vacation.reason}</div>
       <div className="entryElements">
         {button}

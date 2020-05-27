@@ -1,0 +1,36 @@
+.VacationManager{
+    display: grid;
+    position: absolute;
+    left: 300px;
+    width: 1400px;
+}
+
+.searchTarget {
+    width: 400px;
+    margin: 10px;
+}
+
+.vacationTitleContainer {
+    display: grid;
+    margin: 0 auto;
+    font-size: 16px;
+    grid-template-columns: 100px 300px 200px 200px 200px 200px 200px;
+}
+
+.notApprovedVacationListTitle{
+    font-size: 20px;
+    font-weight: bold;
+    width: 300px;
+    margin: 10px;
+}
+
+.approvedVacationListTitle{
+    font-size: 20px;
+    font-weight: bold;
+    width: 300px;
+    margin: 10px;
+}
+
+.vacationTitleContainer{
+    font-weight: bold;
+}

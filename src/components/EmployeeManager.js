@@ -43,11 +43,11 @@ class EmployeeManager extends React.Component {
           {/* <button type="button" onClick={this.searchEmployee}>검색</button> */}
         </div>
         <div className="employeeListTitleContainer">
-          <div className="employeeListTitle"><em>이름</em></div>
-          <div className="employeeListTitle"><em>이메일/전화번호</em></div>
-          <div className="employeeListTitle"><em>사용한 휴가</em></div>
-          <div className="employeeListTitle"><em>남은 휴가</em></div>
-          <div className="employeeListTitle"><em>권한</em></div>
+          <div className="employeeListTitle">이름</div>
+          <div className="employeeListTitle">이메일/전화번호</div>
+          <div className="employeeListTitle">사용한 휴가</div>
+          <div className="employeeListTitle">남은 휴가</div>
+          <div className="employeeListTitle">권한</div>
         </div>
         {employeeList.map((employeeData) => {
           const { search } = this.state;

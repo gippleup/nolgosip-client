@@ -1,0 +1,70 @@
+.VacationEntry {
+    display: grid;
+    margin: 0 auto;
+    grid-template-columns: 100px 300px 200px 200px 200px 200px 200px;
+}
+
+.VacationEntry div {
+    /* display: inline; */
+    margin: 10px auto;
+}
+
+.approveButton {
+    border-radius: 10px;
+    width: 80px;
+    background-color: #577fec;
+    border: none;
+    color: #fff;
+    padding: 5px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px;
+    cursor: pointer;
+}
+
+.declineButton {
+    border-radius: 10px;
+    width: 80px;
+    background-color: #f56a58;
+    border: none;
+    color: #fff;
+    padding: 5px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px;
+    cursor: pointer;
+}
+
+.cancelButton {
+    border-radius: 10px;
+    width: 80px;
+    background-color: #58f558;
+    border: none;
+    color: #fff;
+    padding: 5px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px;
+    cursor: pointer;
+}
+
+.completeButton {
+    border-radius: 10px;
+    width: 80px;
+    background-color: #8b8b8b;
+    border: none;
+    color: #fff;
+    padding: 5px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px;
+    cursor: pointer;
+}
