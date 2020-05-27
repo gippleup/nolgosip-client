@@ -1,80 +1,99 @@
-.loginContainter {
-    height: 1000px;
-    border: 0px;
-    z-index: 1;
-}
-
-
 .Login {
-    padding-top: 20px;
-    border-radius: 20px;
-    width : 400px;
-    height: 600px;
-    margin: 0px auto;
-    background-color: #2b2b2f;
-    opacity: 0.95;
-    z-index: 5;
-    position: absolute;
-    top: 100px;
-    left:50%; 
-    transform:translateX(-50%);
+  padding-top: 20px;
+  border-radius: 20px;
+  width : 400px;
+  height: 580px;
+  margin: 0px auto;
+  background-color: white;
+  opacity: 0.95;
+  z-index: 5;
+  position: absolute;
+  top: 100px;
+  left:50%; 
+  transform:translateX(-50%);
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
 .loginLogo {
-    border : 1px solid black;
-    height: 200px;
-    width : 300px;
-    margin : 30px auto;
-    text-align: center;
-    line-height: 200px;
-    background-color: #8fc693;
-    font-size:40px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* border : 1px solid black; */
+  height: 200px;
+  width : 300px;
+  margin : 30px auto;
+  text-align: center;
+  line-height: 200px;
+  /* background-color: #c3ffc7; */
+  font-size: 100px;
+  font-family: 'Gaegu', cursive;
+  user-select: none;
 }
 
 .loginLogoImage{
-    align-self: center;
+  align-self: center;
 }
 
 .loginInputContainer {
-    margin: 20px auto;
-    height: 150px;
-    width: 300px;
+  margin: 20px auto;
+  height: 150px;
+  width: 300px;
 }
 
-.loginEmailInput {
-    font-family: "Roboto", sans-serif;
-    outline: 0;
-    background: #bdbdbd;
-    width: 100%;
-    border: 0;
-    margin: 0 0 15px;
-    padding: 15px;
-    box-sizing: border-box;
-    font-size: 14px;
-  }
+.loginInputContainer input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+  transition-duration: 100ms;
+  transition-property: 'background-color';
+}
 
-.loginPasswordInput {
-    font-family: "Roboto", sans-serif;
-    outline: 0;
-    background: #bdbdbd;
-    width: 100%;
-    border: 0;
-    margin: 0 0 15px;
-    padding: 15px;
-    box-sizing: border-box;
-    font-size: 14px;
-  }
+.loginInputContainer input:focus {
+  background: slategrey;
+  color: white;
+}
+
+.loginInputContainer input:focus::placeholder {
+  color: white;
+}
 
 .loginEmail{
-    float: left;
+  float: left;
 }
 
 .loginPassword{
-    float: left;
+  float: left;
 }
 
-.signInSubmitButton {
+.loginButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0% 15%;
+}
+
+.loginButton > button {
+  font-size: 30px;
+  border: 0;
+  outline: 0;
+  border-radius: 10px;
+  padding: 10px 20px;
+  background-color: #f2f2f2;
+  transition-duration: 100ms;
+  font-size: 1.5rem;
+}
+
+.loginButton > button:hover {
+  background-color: slategrey;
+  color: white;
+  cursor: pointer;
+}
+
+
+/* .signInSubmitButton {
     font-size: 30px;
     margin-right: 10px;
 }
@@ -82,4 +101,4 @@
 .signUpButton {
     font-size: 30px;
     margin-left: 10px;
-}
+} */
