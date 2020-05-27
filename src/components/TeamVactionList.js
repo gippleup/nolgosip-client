@@ -4,8 +4,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { TeamVactionEntry } from './TeamVactionEntry';
 
-export const TeamVacationList = ({ vacations: { otherEntries } }) => {
-  console.log(otherEntries);
+export const TeamVacationList = (props) => {
+  const { otherEntries } = props;
   const selectiveRender = () => {
     if (!otherEntries.length) {
       return (<></>);
@@ -30,11 +30,4 @@ export const TeamVacationList = ({ vacations: { otherEntries } }) => {
   return selectiveRender();
 };
 
-// const mapStateToProps = (state) => ({
-//   vacations: state,
-// });
-const mapStateToProps = (state) => ({
-  vacations: state.vacationState,
-});
-
-export default connect(mapStateToProps)(TeamVacationList);
+export default TeamVacationList;

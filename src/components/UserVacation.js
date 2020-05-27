@@ -2,36 +2,38 @@
 
 // 현재 진행 중인 userVacation 사용자 휴가 하나 만...
 import React from 'react';
-import { connect } from 'react-redux';
 
 // console.log(fakeData[0].loggedUser.vacations[0].userName);
 
 
-export const UserVaction = ({ vacations: { curUserEntries } }) => (
-  // console.log(curUserEntries)
-  <div className="userVactionEntry">
-    <div className="userName">
-      {curUserEntries.userName}
-    </div>
-    <div>
-      <div className="VacationFrom">
-        {curUserEntries.from}
-      </div>
+export const UserVaction = (props) => {
+  const { userEntries } = props;
 
-      <div className="VacationTo">
-        {curUserEntries.to}
-      </div>
-      <div className="VacationStatus">
-        {curUserEntries.status}
-      </div>
-    </div>
-  </div>
-);
+  return userEntries.map((entry) => {
+    const { status } = entry;
+    if (status === 'waiting' || status === 'approved') {
+      return (
+        <div className="userVactionEntry">
+          <div className="userName">
+            {entry.userName}
+          </div>
+          <div>
+            <div className="VacationFrom">
+              {entry.from}
+            </div>
+            <div className="VacationTo">
+              {entry.to}
+            </div>
+            <div className="VacationStatus">
+              {entry.status}
+            </div>
+          </div>
+        </div>
+      );
+    }
+    return <></>;
+  });
+};
 
 
-// 전체 상태
-const mapStateToProps = (state) => ({
-  vacations: state.vacationState,
-});
-
-export default connect(mapStateToProps)(UserVaction);
+export default UserVaction;

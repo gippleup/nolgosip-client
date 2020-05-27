@@ -10,6 +10,7 @@ import MenuBar from './MenuBar';
 import EmployeeManager from './EmployeeManager';
 import VacationManager from './VacationManager';
 import Main from './Main';
+import MyPage from './Mypage';
 
 const App = (props) => (
   <div className="App">
@@ -69,6 +70,16 @@ const App = (props) => (
           <div>
             <MenuBar />
             <Main logged={props.logged} />
+          </div>
+        )}
+      />
+      <Route
+        exact
+        path="/mypage"
+        render={() => (
+          <div>
+            <MenuBar />
+            <MyPage logged={props.logged} />
           </div>
         )}
       />

@@ -1,5 +1,5 @@
 import {
-  MODIFY_MY_VACATION, MODIFY_OTHER_VACATION, GET_MY_DATA, USER_LIST, ADD_VACATION, DELETE_VACATION,
+  MODIFY_MY_VACATION, MODIFY_OTHER_VACATION, GET_MY_DATA, USER_LIST, SUM, ADD_VACATION, DELETE_VACATION,
 } from '../actions/index';
 
 // 스토어 역할
@@ -8,23 +8,17 @@ const initialState = {
   otherEntries: [],
   curUserEntries: [],
   myData: [],
-  userList: [],
+  vacationState: [],
 };
 
 
 // 팀원의 휴가 상태와 내 휴가 상태를 바꿔 주는 리듀서
 
 export const vacationState = (state = initialState, action) => {
-  console.log(action);
   if (action.type === MODIFY_MY_VACATION) {
     return {
       ...state,
-      curUserEntries: {
-        from: action.curUserEntries.vacations[0].from,
-        to: action.curUserEntries.vacations[0].to,
-        status: action.curUserEntries.vacations[0].status,
-        userName: action.curUserEntries.userName,
-      },
+      curUserEntries: action.curUserEntries,
     };
   }
   if (action.type === MODIFY_OTHER_VACATION) {
@@ -39,10 +33,11 @@ export const vacationState = (state = initialState, action) => {
       myData: action.myData,
     };
   }
-  if (action.type === USER_LIST) {
+  if (action.type === SUM) {
+    console.log(action);
     return {
       ...state,
-      userList: action.userList,
+      vacationState: action.sum,
     };
   }
   return state;

@@ -1,3 +1,12 @@
+/* eslint-disable no-console */
+const axios = require('axios').default;
+
+axios.defaults.withCredentials = true;
+
+// 휴가 상태 , 휴가 계산
+
+export const SUM = 'SUM';
+
 // 휴가 추가
 export const ADD_VACATION = 'ADD_VACATION';
 
@@ -16,13 +25,19 @@ export const GET_MY_DATA = 'GET_MY_DATA';
 
 export const USER_LIST = 'USER_LIST';
 
-export const getMyData = (myData) => {
-  console.log(myData);
-  return {
+export const sumVacation = (sum) => (
+  {
+    type: SUM,
+    sum,
+  }
+);
+
+export const getMyData = (myData) => (
+  {
     type: GET_MY_DATA,
     myData,
-  };
-};
+  }
+);
 
 export const getUserList = (userList) => (
   {
@@ -70,7 +85,7 @@ export const modifyOtherVaction = (otherEntries) => (
 );
 
 
-export const cancelVacation = (vacationId) => async (dispatch, getState) => {
+export const cancelVacation = (vacationId) => async (dispatch) => {
   const cancel = await fetch('http://54.180.90.57:5000/vacation', {
     method: 'POST',
     headers: {
@@ -109,8 +124,6 @@ export const cancelVacation = (vacationId) => async (dispatch, getState) => {
     throw err;
   });
 
-  console.log(vacationId);
-  console.log(getUpdatedData);
   if (!getUpdatedData) throw new Error('UPDATE FAILED');
 
   dispatch(getMyData(getUpdatedData.vacations));
@@ -153,3 +166,69 @@ export const setVacationApprove = (approve) => ({
   type: SET_VACATIONAPPROVE,
   approve,
 });
+
+
+export const getTeamVacation = () => (dispatch, getState) => {
+  const loggedUserEmail = getState().user.loggedUser.email;
+  axios.post('http://54.180.90.57:5000/vacation', {
+    type: 'get',
+    target: 'team',
+    email: loggedUserEmail,
+    from: '2020-01-01',
+    to: '2020-12-31',
+  })
+    .then((res) => {
+      const { vacations } = res.data;
+      const myVacations = [];
+      const othersVacations = [];
+      vacations.forEach((vacation) => {
+        if (vacation.email === loggedUserEmail) {
+          myVacations.push(vacation);
+        } else {
+          othersVacations.push(vacation);
+        }
+      });
+      dispatch(modifyOtherVaction(othersVacations));
+      dispatch(modifyMyVacation(myVacations));
+    })
+    .catch((err) => console.log(err));
+};
+
+// 이거 질문
+export const getUserVacation = () => (dispatch, getState) => {
+  const loggedUserEmail = getState().user.loggedUser.email;
+  // const loggedUserPassword = getState().user.loggedUser.password;
+  // console.log(loggedUserPassword);
+  axios.post('http://54.180.90.57:5000/signin', {
+    email: loggedUserEmail,
+    // password: loggedUserPassword,
+  }).then((res) => {
+    const { vacations } = res.data;
+    console.log(vacations);
+    dispatch(getMyData(vacations));
+  });
+};
+
+export const userVacationStatus = () => (dispatch, getState) => {
+  const loggedUserEmail = getState().user.loggedUser.email;
+  fetch('http://54.180.90.57:5000/vacation', {
+    method: 'POST',
+    credentials: 'include',
+    body: JSON.stringify(
+      {
+        type: 'get',
+        target: 'user',
+        email: loggedUserEmail,
+        from: '2020-01-01',
+        to: '2020-12-31',
+      },
+    ),
+    headers: { 'Content-Type': 'application/json' },
+  }).then((res) => res.json())
+    .then((json) => dispatch(sumVacation(json)))
+    .then((err) => console.log(err));
+};
+
+// export const modalVacation = () => (dispatch) => {
+//   dispatch(sumVacation());
+// }

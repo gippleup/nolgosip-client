@@ -4,7 +4,7 @@ const initialState = {
   logged: false,
   loggedUser: {
     auth: '',
-    leftVacation: 0,
+    totalVacation: 0,
     email: '',
     mobile: '',
     name: '',
@@ -23,7 +23,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         loggedUser: {
           auth: action.userData.auth,
-          leftVacation: action.userData.leftVacation,
+          totalVacation: action.userData.totalVacation,
           email: action.userData.email,
           mobile: action.userData.mobile,
           name: action.userData.name,

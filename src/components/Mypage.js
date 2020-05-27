@@ -1,10 +1,10 @@
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-shadow */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  getMyData, getUserList, modifyMyVacation, deleteVacation, modifyOtherVaction, cancelVacation,
-} from '../actions';
+import * as actions from '../actions';
 
 
 const axios = require('axios');
@@ -14,160 +14,218 @@ axios.defaults.withCredentials = true;
 class MyPage extends React.Component {
   constructor(props) {
     super(props);
-    this.getUserVacation = this.getUserVacation.bind(this);
-    this.getUser = this.getUser.bind(this);
-    this.getCurUserVacation = this.getCurUserVacation.bind(this);
-    // this.cancleVacation = this.cancleVacation.bind(this);
     this.state = {
-      getData: false,
+      getData: true,
     };
   }
 
   componentDidMount() {
-    this.getUser();
-    this.getCurUserVacation();
-    this.getUserVacation();
+    const { userVacationStatus } = this.props;
+    userVacationStatus();
   }
 
-  // cancleVacation(vacationId) {
-  //   this.props.cancel(vacationId)
-  //   console.log('hi')
-  // }
+  ingTable() {
+    const { vacations: { vacationState: { vacationState: { filteredVacations } } } } = this.props;
+    const createdAt = [];
+    filteredVacations.waiting.map((vacation) => createdAt.push(vacation.createdAt));
 
-  // 유저 데이터 모두 가져오기
-  getUser() {
-    const { UserStoreVacation } = this.props;
-    const url = 'http://54.180.90.57:5000/vacation';
-    return axios.post(url, {
-      type: 'get',
-      target: 'user',
-      email: 'a',
-      from: '2020-01-01',
-      to: '2020-12-31',
-    }).then((res) => UserStoreVacation(res.data));
-  }
+    const from = [];
+    filteredVacations.waiting.map((vacation) => from.push(vacation.from));
 
-  // 유저 리스트 데이터 가져오기
-  getCurUserVacation() {
-    const { userList } = this.props;
-    const url = 'http://54.180.90.57:5000/users';
-    return axios.get(url).then((res) => userList(res.data));
-  }
+    const to = [];
+    filteredVacations.waiting.map((vacation) => to.push(vacation.to));
 
+    const span = [];
+    filteredVacations.waiting.map((vacation) => span.push(vacation.span));
 
-  // 내 휴가 데이터 모두 가져오기
-  getUserVacation() {
-    const { myData } = this.props;
-    return axios.post('http://54.180.90.57:5000/vacation', {
-      type: 'get',
-      target: 'user',
-      email: 'a',
-      from: '2020-01-01',
-      to: '2020-12-31',
-    }).then((res) => {
-      myData(res.data.vacations);
-    })
-      .then(() => this.setState({
-        getData: true,
-      }));
-  }
-
-  ingtable() {
-    const { vacations: { myData } } = this.props;
-    const thead = ['신청일', '시작일', '종료일', '사용일수', '사유'].map((key, i) => <th key={i}>{key}</th>);
-    const isAnyOf = (value, arr) => {
-      for (let i = 0; i < arr.length; i += 1) {
-        if (value === arr[i]) return true;
-      }
-      return false;
-    };
-    const targetKeys = ['createdAt', 'from', 'to', 'reason'];
-    const tbody = Object.keys(myData[0])
-      .filter((key) => isAnyOf(key, targetKeys))
-      .map((key) => <td>{myData[0][key]}</td>);
-    let { status } = myData[0];
-    let btnText = status;
+    const reason = [];
+    filteredVacations.waiting.map((vacation) => reason.push(vacation.reason));
 
     return (
-      <table className="tableIngVacation">
+      <thead>
         <tr>
-          {thead}
+          <th>
+            신청일
+          </th>
+          <th>
+            시작일
+          </th>
+          <th>
+            종료일
+          </th>
+          <th>
+            사용 일 수
+          </th>
+          <th>
+            사유
+          </th>
+          <th>
+            {}
+          </th>
         </tr>
         <tr>
-          {tbody}
-          <td>
-            <button type="button" value="휴가 취소" id="statusBtn" onClick={this.props.cancel.bind(null, myData[0].id)}>{btnText}</button>
-          </td>
+          <td>{createdAt.map((key) => key)}</td>
+          <td>{from.map((key) => key)}</td>
+          <td>{to.map((key) => key)}</td>
+          <td>{span.map((key) => key)}</td>
+          <td>{reason.map((key) => key)}</td>
+          <td><button type="button">휴가 취소</button></td>
         </tr>
-      </table>
+      </thead>
     );
   }
 
   doneTable() {
-    const { vacations: { myData } } = this.props;
-    const thead = ['신청일', '시작일', '종료일', '사용 일수', '사유', '상태'].map((key, i) => <th key={i}>{key}</th>);
-    const isAnyOf = (value, arr) => {
-      for (let i = 0; i < arr.length; i += 1) {
-        if (value === arr[i]) return true;
-      }
-      return false;
-    };
-    const targetKeys = ['createdAt', 'from', 'to', '여기에는 사용 일수 ', 'reason', 'status'];
-    const tbody = myData.map((myVacation) => Object.keys(myVacation).filter((key) => isAnyOf(key, targetKeys)).map((key, i) => <td key={i}>{myVacation[key]}</td>));
+    const { vacations: { vacationState: { vacationState: { filteredVacations } } } } = this.props;
+
+
+    const createdAt = [];
+    filteredVacations.expired.map((vacation) => createdAt.push(vacation.createdAt));
+    filteredVacations.declined.map((vacation) => createdAt.push(vacation.createdAt));
+    // filteredVacations.comlete.map((vacation) => createdAt.push(vacation.createdAt));
+
+    const from = [];
+    filteredVacations.expired.map((vacation) => from.push(vacation.from));
+    filteredVacations.declined.map((vacation) => from.push(vacation.createdAt));
+    // filteredVacations.comlete.map((vacation) => createdAt.push(vacation.createdAt));
+
+    const to = [];
+    filteredVacations.expired.map((vacation) => to.push(vacation.to));
+    filteredVacations.declined.map((vacation) => to.push(vacation.createdAt));
+    // filteredVacations.comlete.map((vacation) => createdAt.push(vacation.createdAt));
+
+    const span = [];
+    filteredVacations.expired.map((vacation) => span.push(vacation.span));
+    filteredVacations.declined.map((vacation) => span.push(vacation.createdAt));
+    // filteredVacations.comlete.map((vacation) => createdAt.push(vacation.createdAt));
+
+    const reason = [];
+    filteredVacations.expired.map((vacation) => reason.push(vacation.reason));
+    filteredVacations.declined.map((vacation) => reason.push(vacation.createdAt));
+    // filteredVacations.comlete.map((vacation) => createdAt.push(vacation.createdAt));
+
 
     return (
-      <table className="doneVacationTable">
+      <thead>
         <tr>
-          {thead}
+          <th>
+            신청일
+          </th>
+          <th>
+            시작일
+          </th>
+          <th>
+            종료일
+          </th>
+          <th>
+            사용 일 수
+          </th>
+          <th>
+            사유
+          </th>
         </tr>
         <tr>
-          {tbody}
+          <td>{createdAt.map((key) => key)}</td>
+          <td>{from.map((key) => key)}</td>
+          <td>{to.map((key) => key)}</td>
+          <td>{span.map((key) => key)}</td>
+          <td>{reason.map((key) => key)}</td>
         </tr>
-      </table>
+      </thead>
     );
   }
 
   render() {
     const { getData } = this.state;
-    const { vacations: { curUserEntries, myData } } = this.props;
-    // console.log(curUserEntries);
-    // console.log(myData);
+    const { vacations: { vacationState: { curUserEntries } } } = this.props;
+    const { vacations: { vacationState: { vacationState: { filteredVacations } } } } = this.props;
+    console.log(filteredVacations);
 
+    if (!curUserEntries.length || typeof filteredVacations === 'undefined') {
+      return (
+        <div className="myPage">
+          <div className="myData">
+            <div className="name">
+              이름
+              {}
+            </div>
+            <div className="email">
+              이메일
+              {}
+            </div>
+            <div className="mobile">
+              전화번호
+              {}
+            </div>
+            <div className="status">
+              직책
+              {}
+            </div>
+            <div className="vacation">
+              <div className="usedVacation">
+                휴가 사용 일수
+              </div>
+              <div className="leftVacation">
+                휴가 남은 일수
+              </div>
+            </div>
+            <div className="myVacation">
+              <div className="ingVacation">
+                진행 중인 휴가
+
+              </div>
+              <div className="doneVacation">
+                완료 된 휴가
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
     return (
       <div className="myPage">
         <div className="myData">
           <div className="name">
             이름
-            {}
-          </div>
-          <div className="group">
-            부서
-            {}
+            {curUserEntries[0].userName}
           </div>
           <div className="email">
             이메일
+            {curUserEntries[0].email}
           </div>
           <div className="mobile">
             전화번호
+            {curUserEntries[0].mobile}
+          </div>
+
+          <div className="status">
+            직책
+            {curUserEntries[0].auth}
           </div>
 
           <div className="vacation">
             <div className="usedVacation">
               휴가 사용 일수
+              { filteredVacations.sum.complete + filteredVacations.sum.approved }
             </div>
             <div className="leftVacation">
               휴가 남은 일수
+              { 11 - (filteredVacations.sum.complete + filteredVacations.sum.approved) }
             </div>
           </div>
 
           <div className="myVacation">
             <div className="ingVacation">
               진행 중인 휴가
-              {getData ? this.ingtable() : <></>}
+              <table>
+                {getData ? this.ingTable() : <></>}
+              </table>
             </div>
             <div className="doneVacation">
               완료 된 휴가
               {getData ? this.doneTable() : <></>}
+              <table />
+
             </div>
           </div>
         </div>
@@ -176,18 +234,16 @@ class MyPage extends React.Component {
   }
 }
 
-// 내 전체 데이터 가져오기
-
-
 const mapStateToProps = (state) => ({
-  vacations: state.vacaction,
+  vacations: state,
 });
 
 const mapDispatchtoProps = (dispatch) => ({
-  UserStoreVacation: (curUserEntries) => dispatch(modifyMyVacation(curUserEntries)),
-  myData: (data) => dispatch(getMyData(data)),
-  userList: (user) => dispatch(getUserList(user)),
-  cancel: (vacationId) => dispatch(cancelVacation(vacationId)),
+  UserStoreVacation: (curUserEntries) => dispatch(actions.modifyMyVacation(curUserEntries)),
+  myData: (data) => dispatch(actions.getMyData(data)),
+  getUserVacation: () => dispatch(actions.getUserVacation()),
+  cancel: (vacationId) => dispatch(actions.cancelVacation(vacationId)),
+  userVacationStatus: () => dispatch(actions.userVacationStatus()),
 });
 
 export default connect(mapStateToProps, mapDispatchtoProps)(MyPage);

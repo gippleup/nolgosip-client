@@ -1,11 +1,11 @@
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
 import TeamVacationList from './TeamVactionList';
 import UserVacation from './UserVacation';
 import ShowModal from './ShowModal';
-import { modifyMyVacation, modifyOtherVaction, setVacationList } from '../actions';
-
-// import { signin, getUserVacation } from './Util';
+import * as actions from '../actions';
 
 const axios = require('axios');
 
@@ -19,55 +19,73 @@ class Main extends React.Component {
       logged: false,
       hasSubmit: false,
     };
-    this.getTeamVacation = this.getTeamVacation.bind(this);
-    this.getUserVacation = this.getUserVacation.bind(this);
-    // this.handleOpenModal = this.handleOpenModal.bind(this);
   }
 
   // 메인 화면이 렌더 되면서 보여 준다.
   componentDidMount() {
-    // 메인 화면이 렌더되면서 데이터를 가져온다.
-    this.getUserVacation().then(() => { this.getTeamVacation(); });
+    const { getTeamVacation } = this.props;
+    getTeamVacation();
+    this.toEmployeeManager();
+    console.log(this.props);
+    // 메인 화면이 렌더되면서 데이터를 가져;다.
   }
 
-  // 팀 휴가 상태를 가져 오는 함수
-  getTeamVacation() {
-    const { TeamStoreVacation } = this.props;
-    return axios.post('http://54.180.90.57:5000/vacation', {
-      type: 'get',
-      target: 'team',
-      email: 'a',
-      from: '2020-01-01',
-      to: '2020-12-31',
-    }).then((res) => {
-      TeamStoreVacation(res.data.vacations);
-      // TeamStoreVacation(res.data.vacations);
-    });
-  }
-
-  // 내 휴가 상태를 가져 오는 함수
-  getUserVacation() {
-    const { UserStoreVacation } = this.props;
-    const url = 'http://54.180.90.57:5000/vacation';
-    return axios.post(url, {
-      type: 'get',
-      target: 'user',
-      email: 'a',
-      from: '2020-01-01',
-      to: '2020-12-31',
-    }).then((res) => UserStoreVacation(res.data));
+  toEmployeeManager() {
+    const { setEmployeeList } = this.props;
+    fetch('http://54.180.90.57:5000/users', {
+      method: 'GET',
+      credentials: 'include',
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setEmployeeList(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   render() {
-    console.log(this.props);
+    const { curUserEntries, otherEntries } = this.props;
+    if (!curUserEntries.length || !otherEntries.length) {
+      return (
+        <>
+          <div className="vacationInfo">
+            휴가 정보
+          </div>
+          <div className="mainUserName">
+            이름
+          </div>
+          <div className="mainUserVacation">
+            기간
+          </div>
+          <div className="userStatus">
+            상태(휴가중/예정)
+          </div>
 
+          <div className="vacationInfo">
+            휴가 정보
+          </div>
+          <div className="mainUserName">
+            이름
+          </div>
+          <div className="mainUserVacation">
+            기간
+          </div>
+          <div className="userStatus">
+            상태(휴가중/예정)
+          </div>
+        </>
+      );
+    }
     return (
       <div>
         <div className="userVacation">
-          <UserVacation getUserVacation={this.getUserVacation} />
+          <UserVacation userEntries={curUserEntries} />
         </div>
+        <div style={{ height: '20px' }} />
         <div className="ohterVaction">
-          <TeamVacationList getTeamVacation={this.getTeamVacation} />
+          <TeamVacationList otherEntries={otherEntries} />
         </div>
         <div>
           <ShowModal />
@@ -82,14 +100,16 @@ class Main extends React.Component {
 
 function mapDispatchtoProps(dispatch) {
   return {
-    UserStoreVacation: (curUserEntries) => dispatch(modifyMyVacation(curUserEntries)),
-    TeamStoreVacation: (otherEntries) => dispatch(modifyOtherVaction(otherEntries)),
+    getTeamVacation: () => dispatch(actions.getTeamVacation()),
+    setEmployeeList: (employeeList) => dispatch(actions.setEmployeeList(employeeList)),
   };
 }
 
 // 전체 스토어
 const mapStateToProps = (state) => ({
-  vacations: state.vacation,
+  curUserEntries: state.vacationState.curUserEntries,
+  otherEntries: state.vacationState.otherEntries,
+  employeeList: state,
 });
 
 export default connect(mapStateToProps, mapDispatchtoProps)(Main);
