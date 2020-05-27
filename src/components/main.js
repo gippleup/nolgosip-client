@@ -15,9 +15,7 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      ShowModal: false,
       logged: false,
-      hasSubmit: false,
     };
   }
 
@@ -25,24 +23,7 @@ class Main extends React.Component {
   componentDidMount() {
     const { getTeamVacation } = this.props;
     getTeamVacation();
-    this.toEmployeeManager();
-    console.log(this.props);
     // 메인 화면이 렌더되면서 데이터를 가져;다.
-  }
-
-  toEmployeeManager() {
-    const { setEmployeeList } = this.props;
-    fetch('http://54.180.90.57:5000/users', {
-      method: 'GET',
-      credentials: 'include',
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        setEmployeeList(res);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   }
 
   render() {
@@ -109,7 +90,6 @@ function mapDispatchtoProps(dispatch) {
 const mapStateToProps = (state) => ({
   curUserEntries: state.vacationState.curUserEntries,
   otherEntries: state.vacationState.otherEntries,
-  employeeList: state,
 });
 
 export default connect(mapStateToProps, mapDispatchtoProps)(Main);

@@ -3,8 +3,6 @@ import React from 'react';
 import ReactModal from 'react-modal';
 import '../style/ShowModal.css';
 import { connect } from 'react-redux';
-import { history as historyPropTypes } from 'history-prop-types';
-import { withRouter } from 'react-router-dom';
 import * as actions from '../actions';
 
 const axios = require('axios');
@@ -16,7 +14,6 @@ class ShowModal extends React.Component {
     super(props);
     this.state = {
       showModal: false,
-      hasSubmit: false,
       fromYear: '2020',
       fromMonth: '1',
       fromDay: '1',
@@ -25,12 +22,6 @@ class ShowModal extends React.Component {
       toDay: '1',
       reason: '병가',
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleOpenModal = this.handleOpenModal.bind(this);
-    this.handleCloseModal = this.handleCloseModal.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleInputValue = this.handleInputValue.bind(this);
-    this.postVacation = this.postVacation.bind(this);
   }
 
   postVacation = () => {
@@ -57,34 +48,36 @@ class ShowModal extends React.Component {
   }
 
   handleInputValue = (key) => (e) => {
-    console.log(e.target.value);
     this.setState({ [key]: e.target.value });
   };
 
 
-  handleClick(e) {
+  handleClick = (e) => {
     e.preventDefault();
     this.handleCloseModal();
     this.postVacation();
   }
 
-  handleSubmit() {
-    this.setState({ hasSubmit: true });
-  }
-
   // 모달 창 열기
-  handleOpenModal() {
+  handleOpenModal = () => {
     this.setState({ showModal: true });
   }
 
   // 모달 창 닫기
-  handleCloseModal() {
+  handleCloseModal = () => {
     this.setState({ showModal: false });
+  }
+
+  year = () => {
+    let year;
+    for (let i = 2020; i < 2030; i = +1) {
+      year = <option value={i}>{i}</option>;
+    }
+    return year;
   }
 
   render() {
     const { showModal } = this.state;
-    const { addVacation } = this.props;
     return (
       <div>
         <button type="button" onClick={this.handleOpenModal}>휴가신청</button>
@@ -96,7 +89,6 @@ class ShowModal extends React.Component {
           <div className="modalVacationStart">
             시작일
             <select className="modalFrom" onChange={this.handleInputValue('fromYear')}>
-              <option />
               <option value="2020">2020</option>
               <option value="2021">2021</option>
               <option value="2022">2022</option>
@@ -105,18 +97,18 @@ class ShowModal extends React.Component {
             년
 
             <select className="modalFrom" onChange={this.handleInputValue('fromMonth')}>
-              <option value="1" className="modalYear">1</option>
-              <option value="2" className="modalYear">2</option>
-              <option value="3" className="modalYear">3</option>
-              <option value="4" className="modalYear">4</option>
-              <option value="5" className="modalYear">5</option>
-              <option value="6" className="modalYear">6</option>
-              <option value="7" className="modalYear">7</option>
-              <option value="8" className="modalYear">8</option>
-              <option value="9" className="modalYear">9</option>
-              <option value="10" className="modalYear">10</option>
-              <option value="11" className="modalYear">11</option>
-              <option value="12" className="modalYear">12</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
             </select>
             월
 
@@ -218,7 +210,6 @@ class ShowModal extends React.Component {
             </div>
 
             <div className="modalReason">
-              {' '}
               사유
               <select className="modalReason" onChange={this.handleInputValue('reason')}>
                 <option> 병가 </option>
@@ -240,8 +231,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchtoProps = (dispatch) => ({
-  addVacation: (curUserEntries) => dispatch((actions.modifyMyVacation(curUserEntries))),
   getTeamVacation: () => dispatch(actions.getTeamVacation()),
 });
 
-export default connect(mapStateToProps, mapDispatchtoProps)(withRouter(ShowModal));
+export default connect(mapStateToProps, mapDispatchtoProps)(ShowModal);
