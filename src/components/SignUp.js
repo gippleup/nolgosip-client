@@ -38,21 +38,29 @@ class SignUp extends React.Component {
     })
       .then((res) => {
         const { history } = this.props;
+        console.log(res.data);
         if (res.status === 200) {
           alert('회원가입이 완료되었습니다');
-          history.push('/login');
-        } else if (res.data === 'duplicate') {
-          alert('이미 가입한 계정입니다');
         }
+        history.push('/login');
       })
       .catch((error) => {
-        console.log(error);
+        if (error.response.data === 'duplicate') {
+          alert('이미 가입한 계정입니다');
+        }
       });
   }
 
+
   render() {
     return (
-      <form className="SignUp">
+      <form
+        className="SignUp"
+        onSubmit={(e) => {
+          e.preventDefault();
+          this.submitSignUp();
+        }}
+      >
         <div className="signUpInputContainer">
           <div className="signUpTitle">Sign Up</div>
           <div className="email">
@@ -68,7 +76,7 @@ class SignUp extends React.Component {
             <input className="signUpMobileInput" placeholder="Mobile" size="30" type="mobile" onChange={this.handleInputValue('mobile')} required />
           </div>
           <div className="signUpSubmitButtonContainer">
-            <button className="signUpSubmitButton" type="submit" onClick={this.submitSignUp}>완료</button>
+            <button className="signUpSubmitButton" type="submit">완료</button>
           </div>
         </div>
       </form>
