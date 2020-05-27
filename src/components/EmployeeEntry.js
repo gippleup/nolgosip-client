@@ -12,40 +12,45 @@ const EmployeeEntry = (props) => {
 
   const updateAuth = () => {
     let auth = '';
+    let confirmMsg = '';
     if (employee.auth === 'user') {
       auth = 'manager';
+      confirmMsg = '관리자로 지정하시겠습니까?';
     } else if (employee.auth === 'manager') {
       auth = 'user';
+      confirmMsg = '권한을 회수하시겠습니까?';
     }
     const data = {
       type: 'setAuth',
       auth,
       email: employee.email,
     };
-    fetch('http://54.180.90.57:5000/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.email === employee.email) {
-          alert('권한이 변경되었습니다');
-        }
-        for (let i = 0; i < employeeList.length; i += 1) {
-          if (employeeList[i].email === employee.email) {
-            employeeList[i].auth = auth;
-          }
-        }
-        props.authDispatch(employeeList);
-        history.push('./employeeManager');
+    if (window.confirm(confirmMsg)) {
+      fetch('http://54.180.90.57:5000/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify(data),
       })
-      .catch((error) => {
-        console.log(error);
-      });
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.email === employee.email) {
+            alert('권한이 변경되었습니다');
+          }
+          for (let i = 0; i < employeeList.length; i += 1) {
+            if (employeeList[i].email === employee.email) {
+              employeeList[i].auth = auth;
+            }
+          }
+          props.authDispatch(employeeList);
+          history.push('./employeeManager');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
   let button = null;
   if (employee.auth === 'user') {

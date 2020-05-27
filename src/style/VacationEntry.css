@@ -31,6 +31,9 @@
     margin: 4px;
     cursor: pointer;
 }
+.approveButton:hover {
+    cursor: pointer;
+}
 
 .declineButton {
     border-radius: 10px;
@@ -44,6 +47,9 @@
     display: inline-block;
     font-size: 15px;
     margin: 4px;
+    cursor: pointer;
+}
+.declineButton:hover {
     cursor: pointer;
 }
 
@@ -61,6 +67,9 @@
     margin: 4px;
     cursor: pointer;
 }
+.cancelButton:hover {
+    cursor: pointer;
+}
 
 .completeButton {
     border-radius: 10px;
@@ -74,5 +83,4 @@
     display: inline-block;
     font-size: 15px;
     margin: 4px;
-    cursor: pointer;
 }

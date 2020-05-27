@@ -22,9 +22,9 @@ class VacationManager extends React.Component {
     this.setState({ [key]: e.target.value });
   };
 
-  handleInputValue = (key) => (e) => {
-    this.setState({ [key]: e.target.value });
-  };
+  // handleInputValue = (key) => (e) => {
+  //   this.setState({ [key]: e.target.value });
+  // };
 
   // searchVacation = () => {
   //   const { searchDispatch, vacationList } = this.props;
