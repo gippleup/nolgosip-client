@@ -85,49 +85,6 @@ export const modifyOtherVaction = (otherEntries) => (
 );
 
 
-export const cancelVacation = (vacationId) => async (dispatch) => {
-  const cancel = await fetch('http://54.180.90.57:5000/vacation', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      type: 'cancel',
-      vacationId,
-    }),
-    credentials: 'include',
-  }).then((res) => {
-    if (res.status === 200) return res.json();
-    return false;
-  });
-
-  console.log(cancel);
-  if (!cancel) throw new Error('CANCEL FAILED');
-
-  const getUpdatedData = await fetch('http://54.180.90.57:5000/vacation', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      type: 'get',
-      target: 'user',
-      email: 'a',
-      from: '2020-01-01',
-      to: '2020-12-31',
-    }),
-    credentials: 'include',
-  }).then((res) => {
-    if (res.status === 200) return res.json();
-    return false;
-  }).catch((err) => {
-    throw err;
-  });
-
-  if (!getUpdatedData) throw new Error('UPDATE FAILED');
-
-  dispatch(getMyData(getUpdatedData.vacations));
-};
 export const SET_LOGGED = 'SET_LOGGED';
 export const SET_USERDATA = 'SET_USERDATA';
 
@@ -197,14 +154,10 @@ export const getTeamVacation = () => (dispatch, getState) => {
 // 이거 질문
 export const getUserVacation = () => (dispatch, getState) => {
   const loggedUserEmail = getState().user.loggedUser.email;
-  // const loggedUserPassword = getState().user.loggedUser.password;
-  // console.log(loggedUserPassword);
   axios.post('http://54.180.90.57:5000/signin', {
     email: loggedUserEmail,
-    // password: loggedUserPassword,
   }).then((res) => {
     const { vacations } = res.data;
-    console.log(vacations);
     dispatch(getMyData(vacations));
   });
 };
@@ -232,3 +185,74 @@ export const userVacationStatus = () => (dispatch, getState) => {
 // export const modalVacation = () => (dispatch) => {
 //   dispatch(sumVacation());
 // }
+export const cancelVacation = (vacationId) => async (dispatch, getState) => {
+  const loggedUserEmail = getState().user.loggedUser.email;
+  const cancel = await fetch('http://54.180.90.57:5000/vacation', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      type: 'cancel',
+      vacationId,
+    }),
+    credentials: 'include',
+  }).then((res) => {
+    if (res.status === 200) return res.json();
+    return false;
+  });
+
+  if (!cancel) throw new Error('CANCEL FAILED');
+
+  const getUpdatedData = await fetch('http://54.180.90.57:5000/vacation', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      type: 'get',
+      target: 'user',
+      email: loggedUserEmail,
+      from: '2020-01-01',
+      to: '2020-12-31',
+    }),
+    credentials: 'include',
+  }).then((res) => {
+    if (res.status === 200) return res.json();
+    return false;
+  }).catch((err) => {
+    throw err;
+  });
+
+  if (!getUpdatedData) throw new Error('UPDATE FAILED');
+
+  dispatch(userVacationStatus());
+};
+
+
+export const signIn = (email, password) => (dispatch) => {
+  fetch('http://54.180.90.57:5000/signin', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+    credentials: 'include',
+  })
+    .then((res) => {
+      if (res.status === 404) {
+        alert('등록된 계정이 없습니다');
+      }
+      return res.json();
+    })
+    .then((res) => {
+      dispatch(setLogged(true));
+      dispatch(setUserData(res));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
