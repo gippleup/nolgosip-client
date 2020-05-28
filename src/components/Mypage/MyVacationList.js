@@ -19,111 +19,76 @@ function MyVacationList(props) {
     return `${year}.${month}.${day}`;
   };
 
-  const cellStyle = (type = 'text') => {
-    const basic = {
-      borderRight: '1px solid black',
-      borderBottom: '1px solid black',
-      height: '2rem',
-      padding: 0,
-      display: 'flex',
-      alignSelf: 'center',
-      flexGrow: 1,
-    };
-
-    if (type !== 'text' && type !== 'button') return basic;
-
-    const add = {
-      text: {
-        paddingLeft: '20px',
-      },
-      button: {
-      },
-    };
-
-    return Object.assign(basic, add[type]);
+  const statusText = {
+    expired: '만료',
+    waiting: '대기',
+    approved: '승인',
+    cancelled: '취소',
+    complete: '잘쉼',
+    declined: '거절',
   };
 
-  const cell = (content, type = 'text', vacationId) => {
-    let target;
-    if (type === 'text') target = <div style={{ alignSelf: 'center' }}>{content}</div>;
-    if (type === 'button') {
-      target = (
-        <button
-          className="myPageRowButton"
-          onClick={() => {
-            cancelVacation(vacationId, 'filtered');
-          }}
-          type="button"
-        >
-          {content}
-        </button>
-      );
-    }
-    return (
-      <div style={cellStyle(type)}>
-        {target}
-      </div>
-    );
+  const keyToTitle = {
+    createdAt: '신청일',
+    from: '시작일',
+    to: '종료일',
+    reason: '사유',
+    span: '기간',
+    status: '상태',
   };
 
-  const renderVacations = (data) => data.map((vacation, i) => {
-    const {
-      createdAt, from, to, span, reason, status, id,
-    } = vacation;
-    let lastEle = cell('');
-    if (status === 'waiting') lastEle = cell('취소', 'button', id);
-    return (
-      <div className="myVacationTable">
-        {cell(i)}
-        {cell(toSimpleDate(createdAt))}
-        {cell(toSimpleDate(from))}
-        {cell(toSimpleDate(to))}
-        {cell(`${Math.round(span * 10) / 10}일`)}
-        {cell(reason)}
-        {lastEle}
-      </div>
-    );
-  });
-
-  const tableTitleStyle = {
-    width: '100%',
-    fontSize: '2rem',
-    fontWeight: 'bolder',
-    color: 'white',
-    padding: '2rem 0',
+  const keyToValue = (key, value) => {
+    if (key === 'createdAt' || key === 'from' || key === 'to') return toSimpleDate(value);
+    if (key === 'span') return `${Math.round(value * 10) / 10}일`;
+    if (key === 'status') return statusText[value];
+    return value;
   };
 
-  const tableTitle = (title) => (
-    <div style={tableTitleStyle}>
-      {title}
+  const cancelButton = (vacationId) => (
+    <div type="cancelButton" className="myVacationDesEle">
+      <button type="button" onClick={() => { cancelVacation(vacationId); }}>
+        취소
+      </button>
     </div>
   );
 
+  const vacationToDiv = (vacation) => {
+    return Object.keys(vacation).map((key) => {
+      const subTitle = keyToTitle[key];
+      const value = keyToValue(key, vacation[key]);
+      if (key === 'id' && vacation.status !== 'waiting') return <></>;
+      if (key === 'id' && vacation.status === 'waiting') return cancelButton(vacation.id);
+      return (
+        <div className="myVacationDesEle">
+          <div className="title">{subTitle}</div>
+          <div className={`value ${key === 'status' ? vacation.status : ''}`}>{value}</div>
+        </div>
+      );
+    });
+  };
 
-  const headTitles = ['순번', '신청일', '시작일', '종료일', '사용일수', '사유', '비고'];
-  const tableHead = (
-    <div className="myVacationTable">
-      {headTitles.map((title) => (<div className="myVacationTableHead">{title}</div>))}
+  const renderVacations = (data) => (
+    <div className="myVacationList">
+      {data.map((vacation, i) => (
+        <div className="myVacationListEntry">
+          {vacationToDiv(vacation)}
+        </div>
+      ))}
     </div>
   );
 
   return (
-    <div style={{
-      display: 'grid', width: '100%', paddingBottom: '3rem', justifyContent: 'center',
-    }}
-    >
-      {tableTitle('진행 중인 휴가')}
-      <div>
-        {tableHead}
+    <>
+      <div className="myVacationListBox">
+        <div className="myVacationListSubTitle">진행 중인 휴가</div>
         {renderVacations(curConcern)}
       </div>
-      <div className="dividingLine" style={{ backgroundColor: 'darkgrey' }} />
-      {tableTitle('완료된 휴가')}
-      <div>
-        {tableHead}
+      <div className="dividingLine" />
+      <div className="myVacationListBox">
+        <div className="myVacationListSubTitle">완료된 휴가</div>
         {renderVacations(pastConcern)}
       </div>
-    </div>
+    </>
   );
 }
 

@@ -7,7 +7,7 @@ function UserInfo(props) {
   const { vacationsSum, loggedUser } = props;
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '50% 50%' }}>
+    <div className="myPageTopContainer">
       <InfoUser loggedUser={loggedUser} />
       <InfoDay totalVacation={loggedUser.totalVacation} sum={vacationsSum} />
     </div>

@@ -8,7 +8,7 @@ import SignUp from './SignUp';
 import MenuBar from './MenuBar';
 import EmployeeManager from './EmployeeManager';
 import VacationManager from './VacationManager';
-import Main from './Main';
+import Main from './main';
 import MyPage from './Mypage/Mypage';
 
 const App = (props) => (
