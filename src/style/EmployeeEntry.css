@@ -1,16 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
-
   .EmployeeEntry {
     display: grid;
     margin: 5px auto;
-    /* grid-template-columns: auto auto auto auto auto; */
-    font-family: 'Single Day', cursive;
     border: 1px solid #ffffff;
     border-radius: 1rem;
   }
 
   .EmployeeEntry div {
-    /* display: inline; */
     line-height: 37px;
     margin: 10px auto;
   }
@@ -26,8 +21,7 @@
     display: inline-block;
     font-size: 15px;
     margin: 4px;
-    cursor: pointer;
-    font-family: 'Single Day', cursive;
+    cursor: pointer;  
     padding: 0.5rem;
   }
 
@@ -43,7 +37,6 @@
     font-size: 15px;
     margin: 4px;
     cursor: pointer;
-    font-family: 'Single Day', cursive;
     padding: 0.5rem;
   }
 
@@ -51,7 +44,6 @@
     display: grid;
     margin: 5px auto;
     grid-template-columns: 10% 20% 20% 20% 20%;
-    font-family: 'Single Day', cursive;
     border: 1px solid #ffffff;
     border-radius: 1rem;
   }
@@ -73,9 +65,8 @@
     display: inline-block;
     font-size: 15px;
     margin: 4px;
-    cursor: pointer;
-    font-family: 'Single Day', cursive;
     padding: 0.5rem;
+    cursor: pointer;
   }
 
   .cancelAuthButton {
@@ -90,6 +81,5 @@
     font-size: 15px;
     margin: 4px;
     cursor: pointer;
-    font-family: 'Single Day', cursive;
     padding: 0.5rem;
   }

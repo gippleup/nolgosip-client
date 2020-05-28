@@ -1,12 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
-
 .EmployeeManager{
     display: grid;
     position: absolute;
     left: 302px;
     height: auto;
     /* grid-template-rows: auto auto auto; */
-    font-family: 'Single Day', cursive;
     min-width: 800px;
 }
 

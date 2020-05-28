@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
-
 .modalMain {
     margin-top: 20%;
 }
@@ -12,7 +10,6 @@
     margin:0 auto;
     width: 50%;
     height: 50%;
-    font-family: 'Single Day', cursive;
 }
 
 .modal:focus {
@@ -44,7 +41,6 @@ select {
     transition:800ms ease all;
     outline:none;
     margin-bottom: 5%;
-    font-family: 'Single Day', cursive;
   }
   #modal-button:hover{
     background:#E61E4D 27.5%;
@@ -72,7 +68,6 @@ select {
   } 
   
  #cancelBtn{
-    font-family: 'Single Day', cursive;
     background:#1a54ab;
     color:#fff;
     border:none;
