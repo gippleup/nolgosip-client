@@ -13,7 +13,7 @@ function InfoDay(props) {
         </div>
         <div className="myPageDayDate">
           <div className="myPageDayNum">
-            {Math.round((sum.approved + sum.complete) * 10) / 10}
+            {(Math.round((sum.approved + sum.complete) * 10) / 10) + 1}
           </div>
           <div className="myPageDayLocale">
             일
