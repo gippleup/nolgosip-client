@@ -13,11 +13,11 @@ export const TeamVactionEntry = ({
     </div>
     <div>
       <div className="TeamVacationFrom">
-        {vacationFrom}
+        {new Date(vacationFrom).toISOString().substring(0, 10)}
       </div>
 
       <div className="TeamVacationTo">
-        {vacationTo}
+        {new Date(vacationTo).toISOString().substring(0, 10)}
       </div>
       <div className="TeamVacationStatus">
         {vacationStatus}
@@ -25,13 +25,5 @@ export const TeamVactionEntry = ({
     </div>
   </div>
 );
-// <div className="TeamVactaionStatus">
-//   {vacationStatus}
-// </div>
 
 export default TeamVactionEntry;
-
-// userName = {vacation.userName}
-// vacationFrom = {vacation.vacationFrom}
-// vacationTo = {vacation.vacationTo}
-// vacationStatus = {vacation.vacationStatus}

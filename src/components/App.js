@@ -10,20 +10,11 @@ import MenuBar from './MenuBar';
 import EmployeeManager from './EmployeeManager';
 import VacationManager from './VacationManager';
 import Main from './Main';
-import MyPage from './Mypage';
+import MyPage from './Mypage/Mypage';
 
 const App = (props) => (
   <div className="App">
     <Switch>
-      {/* <Route
-        path="*"
-        render={() => {
-          if (props.logged) {
-            return <MenuBar />;
-          }
-          return <div>NOT FOUND</div>;
-        }}
-      /> */}
       <Route
         path="/login"
         render={() => (
@@ -87,8 +78,12 @@ const App = (props) => (
         path="/"
         render={() => {
           if (props.logged) {
-            return <MenuBar />;
-            // return <Redirect to="/main" />;
+            return (
+              <div>
+                <MenuBar />
+                <Redirect to="/main" />
+              </div>
+            );
           }
           return <Redirect to="/login" />;
         }}
