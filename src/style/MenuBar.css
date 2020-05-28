@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
+
 .menuBar {
   width: 300px;
   float: left;
@@ -32,6 +34,7 @@
 }
 
 .menuBar button {
+  font-family: 'Single Day', cursive;
   width: 300px;
   text-align: left;
   padding-left: 2rem;
@@ -58,5 +61,3 @@
 .menuBar button:active {
   background-color: blue;
 }
-
-
