@@ -19,9 +19,6 @@ function Mypage(props) {
 
   // This is just for test, deactivate when test is done.
   useEffect(() => {
-    if (!user.logged) {
-      dispatch(actions.signIn('a', 'a'));
-    }
     if (user.logged) {
       dispatch(actions.userVacationStatus());
     }
