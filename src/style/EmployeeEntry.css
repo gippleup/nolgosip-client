@@ -50,7 +50,7 @@
   .EmployeeEntry {
     display: grid;
     margin: 5px auto;
-    grid-template-columns: 10% 20% 20% 20% 20%;
+    grid-template-columns: 15% 40% 20% 20% 5%;
     font-family: 'Single Day', cursive;
     border: 1px solid #ffffff;
     border-radius: 1rem;
