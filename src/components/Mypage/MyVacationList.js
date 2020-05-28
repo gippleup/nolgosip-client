@@ -39,7 +39,7 @@ function MyVacationList(props) {
 
   const keyToValue = (key, value) => {
     if (key === 'createdAt' || key === 'from' || key === 'to') return toSimpleDate(value);
-    if (key === 'span') return `${Math.round(value * 10) / 10}일`;
+    if (key === 'span') return `${Math.ceil(value * 10) / 10}일`;
     if (key === 'status') return statusText[value];
     return value;
   };

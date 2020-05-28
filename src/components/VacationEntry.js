@@ -97,7 +97,7 @@ const VacationEntry = (props) => {
       <div className="entryElements">{new Date(vacation.from).toISOString().substring(0, 10)}</div>
       <div className="entryElements">{new Date(vacation.to).toISOString().substring(0, 10)}</div>
       <div className="entryElements">
-        {Math.floor(((Date.parse(vacation.to) - Date.parse(vacation.from)) / 1000 / 60 / 60 / 24))}
+        {Math.floor(((Date.parse(vacation.to) - Date.parse(vacation.from)) / 1000 / 60 / 60 / 24)) + 1}
         일
       </div>
       <div className="entryElements">{vacation.reason}</div>

@@ -33,8 +33,18 @@ class ShowModal extends React.Component {
     const { getTeamVacation } = this.props;
     let from = '';
     let to = '';
+    const nowYear = '';
+    const nowMonth = '';
+    const nowDay = '';
     from = `${fromYear}-${fromMonth}-${fromDay}`;
     to = `${toYear}-${toMonth}-${toDay}`;
+    // nowYear = new Date().toISOString().substring(0, 4);
+    // nowMonth = new Date().toISOString().substring(5, 7);
+    // nowDay = new Date().toISOString().substring(8, 10);
+    // console.log(nowYear + nowMonth + nowDay);
+    // if (Number(fromYear) < Number(nowYear) && Number(fromMonth) < Number(nowMonth) && Number(fromDay) < Number(nowDay)) {
+    //   alert('현재보다 이전의 휴가는 등록할수 없습니다');
+    // } else {
     axios.post('http://54.180.90.57:5000/vacation', {
       type: 'request',
       from,
@@ -45,8 +55,12 @@ class ShowModal extends React.Component {
         getTeamVacation();
       })
       .catch((error) => {
+        if (error.response.data === 'TIME-TRAVELLER CATCHED') {
+          alert('현재보다 이전의 휴가는 등록할수 없습니다');
+        }
         console.log(error.response);
       });
+    // }
   }
 
   handleInputValue = (key) => (e) => {
@@ -154,8 +168,9 @@ class ShowModal extends React.Component {
                   종료일
                   <select className="modalTo" onChange={this.handleInputValue('toYear')}>
                     <option value="2020">2020</option>
-                    <option value="2020">2021</option>
-                    <option value="2020">2022</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
                   </select>
                   년
 

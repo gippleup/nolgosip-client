@@ -132,7 +132,7 @@ export const getTeamVacation = () => (dispatch, getState) => {
     target: 'team',
     email: loggedUserEmail,
     from: '2020-01-01',
-    to: '2020-12-31',
+    to: '2023-12-31',
   })
     .then((res) => {
       const { vacations } = res.data;
@@ -148,7 +148,10 @@ export const getTeamVacation = () => (dispatch, getState) => {
       dispatch(modifyOtherVaction(othersVacations));
       dispatch(modifyMyVacation(myVacations));
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err);
+      console.log(err.reponse);
+    });
 };
 
 // 이거 질문
