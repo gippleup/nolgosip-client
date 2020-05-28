@@ -19,9 +19,9 @@ function Mypage(props) {
 
   // This is just for test, deactivate when test is done.
   useEffect(() => {
-    // if (!user.logged) {
-    //   dispatch(actions.signIn('a', 'a'));
-    // }
+    if (!user.logged) {
+      dispatch(actions.signIn('a', 'a'));
+    }
     if (user.logged) {
       dispatch(actions.userVacationStatus());
     }
@@ -40,10 +40,12 @@ function Mypage(props) {
   };
 
   return (
-    <div style={{ backgroundColor: 'grey', display: 'grid', padding: '5%' }}>
-      {renderWhenReady('info')}
-      <div className="dividingLine" />
-      {renderWhenReady('list')}
+    <div className="myPageContainer">
+      <div className="myPage">
+        {renderWhenReady('info')}
+        <div className="dividingLine" />
+        {renderWhenReady('list')}
+      </div>
     </div>
   );
 }

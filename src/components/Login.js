@@ -45,13 +45,13 @@ class Login extends React.Component {
       credentials: 'include',
     })
       .then((res) => {
+        console.log(res);
         if (res.status === 404) {
           alert('등록된 계정이 없습니다');
         }
         return res.json();
       })
       .then((res) => {
-        console.log(res);
         loggedDispatch();
         userDataDispatch(res);
       })
@@ -69,7 +69,15 @@ class Login extends React.Component {
 
   render() {
     return (
-      <form className="Login">
+      <form
+        className="Login"
+        onSubmit={
+          (e) => {
+            e.preventDefault();
+            this.submit();
+          }
+        }
+      >
         <div className="loginLogo">
           Login
         </div>
