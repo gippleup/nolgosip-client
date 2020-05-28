@@ -1,26 +1,29 @@
-@import './Mypage.css';
+@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&display=swap');
+
+@import './_BreakPoint.css';
+@import './background.css';
+
+html, body{
+  height: 100%;
+  min-height: 800px;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+#root {
+  height: 100%;
+}
+
 
 .App {
   text-align: center;
+  height: 100%;
 }
 
-html {
-  min-width: 1000px;
-}
-
-body {
-  width: 100%;
-  margin: 0;
-}
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
-
-.backgroundImage {
-  z-index: -1;
-  filter: blur(3px) brightness(70%);
 }
 
 @media (prefers-reduced-motion: no-preference) {

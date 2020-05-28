@@ -1,5 +1,4 @@
 import React from 'react';
-// import axios from 'axios';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -67,9 +66,10 @@ class Login extends React.Component {
     history.push('/signup');
   }
 
+
   render() {
     return (
-      <div className="Login">
+      <form className="Login">
         <div className="loginLogo">
           Login
         </div>
@@ -85,7 +85,7 @@ class Login extends React.Component {
           <button className="signInSubmitButton" type="submit" onClick={this.submit}>로그인</button>
           <button className="signUpButton" type="button" onClick={this.toSignUp}>회원가입</button>
         </div>
-      </div>
+      </form>
     );
   }
 }

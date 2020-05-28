@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { history as historyPropTypes } from 'history-prop-types';
 import { setUserAuth } from '../actions';
+import '../style/EmployeeEntry.css';
 
 
 const EmployeeEntry = (props) => {
@@ -11,73 +12,88 @@ const EmployeeEntry = (props) => {
 
   const updateAuth = () => {
     let auth = '';
+    let confirmMsg = '';
     if (employee.auth === 'user') {
       auth = 'manager';
+      confirmMsg = '관리자로 지정하시겠습니까?';
     } else if (employee.auth === 'manager') {
       auth = 'user';
+      confirmMsg = '권한을 회수하시겠습니까?';
     }
     const data = {
       type: 'setAuth',
       auth,
       email: employee.email,
     };
-    fetch('http://54.180.90.57:5000/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.email === employee.email) {
-          alert('권한이 변경되었습니다');
-        }
-        for (let i = 0; i < employeeList.length; i += 1) {
-          if (employeeList[i].email === employee.email) {
-            employeeList[i].auth = auth;
-          }
-        }
-        props.authDispatch(employeeList);
-        history.push('./employeeManager');
+    if (window.confirm(confirmMsg)) {
+      fetch('http://54.180.90.57:5000/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify(data),
       })
-      .catch((error) => {
-        console.log(error);
-      });
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.email === employee.email) {
+            alert('권한이 변경되었습니다');
+          }
+          for (let i = 0; i < employeeList.length; i += 1) {
+            if (employeeList[i].email === employee.email) {
+              employeeList[i].auth = auth;
+            }
+          }
+          props.authDispatch(employeeList);
+          history.push('./employeeManager');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
   let button = null;
   if (employee.auth === 'user') {
-    button = <button type="button" onClick={updateAuth}>관리자지정</button>;
+    button = <button type="button" className="employeeEntryElements approveAuthButton" onClick={updateAuth}>관리자지정</button>;
   } else if (employee.auth === 'manager') {
-    button = <button type="button" onClick={updateAuth}>권한취소</button>;
+    button = <button type="button" className="employeeEntryElements cancelAuthButton" onClick={updateAuth}>권한취소</button>;
   }
 
   let employeeVacations = null;
-  if (employee.vacations){
+  if (employee.vacations) {
     employeeVacations = (
-      <div>
-        <div>{employee.vacations.sum.complete}</div>
-        <div>{employee.totalVacation - employee.vacations.sum.complete}</div>
-      </div>
-    )
+      <>
+        <div className="employeeEntryElements">
+          {employee.vacations.sum.complete}
+          일
+        </div>
+        <div className="employeeEntryElements">
+          {employee.totalVacation - employee.vacations.sum.complete}
+          일
+        </div>
+      </>
+    );
   } else {
     employeeVacations = (
-      <div>
-        <div>0</div>
-        <div>{employee.totalVacation}</div>
-      </div>
-    )
+      <>
+        <div className="employeeEntryElements">0일</div>
+        <div className="employeeEntryElements">
+          {employee.totalVacation}
+          일
+        </div>
+      </>
+    );
   }
   return (
     <div className="EmployeeEntry">
-      <div>{employee.userName}</div>
+      <div className="employeeEntryElements">{employee.userName}</div>
       <div>
         {employee.email}
+        /
         {employee.mobile}
       </div>
       {employeeVacations}
-      <div>
+      <div className="employeeEntryElements">
         {button}
       </div>
     </div>
@@ -96,8 +112,8 @@ EmployeeEntry.propTypes = {
         approved: PropTypes.number,
         waiting: PropTypes.number,
         expired: PropTypes.number,
-      })
-    })
+      }),
+    }),
   }).isRequired,
   employeeList: PropTypes.arrayOf(PropTypes.shape(
     {

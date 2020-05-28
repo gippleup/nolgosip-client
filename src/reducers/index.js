@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import userReducer from './user';
-import employeeReducer from './Employee';
+import employeeReducer from './employee';
 import vacationReducer from './vacation';
 import vacationState from './vacationReducer';
 

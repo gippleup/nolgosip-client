@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../style/App.css';
-import backImg from '../img/vacation.jpg';
 import Login from './Login';
 import SignUp from './SignUp';
 import MenuBar from './MenuBar';
@@ -19,7 +18,7 @@ const App = (props) => (
         path="/login"
         render={() => (
           <div className="loginContainter">
-            <img className="backgroundImage" src={backImg} alt="background" />
+            <div className="backgroundImage" alt="background" />
             <Login logged={props.logged} />
           </div>
         )}
@@ -29,7 +28,7 @@ const App = (props) => (
         path="/signup"
         render={() => (
           <div className="singupContainer">
-            <img className="backgroundImage" src={backImg} alt="background" />
+            <div className="backgroundImage" alt="background" />
             <SignUp />
           </div>
         )}

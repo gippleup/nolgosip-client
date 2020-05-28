@@ -1,0 +1,86 @@
+.VacationEntry {
+    display: grid;
+    margin: 5px auto;
+    grid-template-columns: 150px 300px 250px 250px 100px 200px 200px;
+    grid-template-rows: 70px;
+    background-color: #eaeef8;
+    border: 1px;
+    border-radius: 20px;
+}
+
+.VacationEntry div {
+    line-height: 50px;
+    margin: 10px auto;
+}
+
+.buttonContainer {
+    margin-top: 0px !important;
+}
+
+.approveButton {
+    border-radius: 10px;
+    width: 80px;
+    background-color: #577fec;
+    border: none;
+    color: #fff;
+    padding: 5px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px;
+    cursor: pointer;
+}
+.approveButton:hover {
+    cursor: pointer;
+}
+
+.declineButton {
+    border-radius: 10px;
+    width: 80px;
+    background-color: #f56a58;
+    border: none;
+    color: #fff;
+    padding: 5px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px;
+    cursor: pointer;
+}
+.declineButton:hover {
+    cursor: pointer;
+}
+
+.cancelButton {
+    border-radius: 10px;
+    width: 80px;
+    background-color: #1e8d1e;
+    border: none;
+    color: #fff;
+    padding: 5px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px;
+    cursor: pointer;
+}
+.cancelButton:hover {
+    cursor: pointer;
+}
+
+.completeButton {
+    border-radius: 10px;
+    width: 80px;
+    background-color: #8b8b8b;
+    border: none;
+    color: #fff;
+    padding: 5px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px;
+}
