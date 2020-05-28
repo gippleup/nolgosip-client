@@ -47,6 +47,7 @@ class SignUp extends React.Component {
         history.push('/login');
       })
       .catch((error) => {
+        console.log(error);
         if (error.response.data === 'duplicate') {
           alert('이미 가입한 계정입니다');
         }

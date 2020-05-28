@@ -1,0 +1,75 @@
+.TeamVactionEntry{
+  display: block;
+  background:white;
+  margin: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  color: black;
+  border-radius: 20px;
+}
+
+.entryBox {
+  margin-top: 1.5%;
+  display: grid;
+  grid-template-columns: 30% auto 30%;
+}
+
+.entryBox .TeamUserName {
+  background-color: #d5e2ff;
+  font-size: 0.9rem;
+  color: rgb(47, 47, 47);
+  width: fit-content;
+  box-shadow: 0 3px 2px rgba(0,0,0,0.15);
+  padding: 0 1rem;
+  border-radius: 20px;
+  justify-self: center;
+  margin: 1rem 0;
+}
+
+.TeamVacationData{
+  display: flex;
+  font-size: 0.8rem;
+  font-weight: bold;
+  justify-content: center;
+  width: fit-content;
+  height: fit-content;
+  justify-self: center;
+  align-self: center;
+}
+
+.TeamVacationFrom {
+  background-color: rgb(240, 240, 240);
+}
+
+.TeamVacationFrom::after {
+  content: " ~ ";
+  background-color: white;
+  white-space: pre;
+}
+
+.TeamVacationTo {
+  background-color: rgb(240, 240, 240);
+}
+
+.TeamVacationStatus {
+  justify-self: center;
+  align-self: center;
+  background-color: whitesmoke;
+  border-radius: 20px;
+  padding: 0 1rem;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.TeamVacationStatus.approved {
+  background-color: #1e7ae4;
+  color: white;
+}
+
+.TeamVacationStatus.expired {
+  background-color: gray;
+  color: white;
+}
+
+.TeamVacationStatus.declined {
+  background-color: tomato;
+  color: white;
+}

@@ -1,47 +1,135 @@
 @import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
+@import './Main/ShowModal.css';
+@import './Main/TeamVacationEntry.css';
+@import './Main/TeamVacationList.css';
 
 .main{
-  position: absolute;
+  background-color:rgba(255, 255, 255, 0.514);
+  position: relative;
   left: 300px;
-    font-family: 'Single Day', cursive;
-    background-color:rgba(255, 255, 255, 0.514);
-    position: absolute;
-    width: 1400px;
-    left: 300px;
-    background-color: whitesmoke;
+  background-color: whitesmoke;
 }
+
+.mainGrid {
+  padding-top: 2rem;
+}
+
 .mainTitleList{
   display: grid;
-  grid-template-columns: 300px 500px 500px;
-  margin-top: 1%;
+  grid-template-columns: auto auto auto 5%;
+  margin: 1rem 0;
 }
-.mainName{
-  margin-top: 2%;
+
+.mainDivider {
+  height: '50px';
 }
+
+.otherVacation {
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.mainName {
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 10px 50px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
 .TeamVacitonList{
     background-color:rgba(255, 255, 255, 0.514);
 }
 
-.vacationName{
-  margin-top: 5%;
+.userVacationList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.vacationSpan{
-  display: grid;
-  grid-template-columns: 300px 100px;
-}
 .vacationBox{
   display: grid;
-  grid-template-columns: 300px 500px 500px;
-  background: #1a54ab;
-  margin-top: 1%;
-  padding: 0.5%;
-  color: #ffffff;
+  background: white;
+  padding: 20px 20px;
+  color: black;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  margin: 1rem 1.5rem;
+  border-radius: 10px;
+  grid-template-columns: 70% auto;
+  grid-template-rows: 3rem;
 }
 
-.teamMain{
-  width: 1400px;
+.vacationBox>.userName {
+  display: flex;
+  background-color: #0682ff;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 auto;
+  border-radius: 10px;
+  width: fit-content;
+  padding: 0.2rem 1rem;
+  justify-content: center;
+  align-self: center;
+  margin-left: 0;
 }
+
+/* 이 부분, 휴가 상태에 따라 서로 다른 css 적용하도록 수정해야 함 */
+.VacationStatus {
+  display: flex;
+  background-color: #d8d8d8;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 auto;
+  border-radius: 10px;
+  width: fit-content;
+  padding: 0.2rem 1rem;
+  margin-right: 0;
+  justify-content: center;
+  align-self: center;
+}
+
+.VacationStatus.waiting {
+  background-color: tomato;
+  color: white;
+}
+
+.VacationStatus.approved {
+  background-color: #97c330;
+  color: white;
+}
+
+.vacationSpan {
+  font-size: 1.5rem;
+  font-weight: bolder;
+  z-index: 0;
+  grid-column: 1 / span 2;
+}
+
+.vacationSpan > div {
+  display: inline;
+  background-color: rgb(238, 238, 238);
+  padding: 0
+}
+
+.vacationSpan > div:nth-of-type(1)::after {
+  content: " ~ ";
+  background-color: white;
+  white-space: pre;
+}
+
+.vacationSpan>div:nth-of-type(2)::before {
+  background-color: white;
+  white-space: pre;
+}
+
 
  #mainBtn{
   background:#1a54ab;
@@ -55,7 +143,6 @@
   transition:800ms ease all;
   outline:none;
   margin-bottom: 5%;
-  font-family: 'Single Day', cursive;
 }
 #mainBtn:hover{
   background:#E61E4D 27.5%;
@@ -63,7 +150,7 @@
 }
 #mainBtn:before,#mainBtn:after{
   content:'';
-  position:absolute;
+  /* position:absolute; */
   top:0;
   right:0;
   height:2px;

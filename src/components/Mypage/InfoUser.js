@@ -16,9 +16,9 @@ function InfoUser(props) {
           if (key === 'totalVacation') title = '총 휴가일';
 
           let value = loggedUser[key];
-          if (loggedUser[key] === 'admin') value = '싸장님';
-          if (loggedUser[key] === 'manager') value = '매뉘저님';
-          if (loggedUser[key] === 'user') value = '푸로님';
+          if (loggedUser[key] === 'admin') value = '관리자';
+          if (loggedUser[key] === 'manager') value = '매니저';
+          if (loggedUser[key] === 'user') value = '직원';
           return (
             <div>
               <div className="myPageUserInfoCell container">

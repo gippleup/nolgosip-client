@@ -83,19 +83,22 @@ class Main extends React.Component {
               <UserVacation userEntries={curUserEntries} />
             </div>
           </div>
-          <div className="vacationName">우리 팀 휴가 상태</div>
+
+          <div className="dividingLine" />
+
+          <div className="mainName">우리 팀 휴가 상태</div>
           <div className="otherVaction">
-            <div className="TeamVacationNameList">
-              <div className="TeamVacationName">이름</div>
-              <div className="TeamVacationName">기간</div>
-              <div className="TeamVacationName">상태</div>
+            <div className="mainTitleList">
+              <div className="mainTitle">이름</div>
+              <div className="mainTitle">기간</div>
+              <div className="mainTitle">상태</div>
             </div>
             <div className="TeamVacationList">
               <TeamVacationList otherEntries={otherEntries} />
             </div>
           </div>
         </div>
-        <div>
+        <div id="modalContainer">
           <ShowModal />
         </div>
       </div>

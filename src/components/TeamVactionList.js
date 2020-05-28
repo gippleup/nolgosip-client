@@ -3,7 +3,6 @@
 import React from 'react';
 import { TeamVactionEntry } from './TeamVactionEntry';
 import '../style/Main.css';
-import '../style/TeamVacationList.css';
 
 
 export const TeamVacationList = (props) => {
