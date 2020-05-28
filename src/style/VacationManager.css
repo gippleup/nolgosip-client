@@ -1,15 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
+
 .VacationManager{
     display: grid;
     position: absolute;
     left: 302px;
-    /* width: 1400px; */
-    width: 1490px;
     height: 970px;
-    grid-template-rows: 50px 370px 550px;
+    /* grid-template-rows: auto auto auto; */
+    font-family: 'Single Day', cursive;
+    min-width: 1100px;
 }
 
 .searchTarget {
-    width: 250px;
     height: 100px;
     margin: 10px;
 }
@@ -18,7 +19,6 @@
     font-family: "Roboto", sans-serif;
     outline: 0;
     background: #dfdfdf;
-    width: 200px;
     border: 3px solid #a5c6f1;
     margin: 0 0 5px;
     padding: 5px;
@@ -30,20 +30,18 @@
     display: grid;
     margin: 0 auto;
     font-size: 16px;
-    grid-template-columns: 150px 300px 250px 250px 100px 200px 200px;
+    grid-template-columns: 10% 22% 8% 20% 11% 18% 10% 10%;
 }
 
 .notApprovedVacationListTitle{
     font-size: 20px;
     font-weight: bold;
-    width: 200px;
     margin: 10px;
 }
 
 .approvedVacationListTitle{
     font-size: 20px;
     font-weight: bold;
-    width: 200px;
     margin: 10px;
 }
 
@@ -58,7 +56,7 @@
 }
 
 .vacationTitleContainer{
-    background-color: #f1a5d4;
+    background-color: #1a54ab;
     line-height: 50px;
     font-weight: bold;
 }

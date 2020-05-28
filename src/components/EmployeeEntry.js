@@ -54,7 +54,7 @@ const EmployeeEntry = (props) => {
   };
   let button = null;
   if (employee.auth === 'user') {
-    button = <button type="button" className="employeeEntryElements approveAuthButton" onClick={updateAuth}>관리자지정</button>;
+    button = <button type="button" className="employeeEntryElements approveAuthButton" onClick={updateAuth}>관리자 지정</button>;
   } else if (employee.auth === 'manager') {
     button = <button type="button" className="employeeEntryElements cancelAuthButton" onClick={updateAuth}>권한취소</button>;
   }
