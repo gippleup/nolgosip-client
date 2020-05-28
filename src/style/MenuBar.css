@@ -55,11 +55,7 @@
   border-width: 10px;
 }
 
-.menuBar button:
-
 .menuBar button:active {
   background-color: blue;
 }
-
-.signOutButton {}
 
