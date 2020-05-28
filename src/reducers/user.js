@@ -4,7 +4,7 @@ const initialState = {
   logged: false,
   loggedUser: {
     auth: '',
-    leftVacation: 0,
+    totalVacation: 0,
     email: '',
     mobile: '',
     name: '',

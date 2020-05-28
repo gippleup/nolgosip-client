@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../style/App.css';
-import backImg from '../img/vacation.jpg';
 import Login from './Login';
 import SignUp from './SignUp';
 import MenuBar from './MenuBar';
@@ -11,75 +10,71 @@ import EmployeeManager from './EmployeeManager';
 import VacationManager from './VacationManager';
 // import Main from './Main';
 
-const App = (props) => (
-  <div className="App">
-    <Switch>
-      {/* <Route
-        path="*"
-        render={() => {
-          if (props.logged) {
-            return <MenuBar />;
-          }
-          return <div>NOT FOUND</div>;
-        }}
-      /> */}
-      <Route
-        path="/login"
-        render={() => (
-          <div className="loginContainter">
-            <img className="backgroundImage" src={backImg} alt="background" />
-            <Login logged={props.logged} />
-          </div>
-        )}
-      />
-      <Route
-        exact
-        path="/signup"
-        render={() => (
-          <div className="singupContainer">
-            <img className="backgroundImage" src={backImg} alt="background" />
-            <SignUp />
-          </div>
-        )}
-      />
-      <Route
-        exact
-        path="/employeeManager"
-        render={() => (
-          <div>
-            <MenuBar />
-            <EmployeeManager />
-          </div>
-        )}
-      />
-      <Route
-        exact
-        path="/vacationManager"
-        render={() => (
-          <div>
-            <MenuBar />
-            <VacationManager />
-          </div>
-        )}
-      />
-      {/* <Route
+const App = (props) => {
+  useEffect(() => {
+    document.title = 'Nolgoship';
+  }, []);
+  return (
+    <div className="App">
+      <Switch>
+        <Route
+          path="/login"
+          render={() => (
+            <div className="loginContainer">
+              <div className="backgroundImage" />
+              <Login logged={props.logged} />
+            </div>
+          )}
+        />
+        <Route
+          exact
+          path="/signup"
+          render={() => (
+            <div className="signupContainer">
+              <div className="backgroundImage" />
+              <SignUp />
+            </div>
+          )}
+        />
+        <Route
+          exact
+          path="/employeeManager"
+          render={() => (
+            <div>
+              <MenuBar />
+              <EmployeeManager />
+            </div>
+          )}
+        />
+        <Route
+          exact
+          path="/vacationManager"
+          render={() => (
+            <div>
+              <MenuBar />
+              <VacationManager />
+            </div>
+          )}
+        />
+        {/* <Route
         exact
         path="/main"
         render={() => <Main logged={props.logged}/>}
       /> */}
-      <Route
-        path="/"
-        render={() => {
-          if (props.logged) {
-            return <MenuBar />;
+        <Route
+          path="/"
+          render={() => {
+            if (props.logged) {
+              return <MenuBar />;
             // return <Redirect to="/main" />;
-          }
-          return <Redirect to="/login" />;
-        }}
-      />
-    </Switch>
-  </div>
-);
+            }
+            return <Redirect to="/login" />;
+          }}
+        />
+      </Switch>
+    </div>
+  );
+};
 
 App.propTypes = {
   logged: PropTypes.bool,

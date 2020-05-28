@@ -13,49 +13,59 @@ const VacationEntry = (props) => {
     const buttonAction = e.target.value;
     let type = '';
     let approve = '';
+    let confirmMsg = '';
+    let alertMsg = '';
     if (buttonAction === '승인') {
       type = 'approve';
       approve = 'approved';
+      confirmMsg = '정말 휴가를 결재 하시겠습니까?';
+      alertMsg = '결재가 완료되었습니다';
     } else if (buttonAction === '취소') {
       type = 'revert';
       approve = 'waiting';
+      confirmMsg = '정말 결재를 취소 하시겠습니까?';
+      alertMsg = '결재가 취소되었습니다';
     } else if (buttonAction === '거절') {
       type = 'decline';
       approve = 'declined';
+      confirmMsg = '정말 휴가를 기각 하시겠습니까?';
+      alertMsg = '휴가가 기각되었습니다';
     } else if (buttonAction === '만료' || buttonAction === '완료') {
       return;
     }
-    fetch('http://54.180.90.57:5000/vacation', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        type,
-        vacationId: vacation.id,
-      }),
-      credentials: 'include',
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        for (let i = 0; i < vacationList.vacations.length; i += 1) {
-          if (vacationList.vacations[i].id === vacation.id) {
-            vacationList.vacations[i].status = approve;
-          }
-        }
-        approveDispatch(vacationList);
-        if (res.id === vacation.id) {
-          alert('요청하신 내용이 처리되었습니다');
-        }
+    if (window.confirm(confirmMsg)) {
+      fetch('http://54.180.90.57:5000/vacation', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          type,
+          vacationId: vacation.id,
+        }),
+        credentials: 'include',
       })
-      .catch((error) => {
-        console.log(error);
-      });
+        .then((res) => res.json())
+        .then((res) => {
+          for (let i = 0; i < vacationList.vacations.length; i += 1) {
+            if (vacationList.vacations[i].id === vacation.id) {
+              vacationList.vacations[i].status = approve;
+            }
+          }
+          approveDispatch(vacationList);
+          if (res.id === vacation.id) {
+            alert(alertMsg);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
 
   if ((vacation.status === 'approved' || vacation.status === 'declined') && Date.parse(vacation.from) >= date) {
     statusButton = '취소';
-  } else if (vacation.status === 'approved' && Date.parse(vacation.from) < date) {
+  } else if (vacation.status === 'complete') {
     statusButton = '완료';
   } else if (vacation.status === 'declined' && Date.parse(vacation.from) < date) {
     statusButton = '거절함';
@@ -65,23 +75,31 @@ const VacationEntry = (props) => {
 
   let button = null;
   if (vacation.status === 'approved' || vacation.status === 'expired' || vacation.status === 'declined') {
-    button = <button type="button" value={statusButton} onClick={vacationAction}>{statusButton}</button>;
+    if (Date.parse(vacation.from) >= date) {
+      button = <button type="button" className="cancelButton" value={statusButton} onClick={vacationAction}>{statusButton}</button>;
+    } else {
+      button = <button type="button" className="completeButton" value={statusButton} onClick={vacationAction} disabled>{statusButton}</button>;
+    }
   } else {
     button = (
-      <div>
-        <button type="button" value="승인" onClick={vacationAction}>승인</button>
-        <button type="button" value="거절" onClick={vacationAction}>거절</button>
+      <div className="buttonContainer">
+        <button type="button" className="approveButton" value="승인" onClick={vacationAction}>승인</button>
+        <button type="button" className="declineButton" value="거절" onClick={vacationAction}>거절</button>
       </div>
     );
   }
 
+
   return (
     <div className="VacationEntry">
       <div className="entryElements">{vacation.userName}</div>
-      <div className="entryElements">{vacation.createdAt}</div>
-      <div className="entryElements">{Date.parse(vacation.from)}</div>
-      <div className="entryElements">{vacation.to}</div>
-      <div className="entryElements">{((Date.parse(vacation.to) - Date.parse(vacation.from)) / 1000 / 60 / 60 / 24)}</div>
+      <div className="entryElements">{new Date(vacation.createdAt).toISOString().substring(0, 10)}</div>
+      <div className="entryElements">{new Date(vacation.from).toISOString().substring(0, 10)}</div>
+      <div className="entryElements">{new Date(vacation.to).toISOString().substring(0, 10)}</div>
+      <div className="entryElements">
+        {Math.floor(((Date.parse(vacation.to) - Date.parse(vacation.from)) / 1000 / 60 / 60 / 24))}
+        일
+      </div>
       <div className="entryElements">{vacation.reason}</div>
       <div className="entryElements">
         {button}
@@ -89,6 +107,8 @@ const VacationEntry = (props) => {
     </div>
   );
 };
+
+
 VacationEntry.propTypes = {
   vacation: PropTypes.shape({
     from: PropTypes.string,

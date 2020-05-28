@@ -14,19 +14,22 @@ const MenuBar = (props) => {
   const { loggedUser, history, logoutDispatch } = props;
 
   const signOut = () => {
-    fetch('http://54.180.90.57:5000/signout', {
-      method: 'POST',
-      credentials: 'include',
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          logoutDispatch();
-          history.push('/login');
-        }
+
+    if (window.confirm('로그아웃 하시겠습니까?')) {
+      fetch('http://54.180.90.57:5000/signout', {
+        method: 'POST',
+        credentials: 'include',
       })
-      .catch((error) => {
-        console.log(error);
-      });
+        .then((res) => {
+          if (res.status === 200) {
+            logoutDispatch();
+            history.push('/login');
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   const toMain = () => {
