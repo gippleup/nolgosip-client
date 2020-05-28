@@ -5,7 +5,7 @@
 }
 .modal {
     margin-top: 40%;
-    background-color: beige;
+    background-color: #eaeef8;
     border-radius: 100px;
     text-align:center;
     position: relative;
@@ -14,26 +14,26 @@
     height: 50%;
     font-family: 'Single Day', cursive;
 }
+
+.modal:focus {
+  outline:0;
+}
+
 select {
     margin-left: 2%;
-    margin-top: 2rem;
+    margin-top: 5rem;
     width: 200px;
     padding: .8em .5em;
     border: 1px solid #999;
-    font-family: inherit;
     background: no-repeat 95% 50%;
     border-radius: 10px;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     }
-select::-ms-expand {
-    display: none;
-}
-#modal-button{
-    margin-top: 3%;
-    font-family: 'Single Day', cursive;
-    background:#1AAB8A;
+    
+  #modal-button{
+    background:rgba(28, 112, 180, 0.76) 27.5%;
     color:#fff;
     border:none;
     position:relative;
@@ -43,19 +43,21 @@ select::-ms-expand {
     cursor:pointer;
     transition:800ms ease all;
     outline:none;
+    margin-bottom: 5%;
+    font-family: 'Single Day', cursive;
   }
   #modal-button:hover{
-    background:#fff;
-    color:#1AAB8A;
+    background:#E61E4D 27.5%;
+    color:#E61E4D 27.5%;
   }
   #modal-button:before,#modal-button:after{
     content:'';
     position:absolute;
     top:0;
     right:0;
-    height:1px;
+    height:2px;
     width:0;
-    background: #1AAB8A;
+    background: #E61E4D 27.5%;
     transition:400ms ease all;
   }
   #modal-button:after{
@@ -67,7 +69,8 @@ select::-ms-expand {
   #modal-button:hover:before,#modal-button:hover:after{
     width:100%;
     transition:800ms ease all;
-  }
+  } 
+  
  #cancelBtn{
     font-family: 'Single Day', cursive;
     background:#1a54ab;
@@ -80,6 +83,7 @@ select::-ms-expand {
     cursor:pointer;
     transition:800ms ease all;
     outline:none;
+    margin-top: 3%;
   }
   #cancel:hover{
     background:#fff;

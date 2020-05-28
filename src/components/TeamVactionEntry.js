@@ -8,16 +8,17 @@ export const TeamVactionEntry = ({
   userName, vacationFrom, vacationTo, vacationStatus,
 }) => (
   <div className="TeamVactionEntry">
-    <div className="TeamUserName">
-      {userName}
-    </div>
-    <div>
-      <div className="TeamVacationFrom">
-        {new Date(vacationFrom).toISOString().substring(0, 10)}
+    <div className="entryBox">
+      <div className="TeamUserName">
+        {userName}
       </div>
-
-      <div className="TeamVacationTo">
-        {new Date(vacationTo).toISOString().substring(0, 10)}
+      <div className="TeamVacationData">
+        <div className="TeamVacationFrom">
+          {new Date(vacationFrom).toISOString().substring(0, 10)}
+        </div>
+        <div className="TeamVacationTo">
+          {new Date(vacationTo).toISOString().substring(0, 10)}
+        </div>
       </div>
       <div className="TeamVacationStatus">
         {vacationStatus}

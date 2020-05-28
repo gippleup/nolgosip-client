@@ -7,7 +7,7 @@ import UserVacation from './UserVacation';
 import ShowModal from './ShowModal';
 import * as actions from '../actions';
 import '../style/Main.css';
-
+// import '../style/TeamVacationList.css';
 
 const axios = require('axios');
 
@@ -63,12 +63,37 @@ class Main extends React.Component {
     }
     return (
       <div className="main">
-        <div className="userVacation">
-          <UserVacation userEntries={curUserEntries} />
-        </div>
-        <div style={{ height: '5%' }} />
-        <div className="ohterVaction">
-          <TeamVacationList otherEntries={otherEntries} />
+        <div className="mainGrid">
+          <div className="mainName">
+            내 휴가
+          </div>
+          <div className="userVacation">
+            <div className="mainTitleList">
+              <div className="mainTitle">
+                이름
+              </div>
+              <div className="mainTitle">
+                기간
+              </div>
+              <div className="mainTitle">
+                상태
+              </div>
+            </div>
+            <div className="userVacationList">
+              <UserVacation userEntries={curUserEntries} />
+            </div>
+          </div>
+          <div className="vacationName">우리 팀 휴가 상태</div>
+          <div className="otherVaction">
+            <div className="TeamVacationNameList">
+              <div className="TeamVacationName">이름</div>
+              <div className="TeamVacationName">기간</div>
+              <div className="TeamVacationName">상태</div>
+            </div>
+            <div className="TeamVacationList">
+              <TeamVacationList otherEntries={otherEntries} />
+            </div>
+          </div>
         </div>
         <div>
           <ShowModal />

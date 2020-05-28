@@ -10,20 +10,23 @@ export const UserVaction = (props) => {
     const { status } = entry;
     if (status === 'waiting' || status === 'approved') {
       return (
-        <div className="userVactionEntry">
-          <div className="vacationInfo">휴가 정보</div>
-          <div className="vacationBox">
-            <div className="userName">
-              {entry.userName}
-            </div>
-            <div className="VacationFrom">
-              {entry.from}
-            </div>
-            <div className="VacationTo">
-              {entry.to}
-            </div>
-            <div className="VacationStatus">
-              {entry.status}
+        <div className="userMain">
+          <div className="userVactionEntry">
+            <div className="vacationBox">
+              <div className="userName">
+                {entry.userName}
+              </div>
+              <div className="vacationSpan">
+                <div className="VacationFrom">
+                  {new Date(entry.from).toISOString().substring(0, 10)}
+                </div>
+                <div className="VacationTo">
+                  {new Date(entry.to).toISOString().substring(0, 10)}
+                </div>
+              </div>
+              <div className="VacationStatus">
+                {entry.status}
+              </div>
             </div>
           </div>
         </div>

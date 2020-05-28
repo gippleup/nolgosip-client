@@ -13,17 +13,19 @@ export const TeamVacationList = (props) => {
       return (<></>);
     }
     return (
-      <div className="TeamVacitonList">
-        <div className="otherEntries">
-          {otherEntries.map((data, index) => (
-            <TeamVactionEntry
-              key={index}
-              userName={data.userName}
-              vacationFrom={data.from}
-              vacationTo={data.to}
-              vacationStatus={data.status}
-            />
-          ))}
+      <div className="teamMain">
+        <div className="TeamVacitonList">
+          <div className="otherEntries">
+            {otherEntries.map((data, index) => (
+              <TeamVactionEntry
+                key={index}
+                userName={data.userName}
+                vacationFrom={data.from}
+                vacationTo={data.to}
+                vacationStatus={data.status}
+              />
+            ))}
+          </div>
         </div>
       </div>
     );
