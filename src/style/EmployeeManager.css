@@ -30,7 +30,7 @@
     margin: 0px;
     background-color:#1a54ab;
     font-size: 16px;
-    grid-template-columns: 10% 20% 20% 20% 20%;
+    grid-template-columns: 15% 40% 20% 20% 5%;
 }
 
 .employeeEntryListContainer {
