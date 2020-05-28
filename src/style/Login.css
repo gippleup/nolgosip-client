@@ -86,12 +86,6 @@
   font-size: 1.5rem;
 }
 
-/* .loginButton > button:hover {
-  background-color: rgb(118, 179, 240);
-  color: white;
-  cursor: pointer;
-} */
-
 .inValidLoginEmailInput {
     font-size: 30px;
     margin-right: 10px;

@@ -30,7 +30,7 @@ const App = (props) => {
           exact
           path="/signup"
           render={() => (
-            <div className="singupContainer">
+            <div className="signupContainer">
               <div className="backgroundImage" />
               <SignUp />
             </div>
