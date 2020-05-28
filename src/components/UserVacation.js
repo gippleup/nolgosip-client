@@ -1,10 +1,9 @@
 /* eslint-disable react/prop-types */
-
-// 현재 진행 중인 userVacation 사용자 휴가 하나 만...
 import React from 'react';
+import '../style/Main.css';
+
 
 export const UserVaction = (props) => {
-  console.log(props);
   const { userEntries } = props;
 
   return userEntries.map((entry) => {
@@ -12,10 +11,11 @@ export const UserVaction = (props) => {
     if (status === 'waiting' || status === 'approved') {
       return (
         <div className="userVactionEntry">
-          <div className="userName">
-            {entry.userName}
-          </div>
-          <div>
+          <div className="vacationInfo">휴가 정보</div>
+          <div className="vacationBox">
+            <div className="userName">
+              {entry.userName}
+            </div>
             <div className="VacationFrom">
               {entry.from}
             </div>

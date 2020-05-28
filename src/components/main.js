@@ -6,6 +6,8 @@ import TeamVacationList from './TeamVactionList';
 import UserVacation from './UserVacation';
 import ShowModal from './ShowModal';
 import * as actions from '../actions';
+import '../style/Main.css';
+
 
 const axios = require('axios');
 
@@ -60,11 +62,11 @@ class Main extends React.Component {
       );
     }
     return (
-      <div>
+      <div className="main">
         <div className="userVacation">
           <UserVacation userEntries={curUserEntries} />
         </div>
-        <div style={{ height: '20px' }} />
+        <div style={{ height: '5%' }} />
         <div className="ohterVaction">
           <TeamVacationList otherEntries={otherEntries} />
         </div>
