@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { history as historyPropTypes } from 'history-prop-types';
 import { withRouter } from 'react-router-dom';
 import '../style/SignUp.css';
+import toLoginImg from '../img/toLogin.png';
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class SignUp extends React.Component {
     };
     this.handleInputValue = this.handleInputValue.bind(this);
     this.submitSignUp = this.submitSignUp.bind(this);
+    this.toLogin = this.toLogin.bind(this);
   }
 
   handleInputValue = (key) => (e) => {
@@ -51,6 +53,11 @@ class SignUp extends React.Component {
       });
   }
 
+  toLogin = () => {
+    const { history } = this.props;
+    history.push('/login');
+  }
+
 
   render() {
     return (
@@ -62,6 +69,9 @@ class SignUp extends React.Component {
         }}
       >
         <div className="signUpInputContainer">
+          <div className="toLoginContainer" onClick={this.toLogin}>
+            <img className="toLoginImg" src={toLoginImg} alt="link img to login page" />
+          </div>
           <div className="signUpTitle">Sign Up</div>
           <div className="email">
             <input className="signUpEmailInput" placeholder="Email" size="30" type="email" onChange={this.handleInputValue('email')} required />
