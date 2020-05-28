@@ -1,42 +1,95 @@
-.EmployeeEntry {
-  display: grid;
-  margin: 5px auto;
-  background-color: #f8ffe6;
-  grid-template-columns: 200px 600px 200px 200px 200px;
-}
+@import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
 
-.EmployeeEntry div {
-  /* display: inline; */
-  line-height: 37px;
-  margin: 10px auto;
-}
+  .EmployeeEntry {
+    display: grid;
+    margin: 5px auto;
+    /* grid-template-columns: auto auto auto auto auto; */
+    font-family: 'Single Day', cursive;
+    border: 1px solid #ffffff;
+    border-radius: 1rem;
+  }
 
-.approveAuthButton {
-  border-radius: 10px;
-  width: 80px;
-  background-color: #86ec6d;
-  border: none;
-  color: #fff;
-  padding: 5px 0;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 15px;
-  margin: 4px;
-  cursor: pointer;
-}
+  .EmployeeEntry div {
+    /* display: inline; */
+    line-height: 37px;
+    margin: 10px auto;
+  }
 
-.cancelAuthButton {
-  border-radius: 10px;
-  width: 80px;
-  background-color: #f56a58;
-  border: none;
-  color: #fff;
-  padding: 5px 0;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 15px;
-  margin: 4px;
-  cursor: pointer;
-}
+  .approveAuthButton {
+    border-radius: 10px;
+    background-color: #1a54ab;
+    border: none;
+    color: #fff;
+    padding: 5px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px;
+    cursor: pointer;
+    font-family: 'Single Day', cursive;
+    padding: 0.5rem;
+  }
+
+  .cancelAuthButton {
+    border-radius: 10px;
+    background-color:rgb(35, 173, 173);
+    border: none;
+    color: #fff;
+    padding: 5px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px;
+    cursor: pointer;
+    font-family: 'Single Day', cursive;
+    padding: 0.5rem;
+  }
+
+  .EmployeeEntry {
+    display: grid;
+    margin: 5px auto;
+    grid-template-columns: 10% 20% 20% 20% 20%;
+    font-family: 'Single Day', cursive;
+    border: 1px solid #ffffff;
+    border-radius: 1rem;
+  }
+
+  .EmployeeEntry div {
+    /* display: inline; */
+    line-height: 37px;
+    margin: 10px auto;
+  }
+
+  .approveAuthButton {
+    border-radius: 10px;
+    background-color: #1a54ab;
+    border: none;
+    color: #fff;
+    padding: 5px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px;
+    cursor: pointer;
+    font-family: 'Single Day', cursive;
+    padding: 0.5rem;
+  }
+
+  .cancelAuthButton {
+    border-radius: 10px;
+    background-color:rgb(35, 173, 173);
+    border: none;
+    color: #fff;
+    padding: 5px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px;
+    cursor: pointer;
+    font-family: 'Single Day', cursive;
+    padding: 0.5rem;
+  }

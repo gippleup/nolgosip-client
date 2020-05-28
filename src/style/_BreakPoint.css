@@ -1,5 +1,39 @@
 @media only screen and (max-width: 800px) {
+  .main {
+    margin-left: -300px;
+  }
   .menuBar {
     margin-left: -300px;
+  }
+  .myPageContainer {
+    width: 100%;
+    margin-left: -300px;
+  }
+  .EmployeeManager {
+    margin-left: -300px;
+  }
+  .VacationManager {
+    margin-left: -300px;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .main {
+    margin-left: 0px;
+  }
+
+  .myPageContainer {
+    width: calc(100% - 300px);
+    margin-left: 0px;
+  }
+
+  .EmployeeManager {
+    width: calc(100% - 300px);
+    margin-left: 0px;
+  }
+
+  .VacationManager {
+    width: calc(100% - 300px);
+    margin-left: 0px;
   }
 }

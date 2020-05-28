@@ -4,38 +4,9 @@ import PropTypes from 'prop-types';
 function InfoUser(props) {
   const { loggedUser } = props;
 
-  const containerStyle = {
-    height: '100%',
-    marginRight: '5%',
-    display: 'grid',
-  };
-
-  const cellStyle = (type) => {
-    const basic = {
-      textAlign: 'left',
-      paddingLeft: '10px',
-      paddingRight: '10px',
-      alignSelf: 'center',
-      backgroundColor: 'lightgrey',
-      width: 'fit-content',
-    };
-
-    if (type !== 'title' && type !== 'value') return basic;
-
-    const additional = {
-      title: {
-      },
-      value: {
-        fontWeight: 'bolder',
-      },
-    };
-
-    return Object.assign(basic, additional[type]);
-  };
-
   return (
-    <div style={{ height: '80%', alignSelf: 'center' }}>
-      <div style={containerStyle}>
+    <div style={{ height: '100%', alignSelf: 'center' }}>
+      <div id="myPageUserInfoContainer">
         {Object.keys(loggedUser).map((key) => {
           let title = '';
           if (key === 'auth') title = '직책';
@@ -50,9 +21,9 @@ function InfoUser(props) {
           if (loggedUser[key] === 'user') value = '푸로님';
           return (
             <div>
-              <div style={{ width: 'fit-content', display:'flex', backgroundColor: 'lightgrey' }}>
-                <div style={cellStyle('title')}>{title}</div>
-                <div style={cellStyle('value')}>{value}</div>
+              <div className="myPageUserInfoCell container">
+                <div className="myPageUserInfoCell title">{title}</div>
+                <div className="myPageUserInfoCell value">{value}</div>
               </div>
             </div>
           );
