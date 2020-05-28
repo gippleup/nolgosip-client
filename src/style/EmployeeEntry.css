@@ -1,10 +1,49 @@
-@import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
+  .EmployeeEntry {
+    display: grid;
+    margin: 5px auto;
+    border: 1px solid #ffffff;
+    border-radius: 1rem;
+  }
+
+  .EmployeeEntry div {
+    line-height: 37px;
+    margin: 10px auto;
+  }
+
+  .approveAuthButton {
+    border-radius: 10px;
+    background-color: #1a54ab;
+    border: none;
+    color: #fff;
+    padding: 5px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px;
+    cursor: pointer;  
+    padding: 0.5rem;
+  }
+
+  .cancelAuthButton {
+    border-radius: 10px;
+    background-color:rgb(35, 173, 173);
+    border: none;
+    color: #fff;
+    padding: 5px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
 
   .EmployeeEntry {
     display: grid;
     margin: 5px auto;
-    /* grid-template-columns: auto auto auto auto auto; */
-    font-family: 'Single Day', cursive;
+    grid-template-columns: 10% 20% 20% 20% 20%;
     border: 1px solid #ffffff;
     border-radius: 1rem;
   }
@@ -26,9 +65,8 @@
     display: inline-block;
     font-size: 15px;
     margin: 4px;
-    cursor: pointer;
-    font-family: 'Single Day', cursive;
     padding: 0.5rem;
+    cursor: pointer;
   }
 
   .cancelAuthButton {
@@ -43,53 +81,5 @@
     font-size: 15px;
     margin: 4px;
     cursor: pointer;
-    font-family: 'Single Day', cursive;
-    padding: 0.5rem;
-  }
-
-  .EmployeeEntry {
-    display: grid;
-    margin: 5px auto;
-    grid-template-columns: 15% 40% 20% 20% 5%;
-    font-family: 'Single Day', cursive;
-    border: 1px solid #ffffff;
-    border-radius: 1rem;
-  }
-
-  .EmployeeEntry div {
-    /* display: inline; */
-    line-height: 37px;
-    margin: 10px auto;
-  }
-
-  .approveAuthButton {
-    border-radius: 10px;
-    background-color: #1a54ab;
-    border: none;
-    color: #fff;
-    padding: 5px 0;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 15px;
-    margin: 4px;
-    cursor: pointer;
-    font-family: 'Single Day', cursive;
-    padding: 0.5rem;
-  }
-
-  .cancelAuthButton {
-    border-radius: 10px;
-    background-color:rgb(35, 173, 173);
-    border: none;
-    color: #fff;
-    padding: 5px 0;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 15px;
-    margin: 4px;
-    cursor: pointer;
-    font-family: 'Single Day', cursive;
     padding: 0.5rem;
   }

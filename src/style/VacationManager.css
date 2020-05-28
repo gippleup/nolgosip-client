@@ -1,12 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
-
 .VacationManager{
     display: grid;
     position: absolute;
     left: 302px;
     height: 970px;
     /* grid-template-rows: auto auto auto; */
-    font-family: 'Single Day', cursive;
     min-width: 1100px;
 }
 

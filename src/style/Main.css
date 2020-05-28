@@ -1,9 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
-
 .main{
   position: absolute;
   left: 300px;
-    font-family: 'Single Day', cursive;
     background-color:rgba(255, 255, 255, 0.514);
     position: absolute;
     width: 1400px;
@@ -55,7 +52,6 @@
   transition:800ms ease all;
   outline:none;
   margin-bottom: 5%;
-  font-family: 'Single Day', cursive;
 }
 #mainBtn:hover{
   background:#E61E4D 27.5%;

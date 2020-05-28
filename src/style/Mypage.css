@@ -1,13 +1,10 @@
 /* Don't edit Container margin */
-@import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
-
 .myPageContainer {
   position: absolute;
   left: 300px;
   background-color: whitesmoke;
   display: grid;
   transition-duration: 100ms;
-  font-family: 'Single Day', cursive;
 }
 
 .myPage {

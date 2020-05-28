@@ -30,7 +30,6 @@
     font-size: 15px;
     margin: 4px;
     cursor: pointer;
-    font-family: 'Single Day', cursive;
     padding: 0.5rem;
 }
 .approveButton:hover {
@@ -48,7 +47,6 @@
     font-size: 15px;
     margin: 4px;
     cursor: pointer;
-    font-family: 'Single Day', cursive;
     padding: 0.5rem;
 
 }
@@ -68,7 +66,6 @@
     font-size: 15px;
     margin: 4px;
     cursor: pointer;
-    font-family: 'Single Day', cursive;
     padding: 0.5rem;
 }
 .cancelButton:hover {
