@@ -1,0 +1,80 @@
+.SignUp {
+    padding-top: 20px;
+    border-radius: 20px;
+    width : 400px;
+    height: 580px;
+    margin: 100px auto;
+    opacity: 0.95;
+    background-color: #ffffff;
+    z-index: 5;
+    position: absolute;
+    top: 100px;
+    left:50%; 
+    transform:translateX(-50%);
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.signUpTitle {
+    margin: 15px 0;
+    font-size: 70px;
+}
+
+.signUpInputContainer {
+    margin: 20px auto;
+    height: 300px;
+    width: 300px;
+}
+
+.signUpInputContainer input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+  transition-duration: 100ms;
+}
+
+.signUpInputContainer input:focus {
+  background-color: lightslategray;
+  color: white;
+}
+
+.signUpInputContainer input:focus::placeholder{
+  color: white;
+}
+
+.signUpSubmitButton {
+  border: 0;
+  outline: 0;
+  margin-top: 40px;
+  width: 120px;
+  height: 50px;
+  padding: 5px 30px;
+  font-size: 20px;
+  border-radius: 10px;
+  transition-duration: 150ms;
+  transition-property: 'background-color';
+}
+
+.signUpSubmitButton:hover{
+  background-color: rgb(154, 248, 135);
+  cursor: pointer;
+}
+
+.toLoginImg {
+  width: 30px;
+  height: 30px;
+}
+
+.toLoginContainer {
+  width: 30px;
+  height: 30px;
+}
+
+.toLoginContainer:hover {
+  cursor: pointer;
+}
