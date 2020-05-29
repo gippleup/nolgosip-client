@@ -45,6 +45,23 @@
   box-shadow: inset 0 5px 10px rgba(0,0,0,0.4);
 }
 
+.noneUser {
+  margin-top: 2rem;
+  background-color: white;
+  padding: 1rem 2rem;
+  border-radius: 20px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  font-weight: bold;
+}
+
+.noneUser::before {
+  content: "!";
+  margin-right: 0.5rem;
+  background-color: tomato;
+  padding: 0 0.5rem;
+  color: white;
+  border-radius: 10px;
+}
 
 .TeamVacitonList{
     background-color:rgba(255, 255, 255, 0.514);
