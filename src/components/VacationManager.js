@@ -30,7 +30,7 @@ class VacationManager extends React.Component {
     for (let i = 0; i < vacationList.vacations.length; i += 1) {
       if (vacationList.vacations[i].status === 'waiting') {
         notApprovedVacationList.push(vacationList.vacations[i]);
-      } else {
+      } else if (vacationList.vacations[i].status === 'approved' || vacationList.vacations[i].status === 'declined' || vacationList.vacations[i].status === 'complete') {
         approvedVacationList.push(vacationList.vacations[i]);
       }
     }
