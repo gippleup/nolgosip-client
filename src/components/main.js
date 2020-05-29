@@ -93,7 +93,7 @@ class Main extends React.Component {
               <div className="mainTitle">기간</div>
               <div className="mainTitle">상태</div>
             </div>
-            <div className="TeamVacationList">
+            <div className="TeamVacationListContainer">
               <TeamVacationList otherEntries={otherEntries} />
             </div>
           </div>
