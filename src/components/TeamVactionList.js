@@ -5,7 +5,6 @@ import { TeamVactionEntry } from './TeamVactionEntry';
 import '../style/Main.css';
 
 
-
 export const TeamVacationList = (props) => {
   const { otherEntries } = props;
   const selectiveRender = () => {

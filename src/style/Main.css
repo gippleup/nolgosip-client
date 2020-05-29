@@ -150,6 +150,7 @@
 }
 #mainBtn:before,#mainBtn:after{
   content:'';
+  /* position:absolute; */
   top:0;
   right:0;
   height:2px;
