@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
+
+.ReactModal__Overlay {
+  display: block;
+  z-index: 20;
+}
+
+
+.modalMain {
+  margin: auto auto;
+  padding-left: 0;
+  margin-top: 100px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  height: 50%;
+}
+
+.modalMain>div:nth-of-type(1) {
+  font-size: 2rem;
+  font-weight: bold;
+  background-color: blue;
+  color: white;
+  width: fit-content;
+  padding: 0.2rem 2rem;
+  border-radius: 30px;
+  margin: 0 auto;
+}
+
+
+.modalMain>div:nth-of-type(2) {
+  margin-top: 50px;
+}
+
+
+.modalMain > div {
+  margin-top: 10px;
+}
+
+.modalMain select {
+  width: fit-content;
+  padding: 0.2rem 0.4rem;
+  outline: 0;
+  border:0;
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0 0;
+  background-color: rgb(241, 241, 241);
+  direction: rtl;
+  margin-left: 1rem;
+}
+
+.modalMain select:hover {
+  background-color: blue;
+  color: white;
+  font-weight: bold;
+}
+
+.modalMain select option {
+  font-size: 1rem;
+}
+
+.modalMain select option:hover {
+  font-size: larger;
+}
+
+select.modalTo {
+}
+
+.modal {
+  background-color: #ffffff;
+  border-radius: 100px;
+  text-align:center;
+  position: relative;
+  margin:0 auto;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal:focus {
+  outline:0;
+}
+
+select {
+  margin-left: 2%;
+  margin-top: 5rem;
+  width: 200px;
+  padding: .8em .5em;
+  border: 1px solid #999;
+  background: no-repeat 95% 50%;
+  border-radius: 10px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+
+.modalMain button {
+  display: block;
+  width: 150px;
+  height: 3rem;
+  font-size: 1.2rem;
+  border-radius: 20px;
+  margin: 1rem auto;
+  border: 0;
+}
+
+.modalMain button:hover {
+  background-color: blue;
+  color: white;
+  font-weight: bolder;
+}
+
+
+.modalMain button:nth-of-type(1) {
+  margin-top: 3rem;
+  font-weight: bold;
+}
