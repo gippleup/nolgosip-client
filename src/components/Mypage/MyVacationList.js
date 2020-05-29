@@ -46,26 +46,29 @@ function MyVacationList(props) {
 
   const cancelButton = (vacationId) => (
     <div type="cancelButton" className="myVacationDesEle">
-      <button type="button" onClick={() => { cancelVacation(vacationId); }}>
+      <button
+        type="button"
+        onClick={() => {
+          if (window.confirm('취소하시겠습니까?')) cancelVacation(vacationId);
+        }}
+      >
         취소
       </button>
     </div>
   );
 
-  const vacationToDiv = (vacation) => {
-    return Object.keys(vacation).map((key) => {
-      const subTitle = keyToTitle[key];
-      const value = keyToValue(key, vacation[key]);
-      if (key === 'id' && vacation.status !== 'waiting') return <></>;
-      if (key === 'id' && vacation.status === 'waiting') return cancelButton(vacation.id);
-      return (
-        <div className="myVacationDesEle">
-          <div className="title">{subTitle}</div>
-          <div className={`value ${key === 'status' ? vacation.status : ''}`}>{value}</div>
-        </div>
-      );
-    });
-  };
+  const vacationToDiv = (vacation) => Object.keys(vacation).map((key) => {
+    const subTitle = keyToTitle[key];
+    const value = keyToValue(key, vacation[key]);
+    if (key === 'id' && vacation.status !== 'waiting') return <></>;
+    if (key === 'id' && vacation.status === 'waiting') return cancelButton(vacation.id);
+    return (
+      <div className="myVacationDesEle">
+        <div className="title">{subTitle}</div>
+        <div className={`value ${key === 'status' ? vacation.status : ''}`}>{value}</div>
+      </div>
+    );
+  });
 
   const renderVacations = (data) => (
     <div className="myVacationList">
