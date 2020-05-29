@@ -19,7 +19,6 @@ function InfoUser(props) {
           if (loggedUser[key] === 'admin') value = '관리자';
           if (loggedUser[key] === 'manager') value = '매니저';
           if (loggedUser[key] === 'user') value = '직원';
-
           return (
             <div>
               <div className="myPageUserInfoCell container">
