@@ -15,6 +15,7 @@ function MyVacationList(props) {
     const date = new Date(fullDate);
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
+
     const day = date.getDate();
     return `${year}.${month}.${day}`;
   };
@@ -39,7 +40,7 @@ function MyVacationList(props) {
 
   const keyToValue = (key, value) => {
     if (key === 'createdAt' || key === 'from' || key === 'to') return toSimpleDate(value);
-    if (key === 'span') return `${Math.round(value * 10) / 10}일`;
+    if (key === 'span') return `${Math.ceil(value * 10) / 10}일`;
     if (key === 'status') return statusText[value];
     return value;
   };

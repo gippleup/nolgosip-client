@@ -33,6 +33,7 @@ class ShowModal extends React.Component {
     let to = '';
     from = `${fromYear}-${fromMonth}-${fromDay}`;
     to = `${toYear}-${toMonth}-${toDay}`;
+
     axios.post('http://54.180.90.57:5000/vacation', {
       type: 'request',
       from,
@@ -43,6 +44,9 @@ class ShowModal extends React.Component {
         getTeamVacation();
       })
       .catch((error) => {
+        if (error.response.data === 'TIME-TRAVELLER CATCHED') {
+          alert('현재보다 이전의 휴가는 등록할수 없습니다');
+        }
         console.log(error.response);
       });
   }
@@ -155,6 +159,7 @@ class ShowModal extends React.Component {
                   <option value="2020">2020</option>
                   <option value="2020">2021</option>
                   <option value="2020">2022</option>
+                  <option value="2023">2023</option>
                 </select>
                 년
 

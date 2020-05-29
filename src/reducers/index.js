@@ -1,8 +1,13 @@
-import { combineReducers } from "redux";
-// import settingReducer from "./setting";
-// import videoReducer from "./video";
+import { combineReducers } from 'redux';
+import userReducer from './user';
+import employeeReducer from './employee';
+import vacationReducer from './vacation';
+import vacationState from './vacationReducer';
+
 
 export default combineReducers({
-//   settingReducer,
-//   videoReducer
+  user: userReducer,
+  employee: employeeReducer,
+  vacation: vacationReducer,
+  vacationState,
 });

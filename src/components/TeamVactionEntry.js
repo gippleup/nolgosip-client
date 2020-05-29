@@ -11,6 +11,7 @@ const statusText = {
   declined: '거절',
 };
 
+
 export const TeamVactionEntry = ({
   userName, vacationFrom, vacationTo, vacationStatus,
 }) => (

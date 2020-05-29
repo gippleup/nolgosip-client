@@ -30,36 +30,18 @@ class Main extends React.Component {
 
   render() {
     const { curUserEntries, otherEntries } = this.props;
-    if (!curUserEntries.length || !otherEntries.length) {
-      return (
-        <>
-          <div className="vacationInfo">
-            휴가 정보
-          </div>
-          <div className="mainUserName">
-            이름
-          </div>
-          <div className="mainUserVacation">
-            기간
-          </div>
-          <div className="userStatus">
-            상태(휴가중/예정)
-          </div>
+    let curUser = null;
+    let team = null;
+    if (curUserEntries.length !== 0) {
+      curUser = <UserVacation userEntries={curUserEntries} />;
+    } else {
+      curUser = <div className="noneUser">등록된 휴가가 없습니다</div>;
+    }
 
-          <div className="vacationInfo">
-            휴가 정보
-          </div>
-          <div className="mainUserName">
-            이름
-          </div>
-          <div className="mainUserVacation">
-            기간
-          </div>
-          <div className="userStatus">
-            상태(휴가중/예정)
-          </div>
-        </>
-      );
+    if (otherEntries.length !== 0) {
+      team = <TeamVacationList otherEntries={otherEntries} />;
+    } else {
+      team = <div className="noneTeam">등록된 휴가가 없습니다</div>;
     }
     return (
       <div className="main">
@@ -80,25 +62,22 @@ class Main extends React.Component {
               </div>
             </div>
             <div className="userVacationList">
-              <UserVacation userEntries={curUserEntries} />
+              {curUser}
             </div>
           </div>
-
-          <div className="dividingLine" />
-
-          <div className="mainName">우리 팀 휴가 상태</div>
+          <div className="vacationName">우리 팀 휴가 상태</div>
           <div className="otherVaction">
-            <div className="mainTitleList">
-              <div className="mainTitle">이름</div>
-              <div className="mainTitle">기간</div>
-              <div className="mainTitle">상태</div>
+            <div className="TeamVacationNameList">
+              <div className="TeamVacationName">이름</div>
+              <div className="TeamVacationName">기간</div>
+              <div className="TeamVacationName">상태</div>
             </div>
             <div className="TeamVacationList">
-              <TeamVacationList otherEntries={otherEntries} />
+              {team}
             </div>
           </div>
         </div>
-        <div id="modalContainer">
+        <div>
           <ShowModal />
         </div>
       </div>
